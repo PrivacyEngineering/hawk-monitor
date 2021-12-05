@@ -21,11 +21,15 @@ const TableRow = (props: TableRowProps) => {
 
   return (
     <tr>
+      <td>{new Date(log.date).toLocaleString()}</td>
       <td>{log.requestService}</td>
       <td>{log.responseService}</td>
-      <td>{JSON.stringify(log.data)}</td>
+      <td>{log.data.entity}</td>
+      <td>{JSON.stringify(log.data.identity)}</td>
+      <td>{log.data.properties.join(', ')}</td>
+      <td>{log.purpose.type}</td>
+      <td>{log.purpose.id || '-'}</td>
       <td>{log.purpose.formatted}</td>
-      <td>{new Date(log.date).toLocaleString()}</td>
     </tr>
   )
 }
