@@ -1,32 +1,24 @@
 # Transparency Log Request Example
 
-## Put access Log
-```
+## Put access log
+```json
 {
     "requestService": "newsletter-service",
     "responseService": "user-service",
     "date": "2020-11-18T11:53Z",
     "data": [
         {
-              "service": "user/postgresql",
-              "entity": "user/user/users",
-              "identity": [
-                   {
-                       "id": 1
-                   }
-              ],
-              "properties": ["email"]
-        }
+            "service": "user/postgresql",
+            "entity": "user/user/users",
+            "identity": [{ "id": 1 }],
+            "properties": ["email"]
+        },
         {
             "service": "user/postgresql",
             "entity": "user/user/address",
-            "identity": [
-                 {
-                     "id": 1
-                 }
-            ],
+            "identity": [{ "id": 1 }],
             "properties": ["street", "zipcode"]
-      }  
+        }  
     ],
     "purpose": {
         "formatted": "Newsletter #23",
@@ -37,35 +29,27 @@
 ```
 
 ## Get access logs for user id 1
-### Request:
-```
+Request:
+```json
 {
     "service": "user/postgresql",
     "entity": "user/user/users",
-    "identity": [
-         {
-             "id": 1
-         }
-    ]
+    "identity": [{ "id": 1 }]
 }
 ```
 
-### Response:
-```
+Response:
+```json
 [
     {
         "requestService": "newsletter-service",
         "responseService": "user-service",
         "date": "2020-11-18T11:53Z",
         "data": {
-                "service": "user/postgresql",
-                "entity": "user/user/users",
-                "identity": [
-                    {
-                        "id": 1
-                    }
-                ],
-                "properties": ["email"]
+            "service": "user/postgresql",
+            "entity": "user/user/users",
+            "identity": [{ "id": 1 }],
+            "properties": ["email"]
         },
         "purpose": {
             "formatted": "Newsletter #23",
@@ -78,14 +62,10 @@
         "responseService": "user-service",
         "date": "2020-11-17T11:53Z",
         "data": {
-                "service": "user/postgresql",
-                "entity": "user/user/users",
-                "identity": [
-                    {
-                        "id": 1
-                    }
-                ],
-                "properties": ["name"]
+            "service": "user/postgresql",
+            "entity": "user/user/users",
+            "identity": [ { "id": 1 }],
+            "properties": ["name"]
         },
         "purpose": {
             "formatted": "Order 5345",
@@ -96,44 +76,36 @@
 ]
 ```
 
-### Access Logs for User:
+Access Logs for User:
 
-Request Service | Response Service | Data | Purpose        | Datum
-----------------|------------------|------|----------------|-----------------
-newsletter      | user-service     | email| Newsletter #23 | 18.11.2021 11:53
-payment         | user-service     | name | Order 5345     | 15.11.2021 11:53
+Request Service | Response Service | Data  | Purpose        | Datum
+----------------|------------------|-------|----------------|-----------------
+newsletter      | user-service     | email | Newsletter #23 | 18.11.2021 11:53
+payment         | user-service     | name  | Order 5345     | 15.11.2021 11:53
 
 
 ## Get access logs for address id 1
-### Request:
-```
+Request:
+```json
 {
     "service": "user/postgresql",
     "entity": "user/user/address",
-    "identity": [
-         {
-             "id": 1
-         }
-    ]
+    "identity": [{ "id": 1 }]
 }
 ```
 
-### Response:
-```
+Response:
+```json
 [
     {
         "requestService": "newsletter-service",
         "responseService": "user-service",
         "date": "2020-11-18T11:53Z",
         "data": {
-                "service": "user/postgresql",
-                "entity": "user/user/address",
-                "identity": [
-                    {
-                        "id": 1
-                    }
-                ],
-                "properties": ["street", "zipcode"]
+            "service": "user/postgresql",
+            "entity": "user/user/address",
+            "identity": [{ "id": 1 }],
+            "properties": ["street", "zipcode"]
         },
         "purpose": {
             "formatted": "Newsletter #23",
@@ -144,7 +116,7 @@ payment         | user-service     | name | Order 5345     | 15.11.2021 11:53
 ]
 ```
 
-### Access Logs for Address:
+Access Logs for Address:
 
 Request Service | Response Service | Data            | Purpose        | Datum
 ----------------|------------------|-----------------|----------------|-----------------
