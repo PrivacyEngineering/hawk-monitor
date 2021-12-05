@@ -1,12 +1,35 @@
+import { Table } from 'react-bootstrap';
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-function App() {
+import { dummyLogs as logs } from './dummyData';
+import { TableRow } from './TableRow';
+
+export const App = () => {
+
+  console.log('logs', logs);
+
   return (
     <div className="App">
       <h1>Transparency Dashboard</h1>
-      <p>That's it for now.</p>
+
+      <Table striped bordered hover>
+        <thead>
+          <tr>
+            <th>Request service</th>
+            <th>Response service</th>
+            <th>Data</th>
+            <th>Purpose</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {logs.map(log => <TableRow log={log} />)}
+        </tbody>
+
+      </Table>
+
     </div>
   );
 }
-
-export default App;

@@ -1,19 +1,18 @@
-export const putLogs = [
+export const dummyLogs = [
   {
     "requestService": "frontend",
     "responseService": "user",
     "date": "2020-11-18T11:50Z",
     "data": [
       {
-        "service": "user/postgresql",
-        "entity": "users",
+        "entity": "postgresql/users",
         "identity": [{ "id": 1 }],
         "properties": ["name", "address"]
       }
     ],
     "purpose": {
       "type": "frontend-signup",
-      "formatted": "Account created",
+      "formatted": "User account created",
     }
   },
   {
@@ -22,33 +21,28 @@ export const putLogs = [
     "date": "2020-11-18T11:50Z",
     "data": [
       {
-        "service": "user/postgresql",
-        "entity": "users",
+        "entity": "postgresql/users",
         "identity": [{ "id": 1 }],
         "properties": ["email"]
       }
     ],
     "purpose": {
       "type": "newsletter-signup",
-      "formatted": "Signed up for newsletter",
+      "formatted": "User signed up for newsletter",
     }
-  }
-];
-
-export const getLogs = [
+  },
   {
     "requestService": "newsletter",
     "responseService": "user",
     "date": "2020-11-18T11:53Z",
     "data": {
-      "service": "user/postgresql",
-      "entity": "users", // table in postgresql
+      "entity": "postgresql/users",
       "identity": [{ "id": 1 }],
       "properties": ["email"]
     },
     "purpose": {
       "type": "newsletter-sendout",
-      "formatted": "Newsletter #23",
+      "formatted": "Newsletter #23 sent",
       "id": 23
     }
   },
@@ -57,15 +51,14 @@ export const getLogs = [
     "responseService": "user",
     "date": "2020-11-17T11:54Z",
     "data": {
-      "service": "user/postgresql",
-      "entity": "users", // table in postgresql
+      "entity": "postgresql/users",
       "identity": [{ "id": 1 }],
       "properties": ["name", "address"]
     },
     "purpose": {
       "type": "payment",
-      "formatted": "Order #5345",
+      "formatted": "Order #5345 dispatched",
       "id": 5345
     }
   }
-];
+] as const;
