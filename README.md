@@ -1,10 +1,9 @@
 # Transparency Log
 
-## Idea
+## First idea
 
-The idea is to create a `Transparency Dashboard`, where a user can see all the inputs from our transparency library. We defined two data structures `trace` and `query` that allow us to save and fetch transparency records.
-
-Trace:
+Our first idea was to create a _Dashboard_, where the user can see all the outputs from our transparency library. \
+We defined a `trace` data structure for saving transparency records:
 
 ```json
 {
@@ -23,7 +22,14 @@ Trace:
 }
 ```
 
-Query:
+The following table gives the general impression how the transparency data can be displayed:
+
+| Request Service | Response Service | Data           | Purpose             | Timestamp        |
+| --------------- | ---------------- | -------------- | ------------------- | ---------------- |
+| service-1       | service-2        | prop-x, prop-y | Action x dispatched | 18.11.2021 11:53 |
+| service-1       | service-2        | prop-x, prop-y | Action x dispatched | 18.11.2021 11:52 |
+
+The `query` data structure gives an impression how the data could be queried:
 
 ```json
 {
@@ -33,14 +39,7 @@ Query:
 }
 ```
 
-The following table gives the general impression how the transparency data can be displayed:
+### Implementation
 
-Output:
-Request Service | Response Service | Data | Purpose | Timestamp
-----------------|------------------|----------------|---------------------|-----------------
-service-1 | service-2 | prop-x, prop-y | Action x dispatched | 18.11.2021 11:53
-
-## Actual implementation
-
-The [frontend](frontend) directory contains a React frontend that renders [dummy transparency data](frontend/src/dummyData.ts). Go to the folder to find out more about runnning the webapp locally or building the static website.
+The [frontend](frontend) directory contains a React frontend that renders [dummy transparency data](frontend/src/dummyData.ts) in the `trace` format. Go to the folder to find out more about runnning the webapp locally or building the static website.
 ![](screenshot.png)
