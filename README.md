@@ -70,5 +70,73 @@ In the `requests`, the user should be able to:
 
 In other words, the `requests` will more or less be the table from our first approach, with the restricton that the number of requests displayed will be limited.
 
+# `/overview`
+
+All requests grouped by Service pairs:
+
+| Requestor  | Provider | Count | Last invocation time | See requests |
+| ---------- | -------- | ----- | -------------------- | ------------ |
+| newsletter | user     | 23423 | 2021-12-06 16:00:12  | Link         |
+| frontend   | user     | 7468  | 2021-12-06 16:00:12  | Link         |
+
+> Requestor/Provider are more more specific names than "From/To or "Source/Destination",\
+> in our opinion, the latter do not indicate enough who is sending the request and who is sending the data
+
+All requests grouped by Purpose
+
+| Purpose           | Count | Last invocation time | See requests |
+| ----------------- | ----- | -------------------- | ------------ |
+| payment           | 234   | 2021-12-06 16:00:12  | Link         |
+| newsletter-signup | 99    | 2021-11-23 17:04:50  | Link         |
+| frontend-signup   | 100   | 2021-11-23 17:04:49  | Link         |
+
+All Requests grouped by Endpoint
+
+| Provider | Endpoint    | Count | Last invocation time | See requests |
+| -------- | ----------- | ----- | -------------------- | ------------ |
+| user     | /newsletter | 3643  | 2021-12-06 15:58:03  | Link         |
+| user     | /newsletter | 2342  | 2021-12-06 15:57:02  | Link         |
+
+# `/requests`
+
+See requests, for example:
+
+- of specific Purpose: `/requests?purpose=payment`
+- with Endpoint filtering: `/requests?endpoint=newsletter`
+- using specific Method: `/requests?method=http-get`
+- with all of the above: `/requests?purpose=payment&endpoint=newsletter&method=http-get`
+- etc.
+
+| Invocation time     | Request ID | Requestor  | Provider | Endpoint    | Method   | More columns... |
+| ------------------- | ---------- | ---------- | -------- | ----------- | -------- | --------------- |
+| 2021-12-06 15:58:03 | 32517631   | newsletter | user     | /newsletter | http-get | more...         |
+| 2021-12-06 15:57:02 | 32517630   | newsletter | user     | /newsletter | http-get | more...         |
+
+## `/requests/requestId`
+
+```json
+Requestor:    newsletter
+Provider:     user
+Endpoint:     /newsletter
+Method:       http-get
+Date:         2021-12-06 15:59:11
+Purpose Type: order
+Purpose Data: {
+                "id": 232342,
+                "paymentMethod": "paypal",
+                "transactionId": "23423423454",
+                ...
+              }
+```
+
+| Category          | Field          | Privacy Level | Count | Unique Count |
+| ----------------- | -------------- | ------------- | ----- | ------------ |
+| User-Related-Data | User E-Mail    | 2             | 133   | 23           |
+| User-Related-Data | User Last-Name | 2             | 133   | 23           |
+
+## misc
+The `requests` view should be able to filter using properties like:
+- specfic Field, e.g. User.email
+
 ### Implementation
 TBD
