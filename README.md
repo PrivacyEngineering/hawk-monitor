@@ -134,9 +134,44 @@ Purpose Data: {
 | User-Related-Data | User E-Mail    | 2             | 133   | 23           |
 | User-Related-Data | User Last-Name | 2             | 133   | 23           |
 
-## misc
-The `requests` view should be able to filter using properties like:
-- specfic Field, e.g. User.email
+# Fields & Mappings
+
+## Privacy levels
+
+Privacy levels can be used to filter the requests or endpoints that exchange any particular kind of data.
+
+- **personal data** - means any information relating to an identified or identifiable natural person (‘data subject’); an identifiable natural person is one who can be identified, directly or indirectly, in particular by reference to an identifier such as a name, an identification number, location data, an online identifier or to one or more factors specific to the physical, physiological, genetic, mental, economic, cultural or social identity of that natural person
+
+- **genetic data** - means personal data relating to the inherited or acquired genetic characteristics of a natural person which give unique information about the physiology or the health of that natural person and which result, in particular, from an analysis of a biological sample from the natural person in question
+
+- **biometric data** - means personal data resulting from specific technical processing relating to the physical, physiological or behavioural characteristics of a natural person, which allow or confirm the unique identification of that natural person, such as facial images or dactyloscopic data
+
+- **data concerning health** - means personal data related to the physical or mental health of a natural person, including the provision of health care services, which reveal information about his or her health status
+
+The definitions are taken from the Art. 4 GDPR.
+
+## Fields
+
+| Name              | Privacy Level                                       |
+| ----------------- | --------------------------------------------------- |
+| user              | personal data                                       |
+| blood-test-result | personal data, genetic data, data concerning health |
+
+## Mappings
+
+### Existing mappings
+
+| Service name | Endpoint    | HTTP status code | Mapping       |
+| ------------ | ----------- | ---------------- | ------------- |
+| user         | /newsletter | 200              | See/configure |
+| newsletter   | /signup     | 200              | See/configure |
+
+### Unmapped endpoints
+
+| Service name | Endpoint    | HTTP status code | Mapping   |
+| ------------ | ----------- | ---------------- | --------- |
+| user         | /newsletter | 404              | Configure |
+| newsletter   | /signup     | 404              | Configure |
 
 ### Implementation
 TBD
