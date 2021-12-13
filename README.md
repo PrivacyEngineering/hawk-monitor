@@ -148,6 +148,8 @@ Privacy levels can be used to filter the requests or endpoints that exchange any
 
 - **data concerning health** - means personal data related to the physical or mental health of a natural person, including the provision of health care services, which reveal information about his or her health status
 
+- **(non-personal data)** - default category, not handled explicitly by this project
+
 The definitions are taken from the Art. 4 GDPR.
 
 ## Fields
@@ -168,10 +170,10 @@ The definitions are taken from the Art. 4 GDPR.
 
 ### Unmapped endpoints
 
-| Service name | Endpoint    | HTTP status code | Mapping   |
-| ------------ | ----------- | ---------------- | --------- |
-| user         | /newsletter | 404              | Configure |
-| newsletter   | /signup     | 404              | Configure |
+| Service name | Endpoint    | HTTP status code | Mapping   | Count | Last invocation time |
+| ------------ | ----------- | ---------------- | --------- | ----- | -------------------- |
+| user         | /newsletter | 404              | Configure | 2005  | 2021-12-13 20:20     |
+| newsletter   | /signup     | 404              | Configure | 200   | 2021-12-13 20:19     |
 
 ### Implementation
 TBD
