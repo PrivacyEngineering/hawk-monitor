@@ -1,8 +1,9 @@
 import { Button } from "react-bootstrap"
 import { BsPlusLg } from "react-icons/bs"
-import { ExistingMapping, Field } from "../types"
+import { ExistingMapping, Field, UnmappedEndpoint } from "../types"
 import { ExistingMappingsTable } from "./ExistingMappingsTable"
 import { FieldsTable } from "./FieldsTable"
+import { UnmappedEndpointsTable } from "./UnmappedEnpointsTable"
 
 export const MappingsPage = () => {
   return (
@@ -32,12 +33,21 @@ const ExistingMappings = () => {
 }
 
 const UnmappedEndpoints = () => {
+  const unmappedEndpoints: UnmappedEndpoint[] = [
+    { service: 'statistics', endpoint: '/login', httpStatusCode: 400 },
+    { service: 'statistics', endpoint: '/order-placed', httpStatusCode: 400 },
+    { service: 'user', endpoint: '/newsletter', httpStatusCode: 400 },
+    { service: 'user', endpoint: '/signup', httpStatusCode: 400 },
+  ]
+
   return (
     <>
       <h2>Unmapped endpoints</h2>
       <p>
         We have detected that your system uses following endpoints, but mappings for them are not yet created.<br />
-        Please add the missing mappings here and retroactively map your system's API endpoint calls to particular privacy-related data categories.</p>
+        Please add the missing mappings here and retroactively map your system's API endpoint calls to particular privacy-related data categories.
+      </p>
+      <UnmappedEndpointsTable items={unmappedEndpoints} />
     </>
   )
 }

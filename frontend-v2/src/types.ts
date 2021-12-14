@@ -20,3 +20,9 @@ export interface ExistingMapping {
   attachedFields: string[];
   mapping: any;
 }
+
+export interface UnmappedEndpoint {
+  service: string;
+  endpoint: string;
+  httpStatusCode: number;
+}
