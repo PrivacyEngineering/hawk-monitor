@@ -1,15 +1,16 @@
 import { Col, Row } from "react-bootstrap"
-import { DataCategory } from "../types"
+import { DataCategory, RequestsByServicePair } from "../types"
 import { DataCategoriesTable } from "./DataCategoriesTable"
+import { ServicePairsTable } from "./ServicePairsTable"
 
 export const HomePage = () => {
   return (
     <>
       <Row>
-        <Col lg={6} xl={4} className="pb-3">
+        <Col xl={6} className="pb-3">
           <ServicePairs />
         </Col>
-        <Col lg={6} xl={4} className="pb-3">
+        <Col xl={6} className="pb-3">
           <Endpoints />
         </Col>
         <Col xl={4} className="pb-3">
@@ -21,10 +22,17 @@ export const HomePage = () => {
 }
 
 const ServicePairs = () => {
+  const labels = ['Requestor', 'Provider', 'Count', 'Last invocation time', 'Details'];
+  const items: RequestsByServicePair[] = [
+    { requestor: 'newsletter', provider: 'user', count: 23423, lastInvocation: '2021-12-06 16:00:12' },
+    { requestor: 'frontend', provider: 'user', count: 7468, lastInvocation: '2021-12-06 16:00:12' },
+  ];
+
   return (
     <>
       <h2>Service pairs</h2>
       Requests grouped by Service pairs
+      <ServicePairsTable labels={labels} items={items} />
     </>
   )
 }

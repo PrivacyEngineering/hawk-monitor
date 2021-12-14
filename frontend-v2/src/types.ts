@@ -28,6 +28,13 @@ export interface UnmappedEndpoint {
   httpStatusCode: number;
 }
 
+export interface RequestsByServicePair {
+  requestor: string;
+  provider: string;
+  count: number;
+  lastInvocation: string;
+}
+
 export interface DataCategory {
   id: string;
   name: string;
