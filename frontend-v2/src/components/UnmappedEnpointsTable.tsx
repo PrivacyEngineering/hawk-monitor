@@ -4,11 +4,11 @@ import { TableProps, TableRowProps, UnmappedEndpoint } from "../types";
 import { TableHeader } from "./TableHeader";
 
 export const UnmappedEndpointsTable = (props: TableProps<UnmappedEndpoint>) => {
-  const { items } = props;
+  const { labels, items } = props;
 
   return (
     <Table style={{ 'width': 'unset' }}>
-      <TableHeader labels={['Service ID', 'Endpoint', 'HTTP status code', 'Actions']} />
+      <TableHeader labels={labels} />
       <tbody>{items.map((item, index) => <UnmappedEndpointsTableRow key={index} item={item} />)}</tbody>
     </Table>
   )

@@ -16,6 +16,7 @@ export const MappingsPage = () => {
 }
 
 const Fields = () => {
+  const labels = ['ID', 'Description', 'Personal data', 'Special categories personal data', 'Actions'];
   const fields: Field[] = [
     { id: 'city', description: 'City name with Alpha-2 country code', personalData: false, specialCategoryPersonalData: false },
     { id: 'user', description: 'User data', personalData: true, specialCategoryPersonalData: false },
@@ -30,12 +31,13 @@ const Fields = () => {
         Assign fields to endpoints and save yourself thinking about data privacy categories for good!
       </p>
       <Button variant="success"><BsPlusLg /> Add new field</Button>
-      <FieldsTable items={fields} />
+      <FieldsTable labels={labels} items={fields} />
     </>
   )
 }
 
 const ExistingMappings = () => {
+  const labels = ['Service ID', 'Endpoint', 'HTTP status code', 'Attached Fields', 'Actions'];
   const existingMappings: ExistingMapping[] = [
     { service: 'statistics', endpoint: '/login', httpStatusCode: 201, attachedFields: [], mapping: {} },
     { service: 'statistics', endpoint: '/order-placed', httpStatusCode: 201, attachedFields: ['city'], mapping: {} },
@@ -47,12 +49,13 @@ const ExistingMappings = () => {
     <>
       <h2>Existing mappings</h2>
       <p>These mappings will be used to trace processing of privacy-related data in your system. Please keep them up to date.</p>
-      <ExistingMappingsTable items={existingMappings} />
+      <ExistingMappingsTable labels={labels} items={existingMappings} />
     </>
   )
 }
 
 const UnmappedEndpoints = () => {
+  const labels = ['Service ID', 'Endpoint', 'HTTP status code', 'Actions'];
   const unmappedEndpoints: UnmappedEndpoint[] = [
     { service: 'statistics', endpoint: '/login', httpStatusCode: 400 },
     { service: 'statistics', endpoint: '/order-placed', httpStatusCode: 400 },
@@ -67,7 +70,7 @@ const UnmappedEndpoints = () => {
         We have detected that your system uses following endpoints, but mappings for them are not yet created.<br />
         Please add the missing mappings here and retroactively map your system's API endpoint calls to particular privacy-related data categories.
       </p>
-      <UnmappedEndpointsTable items={unmappedEndpoints} />
+      <UnmappedEndpointsTable labels={labels} items={unmappedEndpoints} />
     </>
   )
 }

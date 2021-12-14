@@ -6,6 +6,7 @@ export interface Field {
 }
 
 export interface TableProps<T> {
+  labels: string[];
   items: readonly T[];
 }
 

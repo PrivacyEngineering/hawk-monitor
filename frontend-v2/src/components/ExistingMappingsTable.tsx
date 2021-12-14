@@ -4,11 +4,11 @@ import { ExistingMapping, TableProps, TableRowProps } from "../types";
 import { TableHeader } from "./TableHeader";
 
 export const ExistingMappingsTable = (props: TableProps<ExistingMapping>) => {
-  const { items } = props;
+  const { labels, items } = props;
 
   return (
     <Table style={{ 'width': 'unset' }}>
-      <TableHeader labels={['Service ID', 'Endpoint', 'HTTP status code', 'Attached Fields', 'Actions']} />
+      <TableHeader labels={labels} />
       <tbody>{items.map((item, index) => <ExistingMappingsTableRow key={index} item={item} />)}</tbody>
     </Table>
   )

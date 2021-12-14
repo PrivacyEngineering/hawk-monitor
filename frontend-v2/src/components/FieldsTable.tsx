@@ -4,11 +4,11 @@ import { TableHeader } from "./TableHeader";
 import { BsCheckSquareFill, BsFillTrashFill, BsPencilFill } from "react-icons/bs";
 
 export const FieldsTable = (props: TableProps<Field>) => {
-  const { items } = props;
+  const { labels, items } = props;
 
   return (
     <Table style={{ 'width': 'unset' }}>
-      <TableHeader labels={['ID', 'Description', 'Personal data', 'Special categories personal data', 'Actions']} />
+      <TableHeader labels={labels} />
       <tbody>{items.map((item, index) => <FieldsTableRow key={index} item={item} />)}</tbody>
     </Table>
   )
