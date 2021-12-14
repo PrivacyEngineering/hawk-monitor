@@ -27,3 +27,9 @@ export interface UnmappedEndpoint {
   endpoint: string;
   httpStatusCode: number;
 }
+
+export interface DataCategory {
+  id: string;
+  name: string;
+  value: number;
+}
