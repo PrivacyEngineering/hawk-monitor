@@ -1,5 +1,5 @@
 import { Button, Table } from "react-bootstrap";
-import { BsPlusLg } from "react-icons/bs";
+import { BsPencilFill } from "react-icons/bs";
 import { TableProps, TableRowProps, UnmappedEndpoint } from "../types";
 import { TableHeader } from "./TableHeader";
 
@@ -23,7 +23,7 @@ const UnmappedEndpointsTableRow = (props: TableRowProps<UnmappedEndpoint>) => {
       <td>{item.endpoint}</td>
       <td>{item.httpStatusCode}</td>
       <td>
-        <Button variant='success' size="sm"><BsPlusLg /></Button>
+        <Button variant='success' size="sm"><BsPencilFill /></Button>
       </td>
     </tr>
   )
