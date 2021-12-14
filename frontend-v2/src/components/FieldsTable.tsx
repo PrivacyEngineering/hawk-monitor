@@ -1,6 +1,7 @@
-import { Button, Form, Table } from "react-bootstrap";
+import { Button, Table } from "react-bootstrap";
 import { Field, TableProps, TableRowProps } from "../types";
 import { TableHeader } from "./TableHeader";
+import { BsCheckSquareFill, BsFillTrashFill, BsPencilFill } from "react-icons/bs";
 
 export const FieldsTable = (props: TableProps<Field>) => {
   const { items } = props;
@@ -20,9 +21,12 @@ const FieldsTableRow = (props: TableRowProps<Field>) => {
     <tr>
       <td><b>{item.id}</b></td>
       <td>{item.description}</td>
-      <td><Form.Check readOnly aria-label="Indicates personal data" checked={item.personalData} /></td>
-      <td><Form.Check readOnly aria-label="Indicates special category vpersonal data" checked={item.specialCategoryPersonalData} /></td>
-      <td><Button variant='warning' size="sm">Edit</Button> <Button variant='danger' size="sm">Delete</Button></td>
+      <td>{item.personalData ? <BsCheckSquareFill /> : '-'}</td>
+      <td>{item.specialCategoryPersonalData ? <BsCheckSquareFill /> : '-'}</td>
+      <td>
+        <Button variant='warning' size="sm"><BsPencilFill /></Button>{' '}
+        <Button variant='danger' size="sm"><BsFillTrashFill /></Button>
+      </td>
     </tr>
   )
 }

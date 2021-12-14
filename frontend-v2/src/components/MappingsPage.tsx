@@ -1,4 +1,5 @@
 import { Button } from "react-bootstrap"
+import { BsPlusLg } from "react-icons/bs"
 import { ExistingMapping, Field } from "../types"
 import { ExistingMappingsTable } from "./ExistingMappingsTable"
 import { FieldsTable } from "./FieldsTable"
@@ -24,6 +25,7 @@ const ExistingMappings = () => {
   return (
     <>
       <h2>Existing mappings</h2>
+      <p>These mappings will be used to trace processing of privacy-related data in your system. Please keep them up to date.</p>
       <ExistingMappingsTable items={existingMappings} />
     </>
   )
@@ -33,6 +35,9 @@ const UnmappedEndpoints = () => {
   return (
     <>
       <h2>Unmapped endpoints</h2>
+      <p>
+        We have detected that your system uses following endpoints, but mappings for them are not yet created.<br />
+        Please add the missing mappings here and retroactively map your system's API endpoint calls to particular privacy-related data categories.</p>
     </>
   )
 }
@@ -47,7 +52,11 @@ const Fields = () => {
   return (
     <>
       <h2>Fields</h2>
-      <Button variant="success">Add new</Button>
+      <p>
+        <b>Fields</b> are meta-structures to enabling hassle-free assignment of privacy categories to endpoints.<br />
+        Assign fields to endpoints and save yourself thinking about data privacy categories for good!
+      </p>
+      <Button variant="success"><BsPlusLg /> Add new field</Button>
       <FieldsTable items={fields} />
     </>
   )
