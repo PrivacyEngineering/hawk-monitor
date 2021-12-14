@@ -8,7 +8,6 @@ export const ServicePairsTable = (props: TableProps<RequestsByServicePair>) => {
 
   return (
     <Table style={{ 'width': 'unset' }}>
-      {/* <Table> */}
       <TableHeader labels={labels} />
       <tbody>{items.map((item, index) => <ServicePairsRow key={index} item={item} />)}</tbody>
     </Table>

@@ -7,7 +7,6 @@ export const DataCategoriesTable = (props: TableProps<DataCategory>) => {
 
   return (
     <Table style={{ 'width': 'unset' }}>
-      {/* <Table> */}
       <TableHeader labels={labels} />
       <tbody>{items.map((item, index) => <DataCategoriesTableRow key={index} item={item} />)}</tbody>
     </Table>

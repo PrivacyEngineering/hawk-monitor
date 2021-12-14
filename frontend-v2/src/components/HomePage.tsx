@@ -7,13 +7,13 @@ export const HomePage = () => {
   return (
     <>
       <Row>
-        <Col xl={6} className="pb-3">
+        <Col lg={12} xl={{ span: 8, order: 'first' }} className="pb-3">
           <ServicePairs />
         </Col>
-        <Col xl={6} className="pb-3">
+        <Col lg={{ span: 12 }} xl={12} className="pb-3">
           <Endpoints />
         </Col>
-        <Col xl={4} className="pb-3">
+        <Col lg={{ span: 12 }} xl={{ span: 4, order: 'first' }} className="pb-3">
           <DataCategories />
         </Col>
       </Row>
