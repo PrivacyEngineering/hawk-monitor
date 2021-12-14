@@ -1,5 +1,6 @@
 import { Button, Col, Row } from "react-bootstrap"
-import { Field } from "../types"
+import { ExistingMapping, Field } from "../types"
+import { ExistingMappingsTable } from "./ExistingMappingsTable"
 import { FieldsTable } from "./FieldsTable"
 
 export const MappingsPage = () => {
@@ -21,9 +22,15 @@ export const MappingsPage = () => {
 }
 
 const ExistingMappings = () => {
+  const existingMappings: ExistingMapping[] = [
+    { service: 'user', endpoint: '/newsletter', httpStatusCode: 200, mapping: {} },
+    { service: 'user', endpoint: '/signup', httpStatusCode: 201, mapping: {} },
+  ]
+
   return (
     <>
       <h2>Existing mappings</h2>
+      <ExistingMappingsTable items={existingMappings} />
     </>
   )
 }

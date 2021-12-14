@@ -12,3 +12,10 @@ export interface TableProps<T> {
 export interface TableRowProps<T> {
   item: T;
 }
+
+export interface ExistingMapping {
+  service: string;
+  endpoint: string;
+  httpStatusCode: number;
+  mapping: any;
+}
