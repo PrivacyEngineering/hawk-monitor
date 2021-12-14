@@ -2,7 +2,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { HomePage } from './components/HomePage';
-import { MappingsPage } from './components/MappingsPage';
+import { SettingsPage } from './components/SettingsPage';
 import { Navigation } from './components/Navigation';
 
 function App() {
@@ -13,7 +13,7 @@ function App() {
         <div className="App">
           <Routes>
             <Route path="/" element={<HomePage />} />
-            <Route path="mappings" element={<MappingsPage />}>
+            <Route path="/settings" element={<SettingsPage />}>
             </Route>
           </Routes>
         </div>
