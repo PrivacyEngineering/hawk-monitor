@@ -35,6 +35,13 @@ export interface RequestsByServicePair {
   lastInvocation: string;
 }
 
+export interface RequestsByEndpoint {
+  provider: string;
+  endpoint: string;
+  count: number;
+  lastInvocation: string;
+}
+
 export interface DataCategory {
   id: string;
   name: string;
