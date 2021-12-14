@@ -17,5 +17,6 @@ export interface ExistingMapping {
   service: string;
   endpoint: string;
   httpStatusCode: number;
+  attachedFields: string[];
   mapping: any;
 }

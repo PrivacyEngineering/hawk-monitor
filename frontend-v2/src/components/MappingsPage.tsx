@@ -1,4 +1,4 @@
-import { Button, Col, Row } from "react-bootstrap"
+import { Button } from "react-bootstrap"
 import { ExistingMapping, Field } from "../types"
 import { ExistingMappingsTable } from "./ExistingMappingsTable"
 import { FieldsTable } from "./FieldsTable"
@@ -6,25 +6,19 @@ import { FieldsTable } from "./FieldsTable"
 export const MappingsPage = () => {
   return (
     <>
-      <h1>Configuration</h1>
-      <Row>
-        <Col>
-          <ExistingMappings />
-          <UnmappedEndpoints />
-        </Col>
-        <Col>
-          <Fields />
-        </Col>
-      </Row>
-
+      <Fields />
+      <ExistingMappings />
+      <UnmappedEndpoints />
     </>
   )
 }
 
 const ExistingMappings = () => {
   const existingMappings: ExistingMapping[] = [
-    { service: 'user', endpoint: '/newsletter', httpStatusCode: 200, mapping: {} },
-    { service: 'user', endpoint: '/signup', httpStatusCode: 201, mapping: {} },
+    { service: 'statistics', endpoint: '/login', httpStatusCode: 201, attachedFields: [], mapping: {} },
+    { service: 'statistics', endpoint: '/order-placed', httpStatusCode: 201, attachedFields: ['city'], mapping: {} },
+    { service: 'user', endpoint: '/newsletter', httpStatusCode: 200, attachedFields: ['user'], mapping: {} },
+    { service: 'user', endpoint: '/signup', httpStatusCode: 201, attachedFields: ['user', 'city'], mapping: {} },
   ]
 
   return (

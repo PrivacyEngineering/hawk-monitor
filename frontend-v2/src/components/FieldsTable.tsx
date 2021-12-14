@@ -6,9 +6,9 @@ export const FieldsTable = (props: TableProps<Field>) => {
   const { items } = props;
 
   return (
-    <Table>
+    <Table style={{ 'width': 'unset' }}>
       <TableHeader labels={['ID', 'Description', 'Personal data', 'Special categories personal data', 'Actions']} />
-      <tbody>{items.map(item => <FieldsTableRow item={item} />)}</tbody>
+      <tbody>{items.map((item, index) => <FieldsTableRow key={index} item={item} />)}</tbody>
     </Table>
   )
 }
