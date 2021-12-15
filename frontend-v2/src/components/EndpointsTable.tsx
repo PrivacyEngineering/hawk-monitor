@@ -24,7 +24,7 @@ const EndpointsTableRow = (props: TableRowProps<RequestsByEndpoint>) => {
       <td><b>{item.endpoint}</b></td>
       <td>{item.count}</td>
       <td>{item.lastInvocation}</td>
-      <td><Link to={'#'}><Button size='sm'><BsLink45Deg /> Details</Button></Link></td>
+      <td><Link to={'requests?provider=service-a&endpoint=endpoint-1'}><Button size='sm'><BsLink45Deg /> Details</Button></Link></td>
     </tr>
   )
 }

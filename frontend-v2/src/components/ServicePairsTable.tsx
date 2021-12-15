@@ -24,7 +24,7 @@ const ServicePairsRow = (props: TableRowProps<RequestsByServicePair>) => {
       <td><b>{item.provider}</b></td>
       <td>{item.count}</td>
       <td>{item.lastInvocation}</td>
-      <td><Link to={'#'}><Button size='sm'><BsLink45Deg /> Details</Button></Link></td>
+      <td><Link to={'requests?requestor=service-a&provider=service-b'}><Button size='sm'><BsLink45Deg /> Details</Button></Link></td>
     </tr>
   )
 }
