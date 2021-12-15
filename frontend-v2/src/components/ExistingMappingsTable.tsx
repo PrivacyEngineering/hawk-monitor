@@ -24,8 +24,8 @@ const ExistingMappingsTableRow = (props: TableRowProps<ExistingMapping>) => {
       <td>{item.httpStatusCode}</td>
       <td>{item.attachedFields.length ? item.attachedFields.join(', ') : '-'}</td>
       <td>
-        <Button variant='warning' size="sm"><BsPencilFill /></Button>{' '}
-        <Button variant='danger' size="sm"><BsFillTrashFill /></Button>
+        <Button variant='warning' size="sm"><BsPencilFill /> Edit</Button>{' '}
+        <Button variant='danger' size="sm"><BsFillTrashFill /> Remove</Button>
       </td>
     </tr>
   )

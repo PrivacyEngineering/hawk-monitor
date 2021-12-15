@@ -1,4 +1,5 @@
-import { Table } from "react-bootstrap";
+import { Button, Table } from "react-bootstrap";
+import { BsLink45Deg } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import { RequestsByServicePair, TableProps, TableRowProps } from "../types";
 import { TableHeader } from "./TableHeader";
@@ -23,7 +24,7 @@ const ServicePairsRow = (props: TableRowProps<RequestsByServicePair>) => {
       <td><b>{item.provider}</b></td>
       <td>{item.count}</td>
       <td>{item.lastInvocation}</td>
-      <td><Link to={'#'}>details</Link></td>
+      <td><Link to={'#'}><Button size='sm'><BsLink45Deg /> Details</Button></Link></td>
     </tr>
   )
 }

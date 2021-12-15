@@ -1,4 +1,4 @@
-import { Col, Row } from "react-bootstrap"
+import { Col, Placeholder, Row } from "react-bootstrap"
 import { DataCategory, RequestsByEndpoint, RequestsByServicePair } from "../types"
 import { DataCategoriesTable } from "./DataCategoriesTable"
 import { EndpointsTable } from "./EndpointsTable"
@@ -8,13 +8,21 @@ export const HomePage = () => {
   return (
     <>
       <Row>
-        <Col lg={12} xl={{ span: 8, order: 'first' }} className="pb-3">
+        <h2>Your services</h2>
+        <Col className="pb-3">
+          <p>(here comes a service graph <a href="https://novatecconsulting.github.io/novatec-service-dependency-graph-panel/images/service-dependency-graph-panel.gif">in this style</a>)</p>
+          <Placeholder style={{ height: '350px' }} xs={12} bg="success" />
+        </Col>
+
+      </Row>
+      <Row>
+        <Col lg={12} xl={6} className="pb-3">
           <ServicePairs />
         </Col>
-        <Col lg={{ span: 12 }} xl={12} className="pb-3">
+        <Col lg={12} xl={6} className="pb-3">
           <Endpoints />
         </Col>
-        <Col lg={{ span: 12 }} xl={{ span: 4, order: 'first' }} className="pb-3">
+        <Col lg={12} xl={4} className="pb-3">
           <DataCategories />
         </Col>
       </Row>

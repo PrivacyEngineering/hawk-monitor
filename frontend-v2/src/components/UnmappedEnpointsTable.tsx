@@ -1,5 +1,6 @@
 import { Button, Table } from "react-bootstrap";
 import { BsPencilFill } from "react-icons/bs";
+import { Link } from "react-router-dom";
 import { TableProps, TableRowProps, UnmappedEndpoint } from "../types";
 import { TableHeader } from "./TableHeader";
 
@@ -23,7 +24,7 @@ const UnmappedEndpointsTableRow = (props: TableRowProps<UnmappedEndpoint>) => {
       <td>{item.endpoint}</td>
       <td>{item.httpStatusCode}</td>
       <td>
-        <Button variant='success' size="sm"><BsPencilFill /></Button>
+        <Link to='new-mapping'><Button variant='success' size="sm"><BsPencilFill /> Create mapping</Button></Link>
       </td>
     </tr>
   )

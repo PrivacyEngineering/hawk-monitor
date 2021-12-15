@@ -24,8 +24,8 @@ const FieldsTableRow = (props: TableRowProps<Field>) => {
       <td>{item.personalData ? <BsCheckSquareFill /> : '-'}</td>
       <td>{item.specialCategoryPersonalData ? <BsCheckSquareFill /> : '-'}</td>
       <td>
-        <Button variant='warning' size="sm"><BsPencilFill /></Button>{' '}
-        <Button variant='danger' size="sm"><BsFillTrashFill /></Button>
+        <Button variant='warning' size="sm"><BsPencilFill /> Edit</Button>{' '}
+        <Button variant='danger' size="sm"><BsFillTrashFill /> Remove</Button>
       </td>
     </tr>
   )

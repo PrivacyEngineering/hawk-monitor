@@ -13,7 +13,9 @@ export const Navigation = () => {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
             <Nav.Link as={Link} to="/" active={location.pathname === '/'}>Home</Nav.Link>
-            <Nav.Link as={Link} to="/settings" active={location.pathname === '/settings'}>Settings</Nav.Link>
+            <Nav.Link as={Link} to="/fields" active={location.pathname.startsWith('/fields')}>Fields</Nav.Link>
+            <Nav.Link as={Link} to="/mappings" active={location.pathname.startsWith('/mappings')}>Mappings</Nav.Link>
+            <Nav.Link as={Link} to="/requests" active={location.pathname.startsWith('/requests')}>Requests</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
