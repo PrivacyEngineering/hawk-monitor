@@ -1,8 +1,11 @@
 import { Button, Col, ColProps, Dropdown, Form, Row } from "react-bootstrap"
+// import { useLocation } from "react-router-dom";
 import { newMapping } from "../dummyData"
-import { NewMappingFieldsTable } from "./NewMappingFieldsTable"
+import { MappingFieldsTable } from "./MappingFieldsTable"
 
-export const NewMapping = () => {
+export const MappingPage = () => {
+  // const location = useLocation();
+  // const { id } = location.state;
   const labels = ['ID', 'Path type', 'Path value', 'Actions'];
   const items = [
     { id: 'user', path: { type: "json", value: "$.body[*].user.email" } }
@@ -10,7 +13,7 @@ export const NewMapping = () => {
 
   return (
     <>
-      <h2>Create new mapping</h2>
+      <h2>Mapping</h2>
       <Row>
         <Col lg={12} xl={6}>
           <Row>
@@ -22,7 +25,7 @@ export const NewMapping = () => {
 
           <Form.Group className="mb-2">
             <Form.Label>Fields</Form.Label>
-            <NewMappingFieldsTable labels={labels} items={items} />
+            <MappingFieldsTable labels={labels} items={items} />
 
             <Dropdown>
               <Dropdown.Toggle variant="outline-success" id="dropdown-basic">Add field</Dropdown.Toggle>
@@ -42,7 +45,7 @@ export const NewMapping = () => {
           </Form.Group>
         </Col>
       </Row>
-      <Button variant='success'>Create mapping</Button>
+      <Button variant='success'>Save</Button>
     </>
   )
 }

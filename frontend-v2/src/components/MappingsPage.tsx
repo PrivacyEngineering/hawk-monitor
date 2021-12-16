@@ -44,7 +44,7 @@ const ExistingMappingsTableRow = (props: TableRowProps<ExistingMapping>) => {
       <td>{item.httpStatusCode}</td>
       <td>{item.attachedFields.length ? item.attachedFields.join(', ') : '-'}</td>
       <td style={{ 'width': '170px' }}>
-        <Button variant='warning' size="sm"><BsPencilFill /> Edit</Button>{' '}
+        <Link to='here-comes-my-id' state={{ id: 'here-comes-my-id' }}><Button variant='warning' size="sm"><BsPencilFill /> Edit</Button></Link>{' '}
         <Button variant='danger' size="sm"><BsFillTrashFill /> Remove</Button>
       </td>
     </tr>
@@ -83,7 +83,7 @@ const UnmappedEndpointsTableRow = (props: TableRowProps<UnmappedEndpoint>) => {
       <td>{item.endpoint}</td>
       <td>{item.httpStatusCode}</td>
       <td style={{ 'width': '170px' }}>
-        <Link to='new-mapping'><Button variant='success' size="sm"><BsPencilFill /> Create mapping</Button></Link>
+        <Link to='new'><Button variant='success' size="sm"><BsPencilFill /> Create mapping</Button></Link>
       </td>
     </tr>
   )
