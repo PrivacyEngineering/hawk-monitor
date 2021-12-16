@@ -11,18 +11,18 @@ export const HomePage = () => {
         <h2>Your services</h2>
         <Col className="pb-3">
           <p>(here comes a service graph <a href="https://novatecconsulting.github.io/novatec-service-dependency-graph-panel/images/service-dependency-graph-panel.gif">in this style</a>)</p>
-          <Placeholder style={{ height: '350px' }} xs={12} bg="success" />
+          <Placeholder style={{ height: '280px' }} xs={12} bg="success" />
         </Col>
 
       </Row>
       <Row>
-        <Col lg={12} xl={6} className="pb-3">
+        <Col lg={12} xl={6} >
           <ServicePairs />
         </Col>
-        <Col lg={12} xl={6} className="pb-3">
+        <Col lg={12} xl={6} >
           <Endpoints />
         </Col>
-        <Col lg={12} xl={4} className="pb-3">
+        <Col lg={12} xl={4} >
           <DataCategories />
         </Col>
       </Row>
