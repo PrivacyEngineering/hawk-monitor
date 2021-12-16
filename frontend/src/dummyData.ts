@@ -10,7 +10,7 @@ export const dummyLogs = [
     },
     "purpose": {
       "type": "frontend-signup",
-      "formatted": "User account created",
+      "formatted": "User account created"
     }
   },
   {
@@ -24,7 +24,7 @@ export const dummyLogs = [
     },
     "purpose": {
       "type": "newsletter-signup",
-      "formatted": "User signed up for newsletter",
+      "formatted": "User signed up for newsletter"
     }
   },
   {
