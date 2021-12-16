@@ -8,7 +8,7 @@ export const EndpointsTable = (props: TableProps<RequestsByEndpoint>) => {
   const { labels, items } = props;
 
   return (
-    <Table style={{ 'width': 'unset' }}>
+    <Table>
       <TableHeader labels={labels} />
       <tbody>{items.map((item, index) => <EndpointsTableRow key={index} item={item} />)}</tbody>
     </Table>
