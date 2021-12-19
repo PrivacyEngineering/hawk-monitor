@@ -15,11 +15,11 @@ export interface TableRowProps<T> {
 }
 
 export interface ExistingMapping {
-  service: string;
+  id: string;
+  serviceName: string;
   endpoint: string;
   httpStatusCode: number;
   attachedFields: string[];
-  mapping: any;
 }
 
 export interface UnmappedEndpoint {

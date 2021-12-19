@@ -16,11 +16,11 @@ export const MappingsPage = () => {
 const ExistingMappings = () => {
   const labels = ['Service ID', 'Endpoint', 'HTTP status code', 'Attached Fields', 'Actions'];
   const items: ExistingMapping[] = [
-    { service: 'orders', endpoint: '/create', httpStatusCode: 201, attachedFields: ['user', 'city'], mapping: {} },
-    { service: 'statistics', endpoint: '/revenue', httpStatusCode: 201, attachedFields: [], mapping: {} },
-    { service: 'user', endpoint: '/newsletter', httpStatusCode: 200, attachedFields: ['user'], mapping: {} },
-    { service: 'user', endpoint: '/signup', httpStatusCode: 201, attachedFields: ['user', 'city'], mapping: {} },
-  ]
+    { id: '1', service: 'orders', endpoint: '/create', httpStatusCode: 201, attachedFields: ['user', 'city'] },
+    { id: '2', service: 'statistics', endpoint: '/revenue', httpStatusCode: 201, attachedFields: [] },
+    { id: '3', service: 'user', endpoint: '/newsletter', httpStatusCode: 200, attachedFields: ['user'] },
+    { id: '4', service: 'user', endpoint: '/signup', httpStatusCode: 201, attachedFields: ['user', 'city'] },
+  ];
 
   return (
     <Col xl={8}>
@@ -44,7 +44,7 @@ const ExistingMappingsTableRow = (props: TableRowProps<ExistingMapping>) => {
       <td>{item.httpStatusCode}</td>
       <td>{item.attachedFields.length ? item.attachedFields.join(', ') : '-'}</td>
       <td style={{ 'width': '170px' }}>
-        <Link to='here-comes-my-id' state={{ id: 'here-comes-my-id' }}><Button variant='warning' size="sm"><BsPencilFill /> Edit</Button></Link>{' '}
+        <Link to={item.id} state={{ ...item }}><Button variant='warning' size="sm"><BsPencilFill /> Edit</Button></Link>{' '}
         <Button variant='danger' size="sm"><BsFillTrashFill /> Remove</Button>
       </td>
     </tr>
