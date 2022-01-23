@@ -14,19 +14,17 @@ export interface TableRowProps<T> {
   item: T;
 }
 
-export interface ExistingMapping {
+export interface MappingBase {
   id: string;
-  serviceName: string;
-  endpoint: string;
-  httpStatusCode: number;
-  attachedFields: string[];
+  service: string;
+  endpoint: {
+    protocol: string;
+    method: string;
+    path: string;
+  };
 }
 
-export interface UnmappedEndpoint {
-  service: string;
-  endpoint: string;
-  httpStatusCode: number;
-}
+export type Mapping = MappingBase & { fields: string[] }
 
 export interface Request {
   requestor: string;

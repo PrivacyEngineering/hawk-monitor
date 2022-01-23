@@ -1,11 +1,11 @@
 import { Button, Col, ColProps, Dropdown, Form, Row } from "react-bootstrap"
 import { useParams } from "react-router-dom";
 import { newMapping } from "../dummyData"
-import { ExistingMapping } from "../types";
+import { Mapping } from "../types";
 import { MappingFieldsTable } from "./MappingFieldsTable"
 
 export const MappingPage = () => {
-  const params = useParams<ExistingMapping & { [key: string]: string; }>();
+  const params = useParams<Mapping & { [key: string]: string; }>();
   const labels = ['ID', 'Path type', 'Path value', 'Actions'];
   const items = [
     { id: 'user', path: { type: "json", value: "$.body[*].user.email" } }

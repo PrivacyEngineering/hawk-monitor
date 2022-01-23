@@ -1,7 +1,7 @@
 import { Button, Col, Table } from "react-bootstrap"
 import { BsFillTrashFill, BsPencilFill } from "react-icons/bs"
 import { Link } from "react-router-dom"
-import { ExistingMapping, TableRowProps, UnmappedEndpoint } from "../types"
+import { Mapping, MappingBase, TableRowProps } from "../types"
 import { TableHeader } from "./TableHeader"
 
 export const MappingsPage = () => {
@@ -14,12 +14,12 @@ export const MappingsPage = () => {
 }
 
 const ExistingMappings = () => {
-  const labels = ['Service ID', 'Endpoint', 'HTTP status code', 'Attached Fields', 'Actions'];
-  const items: ExistingMapping[] = [
-    { id: '1', service: 'orders', endpoint: '/create', httpStatusCode: 201, attachedFields: ['user', 'city'] },
-    { id: '2', service: 'statistics', endpoint: '/revenue', httpStatusCode: 201, attachedFields: [] },
-    { id: '3', service: 'user', endpoint: '/newsletter', httpStatusCode: 200, attachedFields: ['user'] },
-    { id: '4', service: 'user', endpoint: '/signup', httpStatusCode: 201, attachedFields: ['user', 'city'] },
+  const labels = ['Service ID', 'Protocol', 'Method', 'Endpoint', 'Attached Fields', 'Actions'];
+  const items: Mapping[] = [
+    { id: '1', service: 'orders', endpoint: { protocol: 'HTTP', method: 'POST', path: '/create', }, fields: ['user', 'city'] },
+    { id: '2', service: 'statistics', endpoint: { protocol: 'HTTP', method: 'POST', path: '/revenue', }, fields: [] },
+    { id: '3', service: 'user', endpoint: { protocol: 'HTTP', method: 'POST', path: '/newsletter', }, fields: ['user'] },
+    { id: '4', service: 'user', endpoint: { protocol: 'HTTP', method: 'POST', path: '/signup', }, fields: ['user', 'city'] },
   ];
 
   return (
@@ -34,15 +34,16 @@ const ExistingMappings = () => {
   )
 }
 
-const ExistingMappingsTableRow = (props: TableRowProps<ExistingMapping>) => {
+const ExistingMappingsTableRow = (props: TableRowProps<Mapping>) => {
   const { item } = props;
 
   return (
     <tr>
       <td><b>{item.service}</b></td>
-      <td>{item.endpoint}</td>
-      <td>{item.httpStatusCode}</td>
-      <td>{item.attachedFields.length ? item.attachedFields.join(', ') : '-'}</td>
+      <td>{item.endpoint.protocol}</td>
+      <td>{item.endpoint.method}</td>
+      <td>{item.endpoint.path}</td>
+      <td>{item.fields.length ? item.fields.join(', ') : '-'}</td>
       <td style={{ 'width': '170px' }}>
         <Link to={item.id} state={{ ...item }}><Button variant='warning' size="sm"><BsPencilFill /> Edit</Button></Link>{' '}
         <Button variant='danger' size="sm"><BsFillTrashFill /> Remove</Button>
@@ -52,11 +53,11 @@ const ExistingMappingsTableRow = (props: TableRowProps<ExistingMapping>) => {
 }
 
 const UnmappedEndpoints = () => {
-  const labels = ['Service ID', 'Endpoint', 'HTTP status code', 'Actions'];
-  const items: UnmappedEndpoint[] = [
-    { service: 'payment', endpoint: '/pay/once', httpStatusCode: 200 },
-    { service: 'payment', endpoint: '/pay/recurring', httpStatusCode: 200 },
-    { service: 'statistics', endpoint: '/successful-payment', httpStatusCode: 200 },
+  const labels = ['Service ID', 'Protocol', 'Method', 'Endpoint', 'Actions'];
+  const items: MappingBase[] = [
+    { id: '5', service: 'payment', endpoint: { protocol: 'HTTP', method: 'GET', path: '/pay/once' } },
+    { id: '6', service: 'payment', endpoint: { protocol: 'HTTP', method: 'GET', path: '/pay/recurring' } },
+    { id: '7', service: 'statistics', endpoint: { protocol: 'HTTP', method: 'GET', path: '/successful-payment' } },
   ]
 
   return (
@@ -74,14 +75,15 @@ const UnmappedEndpoints = () => {
   )
 }
 
-const UnmappedEndpointsTableRow = (props: TableRowProps<UnmappedEndpoint>) => {
+const UnmappedEndpointsTableRow = (props: TableRowProps<MappingBase>) => {
   const { item } = props;
 
   return (
     <tr>
       <td><b>{item.service}</b></td>
-      <td>{item.endpoint}</td>
-      <td>{item.httpStatusCode}</td>
+      <td>{item.endpoint.protocol}</td>
+      <td>{item.endpoint.method}</td>
+      <td>{item.endpoint.path}</td>
       <td style={{ 'width': '170px' }}>
         <Link to='new'><Button variant='success' size="sm"><BsPencilFill /> Create mapping</Button></Link>
       </td>
