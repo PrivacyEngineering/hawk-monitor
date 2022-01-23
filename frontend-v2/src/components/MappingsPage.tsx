@@ -23,7 +23,7 @@ const ExistingMappings = () => {
   ];
 
   return (
-    <Col xl={8}>
+    <Col xl={10}>
       <h2>Existing mappings</h2>
       <p><b>Mappings</b> are used to trace processing of privacy-related data in your system. Please keep them up to date.</p>
       <Table>
@@ -60,7 +60,7 @@ const UnmappedEndpoints = () => {
   ]
 
   return (
-    <Col xl={8}>
+    <Col xl={10}>
       <h2>Unmapped endpoints</h2>
       <p>
         The following API endpoints were detected in your system, but mappings for them are not yet created.<br />

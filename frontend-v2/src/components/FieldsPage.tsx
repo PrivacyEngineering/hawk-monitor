@@ -18,7 +18,7 @@ export const FieldsPage = () => {
         <b>Fields</b> are meta-structures to enable hassle-free assignment of privacy categories to endpoints.<br />
         Assign fields to endpoints and save yourself thinking about data privacy categories for good!
       </p>
-      <Col xl={8}>
+      <Col xl={10}>
         <Table>
           <TableHeader labels={labels} />
           <tbody>{items.map((item, index) => <FieldsTableRow key={index} item={item} />)}</tbody>
