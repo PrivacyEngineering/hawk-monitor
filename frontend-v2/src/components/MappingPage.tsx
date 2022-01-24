@@ -20,7 +20,7 @@ export const MappingPage = () => {
     <>
       <h2>Mapping #{mapping.id}</h2>
       <Row>
-        <Col lg={12} xl={6}>
+        <Col lg={12} xl={10}>
           <Row>
             <ColInput sm={12} md={6} xl={4} label="Service name" mutedText="e.g. my-service" placeholder={mapping.service} readOnly />
             <ColInput sm={12} md={6} xl={4} label="Protocol" mutedText="e.g. HTTP" placeholder={mapping.endpoint.protocol} readOnly />
