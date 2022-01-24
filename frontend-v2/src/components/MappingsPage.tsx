@@ -1,6 +1,8 @@
 import { Button, Col, Table } from "react-bootstrap"
 import { BsFillTrashFill, BsPencilFill } from "react-icons/bs"
+import { useSelector } from "react-redux"
 import { Link } from "react-router-dom"
+import { RootState } from "../reducers"
 import { Mapping, MappingBase, TableRowProps } from "../types"
 import { TableHeader } from "./TableHeader"
 
@@ -15,12 +17,7 @@ export const MappingsPage = () => {
 
 const ExistingMappings = () => {
   const labels = ['Service ID', 'Protocol', 'Method', 'Endpoint', 'Attached Fields', 'Actions'];
-  const items: Mapping[] = [
-    { id: '1', service: 'orders', endpoint: { protocol: 'HTTP', method: 'POST', path: '/create', }, fields: ['user', 'city'] },
-    { id: '2', service: 'statistics', endpoint: { protocol: 'HTTP', method: 'POST', path: '/revenue', }, fields: [] },
-    { id: '3', service: 'user', endpoint: { protocol: 'HTTP', method: 'POST', path: '/newsletter', }, fields: ['user'] },
-    { id: '4', service: 'user', endpoint: { protocol: 'HTTP', method: 'POST', path: '/signup', }, fields: ['user', 'city'] },
-  ];
+  const items = useSelector<RootState, Mapping[]>(state => state.mappings);
 
   return (
     <Col xl={10}>
@@ -54,11 +51,7 @@ const ExistingMappingsTableRow = (props: TableRowProps<Mapping>) => {
 
 const UnmappedEndpoints = () => {
   const labels = ['Service ID', 'Protocol', 'Method', 'Endpoint', 'Actions'];
-  const items: MappingBase[] = [
-    { id: '5', service: 'payment', endpoint: { protocol: 'HTTP', method: 'GET', path: '/pay/once' } },
-    { id: '6', service: 'payment', endpoint: { protocol: 'HTTP', method: 'GET', path: '/pay/recurring' } },
-    { id: '7', service: 'statistics', endpoint: { protocol: 'HTTP', method: 'GET', path: '/successful-payment' } },
-  ]
+  const items = useSelector<RootState, MappingBase[]>(state => state.unhandeldMappings);
 
   return (
     <Col xl={10}>
