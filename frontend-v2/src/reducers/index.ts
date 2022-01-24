@@ -1,9 +1,8 @@
 import { combineReducers } from 'redux';
-import { mappings, unhandeldMappings } from './mappings';
+import { mappings } from './mappings';
 
 export const app = combineReducers({
-  mappings,
-  unhandeldMappings
+  mappings
 });
 
 export type RootState = ReturnType<typeof app>

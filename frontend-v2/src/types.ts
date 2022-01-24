@@ -14,7 +14,7 @@ export interface TableRowProps<T> {
   item: T;
 }
 
-export interface MappingBase {
+export interface AnyMapping {
   id: string;
   service: string;
   endpoint: {
@@ -22,9 +22,27 @@ export interface MappingBase {
     method: string;
     path: string;
   };
+  fields?: MappingField[];
 }
 
-export type Mapping = MappingBase & { fields: string[] }
+export interface Mapping {
+  id: string;
+  service: string;
+  endpoint: {
+    protocol: string;
+    method: string;
+    path: string;
+  };
+  fields: MappingField[];
+}
+
+export interface MappingField {
+  id: string;
+  path: {
+    type: string;
+    value: string;
+  }
+}
 
 export interface Request {
   requestor: string;

@@ -3,7 +3,7 @@ import { BsFillTrashFill, BsPencilFill } from "react-icons/bs"
 import { useSelector } from "react-redux"
 import { Link } from "react-router-dom"
 import { RootState } from "../reducers"
-import { Mapping, MappingBase, TableRowProps } from "../types"
+import { AnyMapping, Mapping, TableRowProps } from "../types"
 import { TableHeader } from "./TableHeader"
 
 export const MappingsPage = () => {
@@ -16,8 +16,8 @@ export const MappingsPage = () => {
 }
 
 const ExistingMappings = () => {
-  const labels = ['Service ID', 'Protocol', 'Method', 'Endpoint', 'Attached Fields', 'Actions'];
-  const items = useSelector<RootState, Mapping[]>(state => state.mappings);
+  const labels = ['ID', 'Service', 'Protocol', 'Method', 'Endpoint', 'Attached Fields', 'Actions'];
+  const items = useSelector<RootState, AnyMapping[]>(state => state.mappings.filter(m => m.fields !== undefined)) as Mapping[];
 
   return (
     <Col xl={10}>
@@ -36,11 +36,12 @@ const ExistingMappingsTableRow = (props: TableRowProps<Mapping>) => {
 
   return (
     <tr>
+      <td>{item.id}</td>
       <td><b>{item.service}</b></td>
       <td>{item.endpoint.protocol}</td>
       <td>{item.endpoint.method}</td>
       <td>{item.endpoint.path}</td>
-      <td>{item.fields.length ? item.fields.join(', ') : '-'}</td>
+      <td>{item.fields.length ? item.fields.map(f=> f.id).join(', ') : '-'}</td>
       <td style={{ 'width': '170px' }}>
         <Link to={item.id} state={{ ...item }}><Button variant='warning' size="sm"><BsPencilFill /> Edit</Button></Link>{' '}
         <Button variant='danger' size="sm"><BsFillTrashFill /> Remove</Button>
@@ -50,8 +51,8 @@ const ExistingMappingsTableRow = (props: TableRowProps<Mapping>) => {
 }
 
 const UnmappedEndpoints = () => {
-  const labels = ['Service ID', 'Protocol', 'Method', 'Endpoint', 'Actions'];
-  const items = useSelector<RootState, MappingBase[]>(state => state.unhandeldMappings);
+  const labels = ['ID', 'Service', 'Protocol', 'Method', 'Endpoint', 'Actions'];
+  const items = useSelector<RootState, AnyMapping[]>(state => state.mappings.filter(m => m.fields === undefined));
 
   return (
     <Col xl={10}>
@@ -68,17 +69,18 @@ const UnmappedEndpoints = () => {
   )
 }
 
-const UnmappedEndpointsTableRow = (props: TableRowProps<MappingBase>) => {
+const UnmappedEndpointsTableRow = (props: TableRowProps<AnyMapping>) => {
   const { item } = props;
 
   return (
     <tr>
+      <td>{item.id}</td>
       <td><b>{item.service}</b></td>
       <td>{item.endpoint.protocol}</td>
       <td>{item.endpoint.method}</td>
       <td>{item.endpoint.path}</td>
       <td style={{ 'width': '170px' }}>
-        <Link to='new'><Button variant='success' size="sm"><BsPencilFill /> Create mapping</Button></Link>
+        <Link to={item.id}><Button variant='success' size="sm"><BsPencilFill /> Create mapping</Button></Link>
       </td>
     </tr>
   )
