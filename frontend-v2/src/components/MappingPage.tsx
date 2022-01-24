@@ -3,13 +3,14 @@ import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { newMapping } from "../dummyData"
 import { RootState } from "../reducers";
-import { AnyMapping } from "../types";
+import { AnyMapping, Field } from "../types";
 import { ColInput } from "./ColInput";
 import { MappingFieldsTable } from "./MappingFieldsTable"
 
 export const MappingPage = () => {
   const params = useParams<{ id: string }>();
   const id = params.id;
+  const fields = useSelector<RootState, Field[]>(state => state.fields);
   const mapping = useSelector<RootState, AnyMapping | undefined>(state => state.mappings.find(m => m.id === id)) as AnyMapping;
 
   const labels = ['ID', 'Path type', 'Path value', 'Actions'];
@@ -35,21 +36,18 @@ export const MappingPage = () => {
 
             <Dropdown>
               <Dropdown.Toggle variant="outline-success" id="dropdown-basic">Add field</Dropdown.Toggle>
-              <Dropdown.Menu>
-                <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-                <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-                <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
-              </Dropdown.Menu>
+              <Dropdown.Menu>{fields.map(f => <Dropdown.Item key={f.id} href="#">{f.id}</Dropdown.Item>)}</Dropdown.Menu>
             </Dropdown>
           </Form.Group>
         </Col>
 
-        <Col lg={12} xl={6}>
+        {/* TODO: react to changes */}
+        {/* <Col lg={12} xl={6}>
           <Form.Group className="mb-2">
             <Form.Label>Mapping result</Form.Label>
             <Form.Control as="textarea" style={{ height: '35vh' }} type="text" placeholder={JSON.stringify(newMapping, null, 4)} readOnly />
           </Form.Group>
-        </Col>
+        </Col> */}
       </Row>
       <Button variant='success'>Save</Button>
     </>

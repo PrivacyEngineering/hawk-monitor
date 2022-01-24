@@ -22,7 +22,8 @@ const MappingFieldsTableRow = (props: TableRowProps<MappingFieldReference>) => {
       <td><ColInput value={item.path.type}></ColInput></td>
       <td><ColInput value={item.path.value}></ColInput></td>
       <td>
-        <Button variant='danger' size="sm"><BsFillTrashFill /> Remove</Button>
+        {/* <Button variant='danger' size="sm"><BsFillTrashFill /> Remove</Button> */}
+        <Button variant='danger'><BsFillTrashFill /></Button>
       </td>
     </tr>
   )

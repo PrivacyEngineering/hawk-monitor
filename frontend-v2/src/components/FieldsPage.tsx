@@ -1,15 +1,13 @@
 import { Button, Col, Table } from "react-bootstrap"
 import { BsCheckSquareFill, BsFillTrashFill, BsPencilFill } from "react-icons/bs";
+import { useSelector } from "react-redux";
+import { RootState } from "../reducers";
 import { Field, TableRowProps } from "../types"
 import { TableHeader } from "./TableHeader";
 
 export const FieldsPage = () => {
   const labels = ['ID', 'Description', 'Personal data', 'Special categories personal data', 'Actions'];
-  const items: Field[] = [
-    { id: 'city', description: 'City name with Alpha-2 country code', personalData: false, specialCategoryPersonalData: false },
-    { id: 'user', description: 'User data', personalData: true, specialCategoryPersonalData: false },
-    { id: 'blood-test', description: 'Blood test results', personalData: true, specialCategoryPersonalData: true },
-  ];
+  const items = useSelector<RootState, Field[]>(state => state.fields);
 
   return (
     <>
