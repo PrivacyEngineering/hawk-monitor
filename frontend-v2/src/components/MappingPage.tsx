@@ -1,9 +1,10 @@
-import { Button, Col, ColProps, Dropdown, Form, Row } from "react-bootstrap"
+import { Button, Col, Dropdown, Form, Row } from "react-bootstrap"
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { newMapping } from "../dummyData"
 import { RootState } from "../reducers";
 import { AnyMapping } from "../types";
+import { ColInput } from "./ColInput";
 import { MappingFieldsTable } from "./MappingFieldsTable"
 
 export const MappingPage = () => {
@@ -22,10 +23,10 @@ export const MappingPage = () => {
       <Row>
         <Col lg={12} xl={10}>
           <Row>
-            <ColInput sm={12} md={6} xl={4} label="Service name" mutedText="e.g. my-service" placeholder={mapping.service} readOnly />
-            <ColInput sm={12} md={6} xl={4} label="Protocol" mutedText="e.g. HTTP" placeholder={mapping.endpoint.protocol} readOnly />
-            <ColInput sm={12} md={6} xl={4} label="Method" mutedText="e.g. POST" placeholder={mapping.endpoint.method} readOnly />
-            <ColInput sm={12} md={6} xl={12} label="Path" mutedText="e.g. /api/endpoint" placeholder={mapping.endpoint.path} readOnly />
+            <ColInput sm={12} md={6} xl={4} label="Service name" mutedText="e.g. my-service" value={mapping.service} readOnly />
+            <ColInput sm={12} md={6} xl={4} label="Protocol" mutedText="e.g. HTTP" value={mapping.endpoint.protocol} readOnly />
+            <ColInput sm={12} md={6} xl={4} label="Method" mutedText="e.g. POST" value={mapping.endpoint.method} readOnly />
+            <ColInput sm={12} md={6} xl={12} label="Path" mutedText="e.g. /api/endpoint" value={mapping.endpoint.path} readOnly />
           </Row>
 
           <Form.Group className="mb-2">
@@ -52,17 +53,5 @@ export const MappingPage = () => {
       </Row>
       <Button variant='success'>Save</Button>
     </>
-  )
-}
-
-const ColInput = (props: ColProps & { label: string, mutedText: string, placeholder?: string, readOnly?: boolean }) => {
-  return (
-    <Col xs={props.xs} sm={props.sm} md={props.md} lg={props.lg} xl={props.xl}>
-      <Form.Group className="mb-2">
-        <Form.Label>{props.label}</Form.Label>
-        <Form.Control placeholder={props.placeholder} readOnly={props.readOnly} />
-        <Form.Text className="text-muted">{props.mutedText}</Form.Text>
-      </Form.Group>
-    </Col>
   )
 }

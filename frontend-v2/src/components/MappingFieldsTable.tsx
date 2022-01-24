@@ -1,6 +1,7 @@
 import { Button, Table } from "react-bootstrap"
 import { BsFillTrashFill } from "react-icons/bs";
 import { MappingFieldReference, TableProps, TableRowProps } from "../types";
+import { ColInput } from "./ColInput";
 import { TableHeader } from "./TableHeader"
 
 export const MappingFieldsTable = (props: TableProps<MappingFieldReference>) => {
@@ -18,8 +19,8 @@ const MappingFieldsTableRow = (props: TableRowProps<MappingFieldReference>) => {
   return (
     <tr>
       <td><b>{item.id}</b></td>
-      <td>{item.path.type}</td>
-      <td>{item.path.value}</td>
+      <td><ColInput value={item.path.type}></ColInput></td>
+      <td><ColInput value={item.path.value}></ColInput></td>
       <td>
         <Button variant='danger' size="sm"><BsFillTrashFill /> Remove</Button>
       </td>
