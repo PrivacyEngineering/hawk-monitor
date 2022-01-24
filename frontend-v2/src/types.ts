@@ -22,21 +22,14 @@ export interface AnyMapping {
     method: string;
     path: string;
   };
-  fields?: MappingField[];
+  fields?: MappingFieldReference[];
 }
 
-export interface Mapping {
-  id: string;
-  service: string;
-  endpoint: {
-    protocol: string;
-    method: string;
-    path: string;
-  };
-  fields: MappingField[];
+export interface Mapping extends AnyMapping {
+  fields: MappingFieldReference[]
 }
 
-export interface MappingField {
+export interface MappingFieldReference {
   id: string;
   path: {
     type: string;
@@ -71,7 +64,7 @@ export interface DataCategory {
   value: number;
 }
 
-export interface MappingField {
+export interface MappingFieldReference {
   id: string;
   path: {
     type: string;
