@@ -1,4 +1,4 @@
-import { Col, Placeholder, Row } from "react-bootstrap"
+import { Col, Row } from "react-bootstrap"
 import { DataCategory, RequestsByEndpoint, RequestsByServicePair } from "../types"
 import { DataCategoriesTable } from "./DataCategoriesTable"
 import { EndpointsTable } from "./EndpointsTable"
@@ -7,14 +7,14 @@ import { ServicePairsTable } from "./ServicePairsTable"
 export const HomePage = () => {
   return (
     <>
-      <Row>
+      {/* TODO: implement service graph */}
+      {/* <Row>
         <h2>Your services</h2>
         <Col className="pb-3">
           <p>(here comes a service graph <a href="https://novatecconsulting.github.io/novatec-service-dependency-graph-panel/images/service-dependency-graph-panel.gif">in this style</a>)</p>
           <Placeholder style={{ height: '280px' }} xs={12} bg="success" />
         </Col>
-
-      </Row>
+      </Row> */}
       <Row>
         <Col lg={12} xl={6} >
           <ServicePairs />
