@@ -71,3 +71,7 @@ export interface MappingFieldReference {
     value: string;
   }
 }
+
+export interface NormalizedState<T> {
+  [id: string]: T;
+}
