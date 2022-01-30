@@ -18,7 +18,8 @@ export const MappingsPage = () => {
 
 const ExistingMappings = () => {
   const labels = ['ID', 'Service', 'Protocol', 'Method', 'Endpoint', 'Attached Fields', 'Inferred data categories', 'Actions'];
-  const items = useSelector<RootState, AnyMapping[]>(state => state.mappings.filter(m => m.fields !== undefined)) as Mapping[];
+  const mappings = useSelector<RootState, AnyMapping[]>(state => state.mappings) as Mapping[];
+  const existingMappings = mappings.filter(m => m.fields !== undefined).sort((a, b) => a.id.localeCompare(b.id));
 
   return (
     <Col xl={10}>
@@ -26,7 +27,7 @@ const ExistingMappings = () => {
       <p><b>Mappings</b> are used to trace processing of privacy-related data in your system. Please keep them up to date.</p>
       <Table>
         <TableHeader labels={labels} />
-        <tbody>{items.map((item, index) => <ExistingMappingsTableRow key={index} item={item} />)}</tbody>
+        <tbody>{existingMappings.map((item, index) => <ExistingMappingsTableRow key={index} item={item} />)}</tbody>
       </Table>
     </Col>
   )
@@ -74,8 +75,8 @@ const InferredDataCategories = (props: { fieldRefs: MappingFieldReference[] }) =
 }
 
 const UnmappedEndpoints = () => {
-  const labels = ['ID', 'Service', 'Protocol', 'Method', 'Endpoint', 'Actions'];
-  const items = useSelector<RootState, AnyMapping[]>(state => state.mappings.filter(m => m.fields === undefined));
+  const mappings = useSelector<RootState, AnyMapping[]>(state => state.mappings);
+  const unmappedEndpoints = mappings.filter(m => m.fields === undefined).sort((a, b) => a.id.localeCompare(b.id));
 
   return (
     <Col xl={10}>
@@ -85,8 +86,8 @@ const UnmappedEndpoints = () => {
         Please add the missing mappings here and retroactively map your system's API endpoint calls to particular privacy-related data categories.
       </p>
       <Table>
-        <TableHeader labels={labels} />
-        <tbody>{items.map((item, index) => <UnmappedEndpointsTableRow key={index} item={item} />)}</tbody>
+        <TableHeader labels={['ID', 'Service', 'Protocol', 'Method', 'Endpoint', 'Actions']} />
+        <tbody>{unmappedEndpoints.map((item, index) => <UnmappedEndpointsTableRow key={index} item={item} />)}</tbody>
       </Table>
     </Col>
   )

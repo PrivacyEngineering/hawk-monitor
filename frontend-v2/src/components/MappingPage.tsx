@@ -1,10 +1,14 @@
-import { Button, Col, Dropdown, Form, Row } from "react-bootstrap"
+import { useState } from "react";
+import { Button, Col, Dropdown, Form, Row, Table } from "react-bootstrap"
+import { BsFillTrashFill } from "react-icons/bs";
 import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { useThunkDispatch } from "..";
 import { RootState } from "../reducers";
-import { AnyMapping, Field } from "../types";
+import { AnyMapping, Field, MappingFieldReference } from "../types";
+import { UPDATE_MAPPING_REQUEST, UPDATE_MAPPING_SUCCESS } from "../types/actions/Types";
 import { ColInput } from "./ColInput";
-import { MappingFieldsTable } from "./MappingFieldsTable"
+import { TableHeader } from "./TableHeader";
 
 export const MappingPage = () => {
   const params = useParams<{ id: string }>();
@@ -12,43 +16,54 @@ export const MappingPage = () => {
   const fields = useSelector<RootState, Field[]>(state => state.fields);
   const mapping = useSelector<RootState, AnyMapping | undefined>(state => state.mappings.find(m => m.id === id)) as AnyMapping;
 
-  const labels = ['ID', 'Path type', 'Path value', 'Actions'];
-  const items = [
-    { id: 'user', path: { type: "json", value: "$.body[*].user.email" } }
-  ];
+  const dispatch = useThunkDispatch();
+  const navigate = useNavigate();
+
+  const [fieldRefs, setFieldRefs] = useState(mapping.fields || []);
+  const deleteFieldRef = (fieldRef: MappingFieldReference) => setFieldRefs([...fieldRefs.filter(x => x !== fieldRef)]);
+  const addFieldRef = (fieldId: string) => setFieldRefs([...fieldRefs, { id: fieldId, path: { type: '', value: '' } }]);
+
+  const handleSave = () => {
+    const mappingToDispatch = { ...mapping, fields: fieldRefs };
+    dispatch({ type: UPDATE_MAPPING_REQUEST, mapping: mappingToDispatch });
+    // TODO: actual API call
+    dispatch({ type: UPDATE_MAPPING_SUCCESS, mapping: mappingToDispatch });
+    navigate('/mappings', { replace: true })
+  }
 
   return (
     <>
       <h2>Mapping #{mapping.id}</h2>
-      <Row>
-        <Col lg={12} xl={10}>
-          <Row>
-            <ColInput sm={12} md={6} xl={4} label="Service name" mutedText="e.g. my-service" value={mapping.service} readOnly />
-            <ColInput sm={12} md={6} xl={4} label="Protocol" mutedText="e.g. HTTP" value={mapping.endpoint.protocol} readOnly />
-            <ColInput sm={12} md={6} xl={4} label="Method" mutedText="e.g. POST" value={mapping.endpoint.method} readOnly />
-            <ColInput sm={12} md={6} xl={12} label="Path" mutedText="e.g. /api/endpoint" value={mapping.endpoint.path} readOnly />
-          </Row>
+      <Col lg={12} xl={10}>
+        <Row>
+          <ColInput sm={12} md={6} xl={4} label="Service name" mutedText="e.g. my-service" value={mapping.service} readOnly />
+          <ColInput sm={12} md={6} xl={4} label="Protocol" mutedText="e.g. HTTP" value={mapping.endpoint.protocol} readOnly />
+          <ColInput sm={12} md={6} xl={4} label="Method" mutedText="e.g. POST" value={mapping.endpoint.method} readOnly />
+          <ColInput sm={12} md={6} xl={12} label="Path" mutedText="e.g. /api/endpoint" value={mapping.endpoint.path} readOnly />
+        </Row>
 
-          <Form.Group className="mb-2">
-            <Form.Label>Fields</Form.Label>
-            <MappingFieldsTable labels={labels} items={items} />
+        <Form.Group className="mb-2">
+          <Form.Label>Fields</Form.Label>
+          <Table>
+            <TableHeader labels={['ID', 'Path type', 'Path value', 'Actions']} />
+            <tbody>{fieldRefs.sort((a, b) => a.id.localeCompare(b.id)).map((item, index) =>
+              <tr key={index}>
+                <td><b>{item.id}</b></td>
+                <td><ColInput value={item.path.type}></ColInput></td>
+                <td><ColInput value={item.path.value}></ColInput></td>
+                <td><Button variant='danger' onClick={() => deleteFieldRef(item)}><BsFillTrashFill /></Button></td>
+              </tr>
+            )}
+            </tbody>
+          </Table>
 
-            <Dropdown>
-              <Dropdown.Toggle variant="outline-success" id="dropdown-basic">Add field</Dropdown.Toggle>
-              <Dropdown.Menu>{fields.map(f => <Dropdown.Item key={f.id} href="#">{f.id}</Dropdown.Item>)}</Dropdown.Menu>
-            </Dropdown>
-          </Form.Group>
-        </Col>
-
-        {/* TODO: react to changes */}
-        {/* <Col lg={12} xl={6}>
-          <Form.Group className="mb-2">
-            <Form.Label>Mapping result</Form.Label>
-            <Form.Control as="textarea" style={{ height: '35vh' }} type="text" placeholder={JSON.stringify(newMapping, null, 4)} readOnly />
-          </Form.Group>
-        </Col> */}
-      </Row>
-      <Button variant='success'>Save</Button>
+          <Dropdown>
+            <Dropdown.Toggle variant="outline-success" id="dropdown-basic">Add field</Dropdown.Toggle>
+            <Dropdown.Menu>{fields.filter(f => !fieldRefs.map(fieldRef => fieldRef.id).includes(f.id)).map(f => <Dropdown.Item key={f.id} onClick={() => addFieldRef(f.id)}>{f.id}</Dropdown.Item>)}</Dropdown.Menu>
+          </Dropdown>
+        </Form.Group>
+      </Col>
+      <Button variant='success' onClick={handleSave}>Save</Button>
     </>
   )
 }
