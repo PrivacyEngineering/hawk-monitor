@@ -1,7 +1,6 @@
 import { Button, Col, Dropdown, Form, Row } from "react-bootstrap"
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { newMapping } from "../dummyData"
 import { RootState } from "../reducers";
 import { AnyMapping, Field } from "../types";
 import { ColInput } from "./ColInput";
