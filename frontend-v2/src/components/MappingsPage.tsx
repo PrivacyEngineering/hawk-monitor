@@ -1,9 +1,10 @@
+import { useEffect, useState } from "react"
 import { Button, Col, Table } from "react-bootstrap"
-import { BsFillTrashFill, BsPencilFill } from "react-icons/bs"
+import { BsPencilFill } from "react-icons/bs"
 import { useSelector } from "react-redux"
 import { Link } from "react-router-dom"
 import { RootState } from "../reducers"
-import { AnyMapping, Mapping, TableRowProps } from "../types"
+import { AnyMapping, Field, Mapping, MappingFieldReference, TableRowProps } from "../types"
 import { TableHeader } from "./TableHeader"
 
 export const MappingsPage = () => {
@@ -16,7 +17,7 @@ export const MappingsPage = () => {
 }
 
 const ExistingMappings = () => {
-  const labels = ['ID', 'Service', 'Protocol', 'Method', 'Endpoint', 'Attached Fields', 'Actions'];
+  const labels = ['ID', 'Service', 'Protocol', 'Method', 'Endpoint', 'Attached Fields', 'Inferred data categories', 'Actions'];
   const items = useSelector<RootState, AnyMapping[]>(state => state.mappings.filter(m => m.fields !== undefined)) as Mapping[];
 
   return (
@@ -41,12 +42,34 @@ const ExistingMappingsTableRow = (props: TableRowProps<Mapping>) => {
       <td>{item.endpoint.protocol}</td>
       <td>{item.endpoint.method}</td>
       <td>{item.endpoint.path}</td>
-      <td>{item.fields.length ? item.fields.map(f=> f.id).join(', ') : '-'}</td>
-      <td style={{ 'width': '170px' }}>
-        <Link to={item.id} state={{ ...item }}><Button variant='warning' size="sm"><BsPencilFill /> Edit</Button></Link>{' '}
-        <Button variant='danger' size="sm"><BsFillTrashFill /> Remove</Button>
+      <td>{item.fields.length ? item.fields.map(f => f.id).join(', ') : '-'}</td>
+      <td><InferredDataCategories fieldRefs={item.fields} /></td>
+      <td style={{ 'width': '140px' }}>
+        <Link to={item.id} state={{ ...item }}><Button variant='warning' size="sm"><BsPencilFill /> Edit fields</Button></Link>{' '}
       </td>
     </tr>
+  )
+}
+
+const InferredDataCategories = (props: { fieldRefs: MappingFieldReference[] }) => {
+  const { fieldRefs } = props;
+  const fields = useSelector<RootState, Field[]>(state => state.fields);
+  const [personal, setPersonal] = useState(false);
+  const [special, setSpecial] = useState(false);
+  
+  useEffect(() => {
+    const mappedFields = fields.filter(f => fieldRefs.some(ref => ref.id === f.id));
+    setPersonal(mappedFields.map(f => f.personalData).reduce((res, cur) => res || cur, false));
+    setSpecial(mappedFields.map(f => f.specialCategoryPersonalData).reduce((res, cur) => res || cur, false));
+  }, [fieldRefs, fields]);
+
+  return (
+    <>
+      {personal && special && 'personal, special'}
+      {personal && !special && 'personal'}
+      {!personal && special && 'special'}
+      {!personal && !special && '-'}
+    </>
   )
 }
 
@@ -79,8 +102,8 @@ const UnmappedEndpointsTableRow = (props: TableRowProps<AnyMapping>) => {
       <td>{item.endpoint.protocol}</td>
       <td>{item.endpoint.method}</td>
       <td>{item.endpoint.path}</td>
-      <td style={{ 'width': '170px' }}>
-        <Link to={item.id}><Button variant='success' size="sm"><BsPencilFill /> Create mapping</Button></Link>
+      <td style={{ 'width': '140px' }}>
+        <Link to={item.id}><Button variant='success' size="sm"><BsPencilFill /> Attach fields</Button></Link>
       </td>
     </tr>
   )

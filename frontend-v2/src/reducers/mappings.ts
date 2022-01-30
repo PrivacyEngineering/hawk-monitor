@@ -4,7 +4,7 @@ const mappingsInitialState = [
   {
     id: '1', service: 'orders', endpoint: { protocol: 'HTTP', method: 'POST', path: '/create', }, fields: [
       { id: 'email', path: { type: "json", value: "$.body[*].user.email" } },
-      { id: 'city', path: { type: "json", value: "$.body[*].user.city" } },
+      { id: 'genetics', path: { type: "json", value: "$.body[*].user.city" } },
     ]
   },
   { id: '2', service: 'statistics', endpoint: { protocol: 'HTTP', method: 'POST', path: '/revenue', }, fields: [] },
