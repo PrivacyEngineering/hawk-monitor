@@ -19,7 +19,6 @@ import {
 import IconBox from "components/Icons/IconBox";
 import { CreativeTimLogo } from "components/Icons/Icons";
 import { Separator } from "components/Separator/Separator";
-import { SidebarHelp } from "components/Sidebar/SidebarHelp";
 import PropTypes from "prop-types";
 import React from "react";
 import { NavLink, useLocation } from "react-router-dom";
@@ -257,7 +256,6 @@ function Sidebar(props) {
           <Stack direction="column" mb="40px">
             <Box>{links}</Box>
           </Stack>
-          <SidebarHelp></SidebarHelp>
         </Box>
       </Box>
     </Box>
@@ -499,7 +497,6 @@ export function SidebarResponsive(props) {
               <Stack direction="column" mb="40px">
                 <Box>{links}</Box>
               </Stack>
-              <SidebarHelp></SidebarHelp>
             </Box>
           </DrawerBody>
         </DrawerContent>
