@@ -104,7 +104,6 @@ export default function Dashboard(props) {
         {...rest}
       />
       <MainPanel
-        ref={mainPanel}
         w={{
           base: "100%",
           xl: "calc(100% - 275px)",
