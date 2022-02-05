@@ -196,7 +196,7 @@ function Profile() {
                 ACCOUNT
               </Text>
               <Flex align="center" mb="20px">
-                <Switch colorScheme="teal" me="10px" />
+                <Switch colorscheme="teal" me="10px" />
                 <Text
                   noOfLines={1}
                   fontSize="md"
@@ -207,7 +207,7 @@ function Profile() {
                 </Text>
               </Flex>
               <Flex align="center" mb="20px">
-                <Switch colorScheme="teal" me="10px" />
+                <Switch colorscheme="teal" me="10px" />
                 <Text
                   noOfLines={1}
                   fontSize="md"
@@ -218,7 +218,7 @@ function Profile() {
                 </Text>
               </Flex>
               <Flex align="center" mb="20px">
-                <Switch colorScheme="teal" me="10px" />
+                <Switch colorscheme="teal" me="10px" />
                 <Text
                   noOfLines={1}
                   fontSize="md"
@@ -237,7 +237,7 @@ function Profile() {
                 APPLICATION
               </Text>
               <Flex align="center" mb="20px">
-                <Switch colorScheme="teal" me="10px" />
+                <Switch colorscheme="teal" me="10px" />
                 <Text
                   noOfLines={1}
                   fontSize="md"
@@ -248,7 +248,7 @@ function Profile() {
                 </Text>
               </Flex>
               <Flex align="center" mb="20px">
-                <Switch colorScheme="teal" me="10px" />
+                <Switch colorscheme="teal" me="10px" />
                 <Text
                   noOfLines={1}
                   fontSize="md"
@@ -259,7 +259,7 @@ function Profile() {
                 </Text>
               </Flex>
               <Flex align="center" mb="20px">
-                <Switch colorScheme="teal" me="10px" />
+                <Switch colorscheme="teal" me="10px" />
                 <Text
                   noOfLines={1}
                   fontSize="md"
@@ -585,7 +585,7 @@ function Profile() {
                 <Flex justifyContent="space-between">
                   <Button
                     variant="outline"
-                    colorScheme="teal"
+                    colorscheme="teal"
                     minW="110px"
                     h="36px"
                     fontSize="xs"
@@ -633,7 +633,7 @@ function Profile() {
                 <Flex justifyContent="space-between">
                   <Button
                     variant="outline"
-                    colorScheme="teal"
+                    colorscheme="teal"
                     minW="110px"
                     h="36px"
                     fontSize="xs"
@@ -681,7 +681,7 @@ function Profile() {
                 <Flex justifyContent="space-between">
                   <Button
                     variant="outline"
-                    colorScheme="teal"
+                    colorscheme="teal"
                     minW="110px"
                     h="36px"
                     fontSize="xs"

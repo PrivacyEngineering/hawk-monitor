@@ -288,7 +288,7 @@ function Billing() {
                 Invoices
               </Text>
               <Button
-                colorScheme="teal"
+                colorscheme="teal"
                 borderColor="teal.300"
                 color="teal.300"
                 variant="outline"

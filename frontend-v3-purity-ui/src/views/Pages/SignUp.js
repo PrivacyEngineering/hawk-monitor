@@ -198,7 +198,7 @@ function SignUp() {
               size="lg"
             />
             <FormControl display="flex" alignItems="center" mb="24px">
-              <Switch id="remember-login" colorScheme="teal" me="10px" />
+              <Switch id="remember-login" colorscheme="teal" me="10px" />
               <FormLabel htmlFor="remember-login" mb="0" fontWeight="normal">
                 Remember me
               </FormLabel>

@@ -436,7 +436,7 @@ export default function Dashboard() {
                     32,984
                   </Text>
                   <Progress
-                    colorScheme="teal"
+                    colorscheme="teal"
                     borderRadius="12px"
                     h="5px"
                     value={20}
@@ -467,7 +467,7 @@ export default function Dashboard() {
                     2.42m
                   </Text>
                   <Progress
-                    colorScheme="teal"
+                    colorscheme="teal"
                     borderRadius="12px"
                     h="5px"
                     value={90}
@@ -498,7 +498,7 @@ export default function Dashboard() {
                     2,400$
                   </Text>
                   <Progress
-                    colorScheme="teal"
+                    colorscheme="teal"
                     borderRadius="12px"
                     h="5px"
                     value={30}
@@ -529,7 +529,7 @@ export default function Dashboard() {
                     320
                   </Text>
                   <Progress
-                    colorScheme="teal"
+                    colorscheme="teal"
                     borderRadius="12px"
                     h="5px"
                     value={50}
