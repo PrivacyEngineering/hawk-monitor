@@ -28,12 +28,8 @@ import routes from "routes.js";
 export default function HeaderLinks(props) {
   const { variant, children, fixed, secondary, onOpen, ...rest } = props;
 
-  // Chakra Color Mode
-  let mainTeal = useColorModeValue("teal.300", "teal.300");
-  let inputBg = useColorModeValue("white", "gray.800");
   let mainText = useColorModeValue("gray.700", "gray.200");
   let navbarIcon = useColorModeValue("gray.500", "gray.200");
-  let searchIcon = useColorModeValue("gray.700", "gray.200");
 
   if (secondary) {
     navbarIcon = "white";
@@ -54,20 +50,8 @@ export default function HeaderLinks(props) {
           me={{ sm: "2px", md: "16px" }}
           color={navbarIcon}
           variant="transparent-with-icon"
-          rightIcon={
-            document.documentElement.dir ? (
-              ""
-            ) : (
-              <ProfileIcon color={navbarIcon} w="22px" h="22px" me="0px" />
-            )
-          }
-          leftIcon={
-            document.documentElement.dir ? (
-              <ProfileIcon color={navbarIcon} w="22px" h="22px" me="0px" />
-            ) : (
-              ""
-            )
-          }
+          rightIcon={document.documentElement.dir ? "" : <ProfileIcon color={navbarIcon} w="22px" h="22px" me="0px" />}
+          leftIcon={document.documentElement.dir ? <ProfileIcon color={navbarIcon} w="22px" h="22px" me="0px" /> : ""}
         >
           <Text display={{ sm: "none", md: "flex" }}>Sign In</Text>
         </Button>
@@ -76,19 +60,9 @@ export default function HeaderLinks(props) {
         logoText={props.logoText}
         secondary={props.secondary}
         routes={routes}
-        // logo={logo}
         {...rest}
       />
-      <SettingsIcon
-        cursor="pointer"
-        ms={{ base: "16px", xl: "0px" }}
-        me="16px"
-        ref={settingsRef}
-        onClick={props.onOpen}
-        color={navbarIcon}
-        w="18px"
-        h="18px"
-      />
+      <SettingsIcon cursor="pointer" ms={{ base: "16px", xl: "0px" }} me="16px" ref={settingsRef} onClick={props.onOpen} color={navbarIcon} w="18px" h="18px" />
       <Menu>
         <MenuButton>
           <BellIcon color={navbarIcon} w="18px" h="18px" />
@@ -96,31 +70,13 @@ export default function HeaderLinks(props) {
         <MenuList p="16px 8px">
           <Flex flexDirection="column">
             <MenuItem borderRadius="8px" mb="10px">
-              <ItemContent
-                time="13 minutes ago"
-                info="from Alicia"
-                boldInfo="New Message"
-                aName="Alicia"
-                aSrc={avatar1}
-              />
+              <ItemContent time="13 minutes ago" info="from Alicia" boldInfo="New Message" aName="Alicia" aSrc={avatar1} />
             </MenuItem>
             <MenuItem borderRadius="8px" mb="10px">
-              <ItemContent
-                time="2 days ago"
-                info="by Josh Henry"
-                boldInfo="New Album"
-                aName="Josh Henry"
-                aSrc={avatar2}
-              />
+              <ItemContent time="2 days ago" info="by Josh Henry" boldInfo="New Album" aName="Josh Henry" aSrc={avatar2} />
             </MenuItem>
             <MenuItem borderRadius="8px">
-              <ItemContent
-                time="3 days ago"
-                info="Payment succesfully completed!"
-                boldInfo=""
-                aName="Kara"
-                aSrc={avatar3}
-              />
+              <ItemContent time="3 days ago" info="Payment succesfully completed!" boldInfo="" aName="Kara" aSrc={avatar3} />
             </MenuItem>
           </Flex>
         </MenuList>
