@@ -9,46 +9,34 @@ import { AdminNavbarTS } from "../components/Navbars/AdminNavbarTS";
 import Configurator from "components/Configurator/Configurator";
 import PanelContent from "components/Layout/PanelContent";
 import PanelContainer from "components/Layout/PanelContainer";
-import { Switch } from "react-router-dom";
+import { Redirect, Route, Switch } from "react-router-dom";
+import { SidebarVariant } from "types";
+import Tables from "views/Dashboard/Tables";
 
-export const Mappings = () => {
-  const [sidebarVariant, setSidebarVariant] = useState("transparent");
+export const App = () => {
+  const [sidebarVariant, setSidebarVariant] = useState<SidebarVariant>("transparent");
   const [fixed, setFixed] = useState(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
     <ChakraProvider theme={theme} >
-      <SidebarTS
-        logoText={"Transparency Dashboard"}
-        sidebarVariant={sidebarVariant}
-      />
-
+      <SidebarTS logoText={"Transparency Dashboard"} sidebarVariant={sidebarVariant} />
       <MainPanel w={{ base: "100%", xl: "calc(100% - 275px)" }}>
-        <Portal>
-          <AdminNavbarTS
-            onOpen={onOpen}
-            brandText={"BRAND"}
-            secondary={false}
-            fixed={fixed}
-            // {...rest}
-          />
-        </Portal>
-          <PanelContent>
-            <PanelContainer>
-              <Switch>
-                {/* {getRoutes(routes)} */}
-                {/* <Redirect from="/admin" to="/admin/dashboard" /> */}
-              </Switch>
-            </PanelContainer>
-          </PanelContent>
+        <Portal><AdminNavbarTS onOpen={onOpen} brandText={"BRAND"} secondary={false} fixed={fixed} /></Portal>
+        <PanelContent>
+          <PanelContainer>
+            <Switch>
+              <Route path='/fields' component={Tables} />
+              <Route path='/mappings' component={Tables} />
+              <Route path='/tables' component={Tables} />
+              <Redirect from={`/`} to="/mappings" />
+            </Switch>
+          </PanelContainer>
+        </PanelContent>
 
         <Footer />
         <Portal>
-          <FixedPlugin
-            secondary={false}
-            fixed={fixed}
-            onOpen={onOpen}
-          />
+          <FixedPlugin secondary={false} fixed={fixed} onOpen={onOpen} />
         </Portal>
         <Configurator
           isOpen={isOpen}

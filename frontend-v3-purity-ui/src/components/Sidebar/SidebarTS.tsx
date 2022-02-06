@@ -1,17 +1,16 @@
 import { Box, Link, Stack, Text, useColorModeValue } from "@chakra-ui/react";
+import { DocumentIcon, HomeIcon } from "components/Icons/Icons";
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { SidebarVariant } from "types";
 import { Separator } from "../Separator/Separator";
+import { CustomNavLink } from "./CustomNavLink";
 
 interface Props {
   logoText: string;
-  sidebarVariant: string;
+  sidebarVariant: SidebarVariant;
 }
 
 export const SidebarTS = (props: Props) => {
-  // to check for active links and opened collapses
-  let location = useLocation();
-
   const { logoText, sidebarVariant } = props;
   const [sidebarBg, setSidebarBg] = useState('');
   const [sidebarRadius, setSidebarRadius] = useState('');
@@ -40,7 +39,8 @@ export const SidebarTS = (props: Props) => {
           <Separator />
         </Box>
         <Stack direction="column" mb="40px">
-          {/* <Box>{createLinks(routes)}</Box> */}
+          <CustomNavLink path='mappings' label='Mappings' icon={<HomeIcon />} sidebarVariant={sidebarVariant} />
+          <CustomNavLink path='fields' label='Fields' icon={<DocumentIcon />} sidebarVariant={sidebarVariant} />
         </Stack>
       </Box>
     </Box>

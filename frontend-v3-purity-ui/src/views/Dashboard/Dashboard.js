@@ -573,8 +573,7 @@ export default function Dashboard() {
                   members={row.members}
                   budget={row.budget}
                   progression={row.progression}
-                />
-              )}
+                />)}
             </Tbody>
           </Table>
         </Card>
