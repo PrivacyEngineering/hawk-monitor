@@ -43,9 +43,10 @@ function Tables() {
               </Tr>
             </Thead>
             <Tbody>
-              {tablesTableData.map((row) => {
+              {tablesTableData.map((row, index) => {
                 return (
                   <TablesTableRow
+                    key={index}
                     name={row.name}
                     logo={row.logo}
                     email={row.email}
