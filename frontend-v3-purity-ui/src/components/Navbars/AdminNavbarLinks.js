@@ -75,6 +75,7 @@ export default function HeaderLinks(props) {
 
 HeaderLinks.propTypes = {
   variant: PropTypes.string,
+  logoText: PropTypes.string,
   fixed: PropTypes.bool,
   secondary: PropTypes.bool,
   onOpen: PropTypes.func,

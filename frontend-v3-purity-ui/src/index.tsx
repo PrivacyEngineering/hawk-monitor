@@ -15,7 +15,7 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import React from "react";
+import { Mappings } from "layouts/Mappings";
 import ReactDOM from "react-dom";
 import { HashRouter, Route, Switch, Redirect } from "react-router-dom";
 
@@ -25,6 +25,7 @@ ReactDOM.render(
   <HashRouter>
     <Switch>
       <Route path={`/admin`} component={AdminLayout} />
+      <Route path={`/mappings`} component={Mappings} />
       <Redirect from={`/`} to="/admin/dashboard" />
     </Switch>
   </HashRouter>,

@@ -5,7 +5,7 @@ import Footer from "components/Footer/Footer.js";
 // Layout components
 import AdminNavbar from "components/Navbars/AdminNavbar.js";
 import Sidebar from "components/Sidebar/Sidebar.js";
-import React, { useState } from "react";
+import { useState } from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
 import routes from "routes.js";
 // Custom Chakra theme
@@ -16,7 +16,6 @@ import MainPanel from "../components/Layout/MainPanel";
 import PanelContainer from "../components/Layout/PanelContainer";
 import PanelContent from "../components/Layout/PanelContent";
 export default function Dashboard(props) {
-  const { ...rest } = props;
   // states and functions
   const [sidebarVariant, setSidebarVariant] = useState("transparent");
   const [fixed, setFixed] = useState(false);
@@ -27,7 +26,7 @@ export default function Dashboard(props) {
   const getActiveRoute = (routes) => {
     let activeRoute = "Default Brand Text";
     for (let i = 0; i < routes.length; i++) {
-      if (routes[i].collapse) {
+      if (routes[i].collapse) { 
         let collapseActiveRoute = getActiveRoute(routes[i].views);
         if (collapseActiveRoute !== activeRoute) {
           return collapseActiveRoute;
@@ -90,7 +89,6 @@ export default function Dashboard(props) {
     });
   };
   const { isOpen, onOpen, onClose } = useDisclosure();
-  document.documentElement.dir = "ltr";
   // Chakra Color Mode
   return (
     <ChakraProvider theme={theme} resetCss={false}>
@@ -99,7 +97,6 @@ export default function Dashboard(props) {
         logoText={"Transparency Dashboard"}
         display="none"
         sidebarVariant={sidebarVariant}
-        {...rest}
       />
       <MainPanel w={{ base: "100%", xl: "calc(100% - 275px)" }}>
         <Portal>
@@ -109,7 +106,6 @@ export default function Dashboard(props) {
             brandText={getActiveRoute(routes)}
             secondary={getActiveNavbar(routes)}
             fixed={fixed}
-            {...rest}
           />
         </Portal>
         {getRoute() &&
@@ -134,9 +130,7 @@ export default function Dashboard(props) {
           isOpen={isOpen}
           onClose={onClose}
           isChecked={fixed}
-          onSwitch={(value) => {
-            setFixed(value);
-          }}
+          onSwitch={setFixed}
           onOpaque={() => setSidebarVariant("opaque")}
           onTransparent={() => setSidebarVariant("transparent")}
         />

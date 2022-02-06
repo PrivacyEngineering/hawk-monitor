@@ -1,6 +1,6 @@
 import { Box, Button, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerHeader, Flex, Switch, Text, useColorMode, } from "@chakra-ui/react";
-import { Separator } from "components/Separator/Separator";
 import { useState } from "react";
+import { Separator } from "../Separator/Separator";
 
 interface Props {
   isChecked: boolean,
@@ -11,7 +11,7 @@ interface Props {
   onTransparent: () => void,
 };
 
-export default function Configurator(props: Props) {
+export const Configurator = (props: Props) => {
   const { isChecked, isOpen, onClose, onOpaque, onSwitch, onTransparent } = props;
   
   const [switched, setSwitched] = useState(isChecked);
@@ -55,3 +55,5 @@ export default function Configurator(props: Props) {
     </Drawer>
   );
 }
+
+export default Configurator;
