@@ -1,11 +1,9 @@
 // Chakra Imports
-import { Box, Breadcrumb, BreadcrumbItem, BreadcrumbLink, Flex, Link, ResponsiveValue, useColorModeValue } from "@chakra-ui/react";
+import { Box, Flex, Link, Text, useColorModeValue } from "@chakra-ui/react";
 import { useState } from "react";
 import AdminNavbarLinks from "./AdminNavbarLinks";
 
 interface Props {
-  brandText: string;
-  variant?: string;
   secondary: boolean;
   fixed: boolean;
   onOpen: () => void;
@@ -13,9 +11,8 @@ interface Props {
 
 export function AdminNavbarTS(props: Props) {
   const [scrolled, setScrolled] = useState(false);
-  const { variant, fixed, secondary, brandText, onOpen } = props;
+  const { fixed, secondary, onOpen } = props;
 
-  // Here are all the props that may change depending on navbar's type or state.(secondary, variant, scrolled)
   let mainText = useColorModeValue("gray.700", "gray.200");
   let secondaryText = useColorModeValue("gray.400", "gray.200");
   let navbarPosition: "absolute" | 'fixed' = "absolute";
@@ -26,7 +23,7 @@ export function AdminNavbarTS(props: Props) {
   let navbarBorder = "transparent";
   let secondaryMargin = "0px";
   let paddingX = "15px";
-  if (props.fixed === true)
+  if (fixed === true)
     if (scrolled === true) {
       navbarPosition = "fixed";
       navbarShadow = useColorModeValue(
@@ -43,7 +40,7 @@ export function AdminNavbarTS(props: Props) {
         "drop-shadow(0px 7px 23px rgba(0, 0, 0, 0.05))"
       );
     }
-  if (props.secondary) {
+  if (secondary) {
     navbarBackdrop = "none";
     navbarPosition = "absolute";
     mainText = "white";
@@ -103,45 +100,14 @@ export function AdminNavbarTS(props: Props) {
         alignItems={{ xl: "center" }}
       >
         <Box mb={{ sm: "8px", md: "0px" }}>
-          <Breadcrumb>
-            <BreadcrumbItem color={mainText}>
-              <BreadcrumbLink href="#" color={secondaryText}>
-                Pages
-              </BreadcrumbLink>
-            </BreadcrumbItem>
-
-            <BreadcrumbItem color={mainText}>
-              <BreadcrumbLink href="#" color={mainText}>
-                {brandText}
-              </BreadcrumbLink>
-            </BreadcrumbItem>
-          </Breadcrumb>
-          {/* Here we create navbar brand, based on route name */}
-          <Link
-            color={mainText}
-            href="#"
-            bg="inherit"
-            borderRadius="inherit"
-            fontWeight="bold"
-            _hover={{ color: { mainText } }}
-            _active={{
-              bg: "inherit",
-              transform: "none",
-              borderColor: "transparent",
-            }}
-            _focus={{
-              boxShadow: "none",
-            }}
-          >
-            {brandText}
-          </Link>
+          <Text color={mainText} fontSize='xl' fontWeight='800'>Dashboard</Text>
         </Box>
         <Box ms="auto" w={{ sm: "100%", md: "unset" }}>
           <AdminNavbarLinks
-            onOpen={props.onOpen}
+            onOpen={onOpen}
             logoText='Menu'
-            secondary={props.secondary}
-            fixed={props.fixed}
+            secondary={secondary}
+            fixed={fixed}
           />
         </Box>
       </Flex>

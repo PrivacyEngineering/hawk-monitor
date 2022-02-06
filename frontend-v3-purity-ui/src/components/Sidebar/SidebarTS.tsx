@@ -42,8 +42,8 @@ export const SidebarTS = (props: Props) => {
           <Separator />
         </Box>
         <Stack direction="column" mb="40px">
-          <CustomNavLink path='mappings' label='Mappings' icon={<HomeIcon />} sidebarVariant={sidebarVariant} />
           <CustomNavLink path='fields' label='Fields' icon={<DocumentIcon />} sidebarVariant={sidebarVariant} />
+          <CustomNavLink path='mappings' label='Mappings' icon={<HomeIcon />} sidebarVariant={sidebarVariant} />
         </Stack>
       </Box>
     </Box>

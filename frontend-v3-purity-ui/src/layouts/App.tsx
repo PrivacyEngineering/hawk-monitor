@@ -20,9 +20,9 @@ export const App = () => {
 
   return (
     <ChakraProvider theme={theme} >
-      <SidebarTS logoText={"Transparency Dashboard"} sidebarVariant={sidebarVariant} />
+      <SidebarTS logoText="HAWK" sidebarVariant={sidebarVariant} />
       <MainPanel w={{ base: "100%", xl: "calc(100% - 275px)" }}>
-        <Portal><AdminNavbarTS onOpen={onOpen} brandText={"BRAND"} secondary={false} fixed={fixed} /></Portal>
+        <Portal><AdminNavbarTS onOpen={onOpen} secondary={false} fixed={fixed} /></Portal>
         <PanelContent>
           <PanelContainer>
             <Switch>
