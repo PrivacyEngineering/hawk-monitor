@@ -41,7 +41,7 @@ export default function HeaderLinks(props) {
           variant="transparent-with-icon"
           leftIcon={<ProfileIcon color={navbarIcon} w="22px" h="22px" me="0px" />}
         >
-          <Text display={{ sm: "none", md: "flex" }}>Sign In</Text>
+          <Text display={{ sm: "none", md: "flex" }}>Sign Out</Text>
         </Button>
       </NavLink>
       <SidebarResponsive
