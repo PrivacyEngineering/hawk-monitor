@@ -20,8 +20,6 @@ export default function Dashboard(props) {
   // states and functions
   const [sidebarVariant, setSidebarVariant] = useState("transparent");
   const [fixed, setFixed] = useState(false);
-  // ref for main panel div
-  const mainPanel = React.createRef();
   // functions for changing the states from components
   const getRoute = () => {
     return window.location.pathname !== "/admin/full-screen-maps";
