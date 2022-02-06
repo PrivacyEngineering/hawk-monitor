@@ -51,7 +51,16 @@ export const CustomNavLink = (props: Props) => {
       setInctiveColor(transparentInactiveColor);
       setSidebarActiveShadow(transparentSidebarActiveShadow);
     }
-  }, [sidebarVariant]);
+  }, [
+    sidebarVariant,
+    transparentActiveBg,
+    transparentInactiveBg,
+    transparentActiveColor,
+    transparentInactiveColor,
+    opaqueInactiveBg,
+    opaqueActiveColor,
+    opaqueInactiveColor
+  ]);
 
   return (
     <NavLink to={path}>

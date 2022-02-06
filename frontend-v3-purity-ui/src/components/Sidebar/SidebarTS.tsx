@@ -27,7 +27,10 @@ export const SidebarTS = (props: Props) => {
       setSidebarRadius('0px');
       setSidebarMargins('0px');
     }
-  }, [sidebarVariant]);
+  }, [
+    sidebarVariant,
+    opaqueSidebarBg
+  ]);
 
   return (
     <Box display={{ sm: "none", xl: "block" }} position="fixed">

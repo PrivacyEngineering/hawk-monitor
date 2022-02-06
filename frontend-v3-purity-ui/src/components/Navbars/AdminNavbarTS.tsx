@@ -139,8 +139,7 @@ export function AdminNavbarTS(props: Props) {
         <Box ms="auto" w={{ sm: "100%", md: "unset" }}>
           <AdminNavbarLinks
             onOpen={props.onOpen}
-            // logoText={props.logoText}
-            logoText='aaaa'
+            logoText='Menu'
             secondary={props.secondary}
             fixed={props.fixed}
           />
