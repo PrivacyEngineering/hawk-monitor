@@ -1,16 +1,7 @@
 // Chakra Icons
 import { BellIcon } from "@chakra-ui/icons";
 // Chakra Imports
-import {
-  Button,
-  Flex,
-  Menu,
-  MenuButton,
-  MenuItem,
-  MenuList,
-  Text,
-  useColorModeValue,
-} from "@chakra-ui/react";
+import { Button, Flex, Menu, MenuButton, MenuItem, MenuList, Text, useColorModeValue, } from "@chakra-ui/react";
 // Assets
 import avatar1 from "assets/img/avatars/avatar1.png";
 import avatar2 from "assets/img/avatars/avatar2.png";
@@ -21,7 +12,6 @@ import { ProfileIcon, SettingsIcon } from "components/Icons/Icons";
 import { ItemContent } from "components/Menu/ItemContent";
 import { SidebarResponsive } from "components/Sidebar/Sidebar";
 import PropTypes from "prop-types";
-import React from "react";
 import { NavLink } from "react-router-dom";
 import routes from "routes.js";
 
@@ -35,7 +25,6 @@ export default function HeaderLinks(props) {
     navbarIcon = "white";
     mainText = "white";
   }
-  const settingsRef = React.useRef();
   return (
     <Flex
       pe={{ sm: "0px", md: "16px" }}
@@ -43,7 +32,7 @@ export default function HeaderLinks(props) {
       alignItems="center"
       flexDirection="row"
     >
-      <NavLink to="/auth/signin">
+      <NavLink to="#">
         <Button
           ms="0px"
           px="0px"
@@ -61,7 +50,7 @@ export default function HeaderLinks(props) {
         routes={routes}
         {...rest}
       />
-      <SettingsIcon cursor="pointer" ms={{ base: "16px", xl: "0px" }} me="16px" ref={settingsRef} onClick={props.onOpen} color={navbarIcon} w="18px" h="18px" />
+      <SettingsIcon cursor="pointer" ms={{ base: "16px", xl: "0px" }} me="16px" onClick={props.onOpen} color={navbarIcon} w="18px" h="18px" />
       <Menu>
         <MenuButton>
           <BellIcon color={navbarIcon} w="18px" h="18px" />
