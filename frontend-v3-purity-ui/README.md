@@ -2,6 +2,7 @@
 
 ## Quick Start
 
-- Clone the repo: `git clone https://github.com/creativetimofficial/purity-ui-dashboard.git`.
-- `npm install`
-- `npm start`
+- clone the repo
+- cd to cloned directory
+- run `npm install`
+- run `npm start`
