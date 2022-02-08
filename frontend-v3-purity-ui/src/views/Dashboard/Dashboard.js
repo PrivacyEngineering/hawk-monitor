@@ -103,7 +103,7 @@ export default function Dashboard() {
                   </StatHelpText>
                 </Flex>
               </Stat>
-              <IconBox as="box" h={"45px"} w={"45px"} bg={iconTeal}>
+              <IconBox as={Box} h={"45px"} w={"45px"} bg={iconTeal}>
                 <WalletIcon h={"24px"} w={"24px"} color={iconBoxInside} />
               </IconBox>
             </Flex>
@@ -138,7 +138,7 @@ export default function Dashboard() {
                   </StatHelpText>
                 </Flex>
               </Stat>
-              <IconBox as="box" h={"45px"} w={"45px"} bg={iconTeal}>
+              <IconBox as={Box} h={"45px"} w={"45px"} bg={iconTeal}>
                 <GlobeIcon h={"24px"} w={"24px"} color={iconBoxInside} />
               </IconBox>
             </Flex>
@@ -174,7 +174,7 @@ export default function Dashboard() {
                 </Flex>
               </Stat>
               <Spacer />
-              <IconBox as="box" h={"45px"} w={"45px"} bg={iconTeal}>
+              <IconBox as={Box} h={"45px"} w={"45px"} bg={iconTeal}>
                 <DocumentIcon h={"24px"} w={"24px"} color={iconBoxInside} />
               </IconBox>
             </Flex>
@@ -209,7 +209,7 @@ export default function Dashboard() {
                   </StatHelpText>
                 </Flex>
               </Stat>
-              <IconBox as="box" h={"45px"} w={"45px"} bg={iconTeal}>
+              <IconBox as={Box} h={"45px"} w={"45px"} bg={iconTeal}>
                 <CartIcon h={"24px"} w={"24px"} color={iconBoxInside} />
               </IconBox>
             </Flex>
@@ -398,7 +398,7 @@ export default function Dashboard() {
                 <Flex direction="column">
                   <Flex alignItems="center">
                     <IconBox
-                      as="box"
+                      as={Box}
                       h={"30px"}
                       w={"30px"}
                       bg={iconTeal}
@@ -420,7 +420,7 @@ export default function Dashboard() {
                     32,984
                   </Text>
                   <Progress
-                    colorScheme="teal"
+                    colorscheme="teal"
                     borderRadius="12px"
                     h="5px"
                     value={20}
@@ -429,7 +429,7 @@ export default function Dashboard() {
                 <Flex direction="column">
                   <Flex alignItems="center">
                     <IconBox
-                      as="box"
+                      as={Box}
                       h={"30px"}
                       w={"30px"}
                       bg={iconTeal}
@@ -451,7 +451,7 @@ export default function Dashboard() {
                     2.42m
                   </Text>
                   <Progress
-                    colorScheme="teal"
+                    colorscheme="teal"
                     borderRadius="12px"
                     h="5px"
                     value={90}
@@ -460,7 +460,7 @@ export default function Dashboard() {
                 <Flex direction="column">
                   <Flex alignItems="center">
                     <IconBox
-                      as="box"
+                      as={Box}
                       h={"30px"}
                       w={"30px"}
                       bg={iconTeal}
@@ -482,7 +482,7 @@ export default function Dashboard() {
                     2,400$
                   </Text>
                   <Progress
-                    colorScheme="teal"
+                    colorscheme="teal"
                     borderRadius="12px"
                     h="5px"
                     value={30}
@@ -491,7 +491,7 @@ export default function Dashboard() {
                 <Flex direction="column">
                   <Flex alignItems="center">
                     <IconBox
-                      as="box"
+                      as={Box}
                       h={"30px"}
                       w={"30px"}
                       bg={iconTeal}
@@ -513,7 +513,7 @@ export default function Dashboard() {
                     320
                   </Text>
                   <Progress
-                    colorScheme="teal"
+                    colorscheme="teal"
                     borderRadius="12px"
                     h="5px"
                     value={50}
@@ -526,15 +526,10 @@ export default function Dashboard() {
         <Card p="28px 10px 16px 0px" mb={{ sm: "26px", lg: "0px" }}>
           <CardHeader mb="20px" pl="22px">
             <Flex direction="column" alignSelf="flex-start">
-              <Text fontSize="lg" color={textColor} fontWeight="bold" mb="6px">
-                Sales Overview
-              </Text>
+              <Text fontSize="lg" color={textColor} fontWeight="bold" mb="6px">Sales Overview</Text>
               <Text fontSize="md" fontWeight="medium" color="gray.400">
-                <Text as="span" color="green.400" fontWeight="bold">
-                  (+5%) more
-                </Text>{" "}
-                in 2021
-              </Text>
+                <Text as="span" color="green.400" fontWeight="bold">(+5%) more</Text>
+                {" "}in 2021</Text>
             </Flex>
           </CardHeader>
           <Box w="100%" h={{ sm: "300px" }} ps="8px">
@@ -549,29 +544,12 @@ export default function Dashboard() {
       >
         <Card p="16px" overflowX={{ sm: "scroll", xl: "hidden" }}>
           <CardHeader p="12px 0px 28px 0px">
-            <Flex direction="column">
-              <Text
-                fontSize="lg"
-                color={textColor}
-                fontWeight="bold"
-                pb=".5rem"
-              >
-                Projects
-              </Text>
+            <Flex direction="column"><Text fontSize="lg" color={textColor} fontWeight="bold" pb=".5rem">Projects</Text>
               <Flex align="center">
-                <Icon
-                  as={IoCheckmarkDoneCircleSharp}
-                  color="teal.300"
-                  w={4}
-                  h={4}
-                  pe="3px"
-                />
+                <Icon as={IoCheckmarkDoneCircleSharp} color="teal.300" w={4} h={4} pe="3px" />
                 <Text fontSize="sm" color="gray.400" fontWeight="normal">
-                  <Text fontWeight="bold" as="span">
-                    30 done
-                  </Text>{" "}
-                  this month.
-                </Text>
+                  <Text fontWeight="bold" as="span">30 done</Text>
+                  {" "}this month.</Text>
               </Flex>
             </Flex>
           </CardHeader>
@@ -587,17 +565,15 @@ export default function Dashboard() {
               </Tr>
             </Thead>
             <Tbody>
-              {dashboardTableData.map((row) => {
-                return (
-                  <DashboardTableRow
-                    name={row.name}
-                    logo={row.logo}
-                    members={row.members}
-                    budget={row.budget}
-                    progression={row.progression}
-                  />
-                );
-              })}
+              {dashboardTableData.map((row, index) =>
+                <DashboardTableRow
+                  key={index}
+                  name={row.name}
+                  logo={row.logo}
+                  members={row.members}
+                  budget={row.budget}
+                  progression={row.progression}
+                />)}
             </Tbody>
           </Table>
         </Card>
@@ -625,6 +601,7 @@ export default function Dashboard() {
               {timelineData.map((row, index, arr) => {
                 return (
                   <TimelineRow
+                    key={index}
                     logo={row.logo}
                     title={row.title}
                     date={row.date}

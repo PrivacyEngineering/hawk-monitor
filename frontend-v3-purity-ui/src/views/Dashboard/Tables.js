@@ -1,15 +1,4 @@
-import React from "react";
-// Chakra imports
-import {
-  Flex,
-  Table,
-  Tbody,
-  Text,
-  Th,
-  Thead,
-  Tr,
-  useColorModeValue,
-} from "@chakra-ui/react";
+import { Flex, Table, Tbody, Text, Th, Thead, Tr, useColorModeValue } from "@chakra-ui/react";
 // Custom components
 import Card from "components/Card/Card.js";
 import CardHeader from "components/Card/CardHeader.js";
@@ -43,19 +32,17 @@ function Tables() {
               </Tr>
             </Thead>
             <Tbody>
-              {tablesTableData.map((row) => {
-                return (
-                  <TablesTableRow
-                    name={row.name}
-                    logo={row.logo}
-                    email={row.email}
-                    subdomain={row.subdomain}
-                    domain={row.domain}
-                    status={row.status}
-                    date={row.date}
-                  />
-                );
-              })}
+              {tablesTableData.map((row, index) =>
+                <TablesTableRow
+                  key={index}
+                  name={row.name}
+                  logo={row.logo}
+                  email={row.email}
+                  subdomain={row.subdomain}
+                  domain={row.domain}
+                  status={row.status}
+                  date={row.date}
+                />)}
             </Tbody>
           </Table>
         </CardBody>
@@ -85,17 +72,15 @@ function Tables() {
               </Tr>
             </Thead>
             <Tbody>
-              {tablesProjectData.map((row) => {
-                return (
-                  <TablesProjectRow
-                    name={row.name}
-                    logo={row.logo}
-                    status={row.status}
-                    budget={row.budget}
-                    progression={row.progression}
-                  />
-                );
-              })}
+              {tablesProjectData.map((row, index) =>
+                <TablesProjectRow
+                  key={index}
+                  name={row.name}
+                  logo={row.logo}
+                  status={row.status}
+                  budget={row.budget}
+                  progression={row.progression}
+                />)}
             </Tbody>
           </Table>
         </CardBody>
