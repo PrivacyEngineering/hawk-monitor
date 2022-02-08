@@ -3,29 +3,23 @@ import { Button, Flex, Menu, MenuButton, MenuItem, MenuList, Text, useColorModeV
 import { ProfileIcon, SettingsIcon } from "components/Icons/Icons";
 import { ItemContent } from "components/Menu/ItemContent";
 import { SidebarResponsive } from "components/Sidebar/SidebarResponsive";
-import PropTypes from "prop-types";
-import { useState } from "react";
 import { NavLink } from "react-router-dom";
 
-export default function HeaderLinks(props) {
-  const { onOpen, secondary } = props;
+interface Props {
+  onOpen: () => any;
+}
 
-  const [navbarIconColor, setNavbarIconColor] = useState('');
-  const [mainTextColor, setMainTextColor] = useState('');
+export const AdminNavbarLinks = (props: Props) => {
+  const { onOpen } = props;
 
-  const mainTextColorDefault = useColorModeValue("gray.300", "gray.200");
-  const navbarIconColorDefault = useColorModeValue("gray.500", "gray.200");
-
-  useState(() => {
-    setNavbarIconColor(secondary ? "white" : navbarIconColorDefault);
-    setMainTextColor(secondary ? "white" : mainTextColorDefault);
-  })
+  const navbarIconColor = useColorModeValue("gray.500", "gray.200");
+  const navbarTextColor = useColorModeValue("gray.700", "gray.200");
   
   return (
     <Flex pe={{ sm: "0px", md: "16px" }} w={{ sm: "100%", md: "auto" }} alignItems="center" flexDirection="row">
       <NavLink to="#">
-        <Button ms="0px" px="0px" me={{ sm: "2px", md: "16px" }} color={mainTextColor} variant="transparent-with-icon" leftIcon={<ProfileIcon color={navbarIconColor} w="22px" h="22px" me="0px" />}>
-          <Text display={{ sm: "none", md: "flex" }}>Sign Out</Text>
+        <Button ms="0px" px="0px" me={{ sm: "2px", md: "16px" }} variant="transparent-with-icon" leftIcon={<ProfileIcon color={navbarIconColor} w="22px" h="22px" me="0px" />}>
+          <Text display={{ sm: "none", md: "flex" }} color={navbarTextColor}>Sign Out</Text>
         </Button>
       </NavLink>
       <SidebarResponsive />
@@ -51,11 +45,3 @@ export default function HeaderLinks(props) {
     </Flex>
   );
 }
-
-HeaderLinks.propTypes = {
-  variant: PropTypes.string,
-  logoText: PropTypes.string,
-  fixed: PropTypes.bool,
-  secondary: PropTypes.bool,
-  onOpen: PropTypes.func,
-};
