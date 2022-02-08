@@ -1,7 +1,7 @@
 // Chakra Icons
 import { BellIcon } from "@chakra-ui/icons";
 // Chakra Imports
-import { Button, Flex, Menu, MenuButton, MenuItem, MenuList, Text, useColorModeValue, } from "@chakra-ui/react";
+import { Button, Flex, Menu, MenuButton, MenuItem, MenuList, Text, useColorModeValue } from "@chakra-ui/react";
 // Assets
 import avatar1 from "assets/img/avatars/avatar1.png";
 import avatar2 from "assets/img/avatars/avatar2.png";
@@ -16,7 +16,7 @@ import { NavLink } from "react-router-dom";
 import routes from "routes.js";
 
 export default function HeaderLinks(props) {
-  const { variant, children, fixed, secondary, onOpen, ...rest } = props;
+  const { variant, children, fixed, secondary, onOpen } = props;
 
   let mainText = useColorModeValue("gray.700", "gray.200");
   let navbarIcon = useColorModeValue("gray.500", "gray.200");
@@ -48,7 +48,6 @@ export default function HeaderLinks(props) {
         logoText={props.logoText}
         secondary={props.secondary}
         routes={routes}
-        {...rest}
       />
       <SettingsIcon cursor="pointer" ms={{ base: "16px", xl: "0px" }} me="16px" onClick={props.onOpen} color={navbarIcon} w="18px" h="18px" />
       <Menu>
