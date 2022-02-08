@@ -1,6 +1,5 @@
 import { Box, Flex, Text, useColorModeValue } from "@chakra-ui/react";
-import { Box, Flex, Link, Text, useColorModeValue } from "@chakra-ui/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AdminNavbarLinks from "./AdminNavbarLinks";
 
 interface Props {
@@ -13,41 +12,54 @@ export function AdminNavbarTS(props: Props) {
   const [scrolled, setScrolled] = useState(false);
   const { fixed, secondary, onOpen } = props;
 
-  let mainText = useColorModeValue("gray.700", "gray.200");
-  let secondaryText = useColorModeValue("gray.400", "gray.200");
-  let navbarPosition: "absolute" | 'fixed' = "absolute";
-  let navbarFilter = "none";
-  let navbarBackdrop = "blur(21px)";
-  let navbarShadow = "none";
-  let navbarBg = "none";
-  let navbarBorder = "transparent";
-  let secondaryMargin = "0px";
-  let paddingX = "15px";
-  if (fixed === true)
-    if (scrolled === true) {
-      navbarPosition = "fixed";
-      navbarShadow = useColorModeValue(
-        "0px 7px 23px rgba(0, 0, 0, 0.05)",
-        "none"
-      );
-      navbarBg = useColorModeValue(
-        "linear-gradient(112.83deg, rgba(255, 255, 255, 0.82) 0%, rgba(255, 255, 255, 0.8) 110.84%)",
-        "linear-gradient(112.83deg, rgba(255, 255, 255, 0.21) 0%, rgba(255, 255, 255, 0) 110.84%)"
-      );
-      navbarBorder = useColorModeValue("#FFFFFF", "rgba(255, 255, 255, 0.31)");
-      navbarFilter = useColorModeValue(
-        "none",
-        "drop-shadow(0px 7px 23px rgba(0, 0, 0, 0.05))"
-      );
-    }
-  if (secondary) {
-    navbarBackdrop = "none";
-    navbarPosition = "absolute";
-    mainText = "white";
-    secondaryText = "white";
-    secondaryMargin = "22px";
-    paddingX = "30px";
-  }
+  const [mainText, setMainText] = useState('');
+  const [secondaryMargin, setSecondaryMargin] = useState('');
+
+  const [navbarBackdrop, setNavbarBackdrop] = useState('');
+  const [navbarBg, setNavbarBg] = useState('');
+  const [navbarBorder, setNavbarBorder] = useState('');
+  const [navbarFilter, setNavbarFilter] = useState('');
+  const [navbarPosition, setNavbarPosition] = useState<'absolute' | 'fixed'>('absolute');
+  const [navbarShadow, setNavbarShadow] = useState('');
+  const [paddingX, setPaddingX] = useState('');
+
+  const mainTextDefault = useColorModeValue("gray.700", "gray.200");
+  const secondaryMarginDefault = "0px";
+  const navbarBackdropDefault = "blur(21px)";
+  const navbarBgDefault = "none";
+  const navbarBorderDefault = "transparent";
+  const navbarFilterDefault = "none";
+  const navbarPositionDefault = "absolute";
+  const navbarShadowDefault = "none";
+  const paddingXDefault = "15px";
+
+  const navbarBgFixedScrolled = useColorModeValue("linear-gradient(112.83deg, rgba(255, 255, 255, 0.82) 0%, rgba(255, 255, 255, 0.8) 110.84%)", "linear-gradient(112.83deg, rgba(255, 255, 255, 0.21) 0%, rgba(255, 255, 255, 0) 110.84%)");
+  const navbarBorderFixedScrolled = useColorModeValue("#FFFFFF", "rgba(255, 255, 255, 0.31)");
+  const navbarFilterFixedScrolled = useColorModeValue("none", "drop-shadow(0px 7px 23px rgba(0, 0, 0, 0.05))");
+  const navbarPositionFixedScrolled = "fixed";
+  const navbarShadowFixedScrolled = useColorModeValue("0px 7px 23px rgba(0, 0, 0, 0.05)", "none");
+
+  const navbarBackdropSecondary = "none";
+  const mainTextSecondary = "white";
+  const secondaryMarginSecondary = "22px";
+  const paddingXSecondary = "30px";
+
+  useEffect(() => {
+    setNavbarPosition(fixed && scrolled ? navbarPositionFixedScrolled : navbarPositionDefault)
+    setNavbarShadow(fixed && scrolled ? navbarShadowFixedScrolled : navbarShadowDefault);
+    setNavbarBg(fixed && scrolled ? navbarBgFixedScrolled : navbarBgDefault);
+    setNavbarBorder(fixed && scrolled ? navbarBorderFixedScrolled : navbarBorderDefault);
+    setNavbarFilter(fixed && scrolled ? navbarFilterFixedScrolled : navbarFilterDefault);
+  }, [fixed, scrolled, navbarBgFixedScrolled, navbarBorderFixedScrolled, navbarFilterFixedScrolled, navbarShadowFixedScrolled]);
+
+  useEffect(() => {
+    setMainText(secondary ? mainTextSecondary : mainTextDefault);
+    setNavbarBackdrop(secondary ? navbarBackdropSecondary : navbarBackdropDefault);
+    setSecondaryMargin(secondary ? secondaryMarginSecondary : secondaryMarginDefault);
+    setPaddingX(secondary ? paddingXSecondary : paddingXDefault);
+  }, [secondary, mainTextDefault]);
+
+
   const changeNavbar = () => {
     if (window.scrollY > 1) {
       setScrolled(true);
