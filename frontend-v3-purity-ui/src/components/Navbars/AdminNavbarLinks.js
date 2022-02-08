@@ -1,8 +1,5 @@
 import { BellIcon } from "@chakra-ui/icons";
 import { Button, Flex, Menu, MenuButton, MenuItem, MenuList, Text, useColorModeValue } from "@chakra-ui/react";
-import avatar1 from "assets/img/avatars/avatar1.png";
-import avatar2 from "assets/img/avatars/avatar2.png";
-import avatar3 from "assets/img/avatars/avatar3.png";
 import { ProfileIcon, SettingsIcon } from "components/Icons/Icons";
 import { ItemContent } from "components/Menu/ItemContent";
 import { SidebarResponsive } from "components/Sidebar/SidebarResponsive";
@@ -16,7 +13,7 @@ export default function HeaderLinks(props) {
   const [navbarIconColor, setNavbarIconColor] = useState('');
   const [mainTextColor, setMainTextColor] = useState('');
 
-  const mainTextColorDefault = useColorModeValue("gray.700", "gray.200");
+  const mainTextColorDefault = useColorModeValue("gray.300", "gray.200");
   const navbarIconColorDefault = useColorModeValue("gray.500", "gray.200");
 
   useState(() => {
@@ -40,13 +37,13 @@ export default function HeaderLinks(props) {
         <MenuList p="16px 8px">
           <Flex flexDirection="column">
             <MenuItem borderRadius="8px" mb="10px">
-              <ItemContent time="13 minutes ago" info="from Alicia" boldInfo="New Message" aName="Alicia" aSrc={avatar1} />
+              <ItemContent time="13 minutes ago" info="New mapping available!" boldInfo="payment service"/>
             </MenuItem>
             <MenuItem borderRadius="8px" mb="10px">
-              <ItemContent time="2 days ago" info="by Josh Henry" boldInfo="New Album" aName="Josh Henry" aSrc={avatar2} />
+              <ItemContent time="2 days ago" info="New mapping available!" boldInfo="payment service" />
             </MenuItem>
             <MenuItem borderRadius="8px">
-              <ItemContent time="3 days ago" info="Payment succesfully completed!" boldInfo="" aName="Kara" aSrc={avatar3} />
+              <ItemContent time="3 days ago" info="New mapping available!" boldInfo="statistics service" />
             </MenuItem>
           </Flex>
         </MenuList>
