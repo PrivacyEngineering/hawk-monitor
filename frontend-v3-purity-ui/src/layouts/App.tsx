@@ -9,9 +9,13 @@ import { AdminNavbarTS } from "../components/Navbars/AdminNavbarTS";
 import Configurator from "components/Configurator/Configurator";
 import PanelContent from "components/Layout/PanelContent";
 import PanelContainer from "components/Layout/PanelContainer";
-import { Redirect, Route, Switch } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import { SidebarVariant } from "types";
-import Tables from "views/Dashboard/Tables";
+import { FieldPage } from "views/FieldPage";
+import { FieldsPage } from "views/FieldsPage";
+import { MappingPage } from "views/MappingPage";
+import { MappingsPage } from "views/MappingsPage";
+import { MappingsPage2 } from "views/MappingsPage2";
 
 export const App = () => {
   const [sidebarVariant, setSidebarVariant] = useState<SidebarVariant>("transparent");
@@ -25,12 +29,14 @@ export const App = () => {
         <Portal><AdminNavbarTS onOpen={onOpen} secondary={false} fixed={fixed} /></Portal>
         <PanelContent>
           <PanelContainer>
-            <Switch>
-              <Route path='/fields' component={Tables} />
-              <Route path='/mappings' component={Tables} />
-              <Route path='/tables' component={Tables} />
-              <Redirect from={`/`} to="/mappings" />
-            </Switch>
+            <Routes>
+              <Route path="/fields/new" element={<FieldPage />} />
+              <Route path="/fields/:id" element={<FieldPage />} />
+              <Route path="/fields" element={<FieldsPage />} />
+              <Route path="/mappings/:id" element={<MappingPage />} />
+              <Route path="/mappings" element={<MappingsPage2 />} />
+              <Route path="*" element={<Navigate to="/mappings" />} />
+            </Routes>
           </PanelContainer>
         </PanelContent>
 
