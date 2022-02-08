@@ -12,16 +12,13 @@ import {
 // Assets
 import BackgroundCard1 from "assets/img/BackgroundCard1.png";
 // Custom components
-import Card from "components/Card/Card.js";
-import CardBody from "components/Card/CardBody.js";
-import CardHeader from "components/Card/CardHeader.js";
+import { Card, CardHeader, CardBody } from "components/StyledComponent";
 import IconBox from "components/Icons/IconBox";
 import { MastercardIcon, VisaIcon } from "components/Icons/Icons";
 import BillingRow from "components/Tables/BillingRow";
 import InvoicesRow from "components/Tables/InvoicesRow";
 import TransactionRow from "components/Tables/TransactionRow";
 import { Separator } from "components/Separator/Separator";
-import React from "react";
 import {
   FaPaypal,
   FaPencilAlt,

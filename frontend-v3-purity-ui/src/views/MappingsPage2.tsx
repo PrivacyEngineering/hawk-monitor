@@ -1,7 +1,5 @@
 import { Badge, Button, Flex, Table, Tbody, Td, Text, Th, Thead, Tr, useColorModeValue } from "@chakra-ui/react";
-import Card from "components/Card/Card.js";
-import CardHeader from "components/Card/CardHeader.js";
-import CardBody from "components/Card/CardBody.js";
+import { Card, CardBody, CardHeader } from "components/StyledComponent";
 import { useSelector } from "react-redux";
 import { RootState } from "reducers";
 import { AnyMapping, Field, Mapping, MappingFieldReference, TableRowProps } from "types";

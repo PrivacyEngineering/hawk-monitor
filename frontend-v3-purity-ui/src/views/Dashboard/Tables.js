@@ -1,7 +1,5 @@
 import { Flex, Table, Tbody, Text, Th, Thead, Tr, useColorModeValue } from "@chakra-ui/react";
-import Card from "components/Card/Card.js";
-import CardHeader from "components/Card/CardHeader.js";
-import CardBody from "components/Card/CardBody.js";
+import { Card, CardHeader, CardBody } from "components/StyledComponent";
 import TablesProjectRow from "components/Tables/TablesProjectRow";
 import TablesTableRow from "components/Tables/TablesTableRow";
 import { tablesProjectData, tablesTableData } from "variables/general";
