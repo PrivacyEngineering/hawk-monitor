@@ -7,6 +7,7 @@ import { Card } from "components/StyledComponent";
 import { RootState } from "reducers";
 import { AnyMapping, Field, Mapping, MappingFieldReference, TableRowProps } from "types";
 import { GenericTable } from "./GenericTable";
+import { BsPencilFill, BsPlusLg } from "react-icons/bs";
 
 export const MappingsPage = () => {
   const mappings = useSelector<RootState, AnyMapping[]>(state => state.mappings) as Mapping[];
@@ -50,7 +51,11 @@ const ExistingMappingsTableRow = (props: TableRowProps<Mapping>) => {
       <Td>{item.endpoint.path}</Td>
       <Td>{item.fields.length ? item.fields.map(f => f.id).join(', ') : '-'}</Td>
       <Td><InferredDataCategories fieldRefs={item.fields} /></Td>
-      <Td><Link to={item.id}><TableButton label="Edit fields" /></Link></Td>
+      <Td>
+        <Link to={item.id}>
+          <Button color='teal.400' size="sm" leftIcon={<BsPencilFill />}>Edit fields</Button>{' '}
+        </Link>
+      </Td>
     </tr>
   )
 }
@@ -90,9 +95,11 @@ const UnmappedEndpointsTableRow = (props: TableRowProps<AnyMapping>) => {
       <Td>{item.endpoint.protocol}</Td>
       <Td>{item.endpoint.method}</Td>
       <Td>{item.endpoint.path}</Td>
-      <Td><Link to={item.id}><TableButton label="Attach fields" /></Link></Td>
+      <Td>
+        <Link to={item.id}>
+          <Button color='teal.400' size="sm" leftIcon={<BsPlusLg />}>Attach fields</Button>{' '}
+        </Link>
+      </Td>
     </Tr>
   )
 }
-
-const TableButton = (props: { label: string }) => <Button size="sm"><Text fontSize="md" color="gray.400" cursor="pointer">{props.label}</Text></Button>;
