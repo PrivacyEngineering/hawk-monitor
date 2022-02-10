@@ -19,7 +19,7 @@ export const GenericTable = <T,>(props: GenericTableProps<T>) => {
 
   return (
     <>
-      <CardHeader p="8px 6px">
+      <CardHeader>
         <Flex direction={"column"} pb="6px">
           <Text fontSize="xl" color={textColor} fontWeight="bold">{header}</Text>
           {descriptionLine1 && <Text color={textColor}>{descriptionLine1}</Text>}

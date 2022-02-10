@@ -9,12 +9,11 @@ interface Props {
 
 export const AdminNavbar = (props: Props) => {
   const { fixed, onOpen } = props;
-  
+
   const mainText = useColorModeValue("gray.700", "gray.200");
   const navbarBackdrop = "blur(21px)";
   const secondaryMargin = "0px";
-  const paddingX = "15px";
-  
+
   const [scrolled, setScrolled] = useState(window.scrollY > 1);
 
   useEffect(() => {
@@ -22,7 +21,7 @@ export const AdminNavbar = (props: Props) => {
     window.addEventListener("scroll", updateScrolled);
     return () => window.removeEventListener("scroll", updateScrolled);
   });
-  
+
   const [navbarBg, setNavbarBg] = useState('');
   const [navbarBorder, setNavbarBorder] = useState('');
   const [navbarFilter, setNavbarFilter] = useState('');
@@ -57,8 +56,6 @@ export const AdminNavbar = (props: Props) => {
       borderColor={navbarBorder}
       filter={navbarFilter}
       backdropFilter={navbarBackdrop}
-      borderWidth="1.5px"
-      borderStyle="solid"
       transitionDelay="0s, 0s, 0s, 0s"
       transitionDuration=" 0.25s, 0.25s, 0.25s, 0s"
       transition-property="box-shadow, background-color, filter, border"
@@ -67,22 +64,17 @@ export const AdminNavbar = (props: Props) => {
       borderRadius="16px"
       display="flex"
       minH="75px"
-      justifyContent={{ xl: "center" }}
       lineHeight="25.6px"
-      mx="auto"
+      // mx="auto"
       mt={secondaryMargin}
       pb="8px"
       right="30px"
-      px={{ sm: paddingX, md: "30px", }}
-      ps={{ xl: "12px", }}
       pt="8px"
       top="18px"
-      w={{ sm: "calc(100vw - 30px)", xl: "calc(100vw - 75px - 275px)" }}
+      w={{ sm: "calc(100% - 60px)", xl: "calc(100% - 60px - 275px)" }}
     >
-      <Flex w="100%" flexDirection={{ sm: "column", md: "row", }} alignItems={{ xl: "center" }}>
-        <Box mb={{ sm: "8px", md: "0px" }}>
-          <Text color={mainText} fontSize='xl' fontWeight='800'>Dashboard</Text>
-        </Box>
+      <Flex w="100%" justifyContent="center" alignItems="center">
+        <Text color={mainText} fontSize='xl' fontWeight='800' pl={"20px"}>Dashboard</Text>
         <Box ms="auto" w={{ sm: "100%", md: "unset" }}>
           <AdminNavbarLinks onOpen={onOpen} />
         </Box>

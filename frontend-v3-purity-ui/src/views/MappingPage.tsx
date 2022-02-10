@@ -36,8 +36,8 @@ export const MappingPage = () => {
     <>
       <Flex direction="column" pt={{ base: "120px", md: "75px" }}>
         <Card>
-          <CardHeader p="8px 6px">
-            <Flex direction={"column"} pb="6px">
+          <CardHeader>
+            <Flex direction={"column"}>
               <Text fontSize="xl" color={textColor} fontWeight="bold">Mapping #{mapping.id}</Text>
             </Flex>
           </CardHeader>
@@ -60,7 +60,7 @@ export const MappingPage = () => {
               </Grid>
 
               <VStack pt={{ base: "60px", md: "40px" }} spacing='12px' alignItems={"flex-start"}>
-                <Text fontSize="lg" color={textColor} fontWeight="bold" p="0px 6px">Attached fields</Text>
+                <Text fontSize="lg" color={textColor} fontWeight="bold">Attached fields</Text>
                 <Table color={textColor}>
                   <Thead>
                     <Tr>{['ID', 'Path type', 'Path value', 'Actions'].map((item, index) => <Th color="gray.400" key={index}>{item}</Th>)}</Tr>
