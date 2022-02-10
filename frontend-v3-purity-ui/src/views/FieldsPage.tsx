@@ -38,7 +38,7 @@ export const FieldsPage = () => {
           <CardHeader>
             <Flex direction={"column"} pb="12px">
               <Text fontSize="xl" color={textColor} fontWeight="bold" pb="6px">Fields</Text>
-              <Text color={textColor}><b>Fields</b> are meta-structures to enable hassle-free assignment of privacy categories to endpoints.</Text>
+              <Text color={textColor}>Fields are meta-structures to enable hassle-free assignment of privacy categories to endpoints.</Text>
               <Text color={textColor}>Assign fields to endpoints and save yourself thinking about data privacy categories for good!</Text>
             </Flex>
           </CardHeader>
