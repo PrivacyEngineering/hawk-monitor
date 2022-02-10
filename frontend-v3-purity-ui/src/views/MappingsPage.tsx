@@ -1,11 +1,12 @@
-import { Badge, Box, Button, Flex, Table, Tbody, Td, Text, Th, Thead, Tr, useColorModeValue } from "@chakra-ui/react";
+import { Badge, Button, Flex, Td, Text, Tr, useColorModeValue } from "@chakra-ui/react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 
-import { Card, CardBody, CardHeader } from "components/StyledComponent";
+import { Card } from "components/StyledComponent";
 import { RootState } from "reducers";
 import { AnyMapping, Field, Mapping, MappingFieldReference, TableRowProps } from "types";
+import { GenericTable } from "./GenericTable";
 
 export const MappingsPage = () => {
   const mappings = useSelector<RootState, AnyMapping[]>(state => state.mappings) as Mapping[];
@@ -79,7 +80,6 @@ const InferredDataCategories = (props: { fieldRefs: MappingFieldReference[] }) =
   )
 }
 
-
 const UnmappedEndpointsTableRow = (props: TableRowProps<AnyMapping>) => {
   const { item } = props;
 
@@ -96,39 +96,3 @@ const UnmappedEndpointsTableRow = (props: TableRowProps<AnyMapping>) => {
 }
 
 const TableButton = (props: { label: string }) => <Button size="sm"><Text fontSize="md" color="gray.400" cursor="pointer">{props.label}</Text></Button>;
-
-interface GenericTableProps<T> {
-  columnLabels: string[];
-  descriptionLine1?: string;
-  descriptionLine2?: string;
-  header: string;
-  items: T[];
-  row: React.FC<TableRowProps<T>>;
-}
-
-const GenericTable = <T,>(props: GenericTableProps<T>) => {
-  const { columnLabels, descriptionLine1, descriptionLine2, header, items, row: Row } = props;
-
-  const textColor = useColorModeValue("gray.700", "white");
-  const scrollbarColor = useColorModeValue("rgb(230,230,230)", "lightgray");
-
-  return (
-    <>
-      <CardHeader p="8px 6px">
-        <Flex direction={"column"} pb="6px">
-          <Text fontSize="xl" color={textColor} fontWeight="bold">{header}</Text>
-          {descriptionLine1 && <Text color={textColor}>{descriptionLine1}</Text>}
-          {descriptionLine2 && <Text color={textColor}>{descriptionLine2}</Text>}
-        </Flex>
-      </CardHeader>
-      <CardBody>
-        <Box overflowX="auto" width="100%" css={{ '&::-webkit-scrollbar': { width: '2px' }, '&::-webkit-scrollbar-thumb': { background: scrollbarColor, borderRadius: '10px' } }}>
-          <Table color={textColor}>
-            <Thead><Tr>{columnLabels.map((item, index) => <Th color="gray.400" key={index}>{item}</Th>)}</Tr></Thead>
-            <Tbody>{items.map((item, index) => <Row item={item} key={index} />)}</Tbody>
-          </Table>
-        </Box>
-      </CardBody>
-    </>
-  )
-}
