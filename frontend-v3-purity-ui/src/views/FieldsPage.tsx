@@ -1,7 +1,7 @@
-import { Button, Flex, Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton, Table, Tbody, Td, Text, Th, Thead, Tr, useColorModeValue, VStack } from "@chakra-ui/react";
+import { Button, Flex, Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton, Table, Tbody, Td, Text, Th, Thead, Tr, useColorModeValue, VStack, Checkbox } from "@chakra-ui/react";
 import { Card, CardBody, CardHeader } from "components/StyledComponent";
 import { useState } from "react";
-import { BsCheckSquareFill, BsFillTrashFill, BsPencilFill, BsPlusLg } from "react-icons/bs";
+import { BsFillTrashFill, BsPencilFill, BsPlusLg } from "react-icons/bs";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useThunkDispatch } from "..";
@@ -58,8 +58,8 @@ export const FieldsPage = () => {
                       <Tr key={index}>
                         <Td><b>{field.id}</b></Td>
                         <Td>{field.description}</Td>
-                        <Td>{field.personalData ? <BsCheckSquareFill /> : '-'}</Td>
-                        <Td>{field.specialCategoryPersonalData ? <BsCheckSquareFill /> : '-'}</Td>
+                        <Td>{field.personalData ? <Checkbox colorScheme="teal" isChecked />: '-'}</Td>
+                        <Td>{field.specialCategoryPersonalData ? <Checkbox colorScheme="teal" isChecked /> : '-'}</Td>
                         <Td>
                           <Button color='teal.400' size="sm" onClick={() => navigate(`/fields/${field.id}`, { replace: true })} leftIcon={<BsPencilFill />}>Edit</Button>{' '}
                           {fieldsBeingDeleted[field.id] ?
