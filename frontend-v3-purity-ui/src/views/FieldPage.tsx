@@ -1,5 +1,6 @@
+import { Button, Checkbox, Flex, FormControl, FormLabel, Input, Text, useColorModeValue, VStack } from "@chakra-ui/react";
+import { Card } from "components/StyledComponent";
 import { useState } from "react";
-import { Button, Col, Form } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { useThunkDispatch } from "..";
@@ -28,33 +29,42 @@ export const FieldPage = () => {
     navigate('/fields', { replace: true })
   }
 
+  const textColor = useColorModeValue("gray.700", "white");
+
   return (
-    <>
-      <h2>{id ? `Field ${id}` : 'New field'}</h2>
+    <Flex direction="column" pt={{ base: "120px", md: "75px" }}>
+      <Card>
+        <Flex direction="column" pb="12px">
+          <Text fontSize="xl" color={textColor} fontWeight="bold" pb="6px">{field ? `Field ${id}` : `New field ${id}`}</Text>
+        </Flex>
 
-      <Col lg={6} xl={4}>
-        <Form.Group className="mb-2">
-          <Form.Label>ID</Form.Label>
-          <Form.Control value={id} readOnly={Boolean(field)} onChange={e => setId(e.target.value)} />
-        </Form.Group>
+        <Flex direction="column" >
+          <VStack spacing='12px' alignItems="flex-start">
 
-        <Form.Group className="mb-2">
-          <Form.Label>Description</Form.Label>
-          <Form.Control value={description} onChange={e => setDescription(e.target.value)} />
-        </Form.Group>
+            <FormControl maxWidth="300px">
+              <FormLabel>ID</FormLabel>
+              <Input value={id} onChange={e => setId(e.target.value)} isDisabled={Boolean(field)} />
+            </FormControl>
 
-        <Form.Group className="mb-2">
-          <Form.Label>Personal data</Form.Label>
-          <Form.Check type='checkbox' checked={personalData} onChange={e => setPersonalData(e.target.checked)} />
-        </Form.Group>
+            <FormControl maxWidth="500px">
+              <FormLabel>Description</FormLabel>
+              <Input value={description} onChange={e => setDescription(e.target.value)} />
+            </FormControl>
 
-        <Form.Group className="mb-2">
-          <Form.Label>Special category personal data</Form.Label>
-          <Form.Check type='checkbox' checked={specialCategoryPersonalData} onChange={e => setSpecialCategoryPersonalData(e.target.checked)} />
-        </Form.Group>
-      </Col>
+            <FormControl>
+              {/* <FormLabel>Description</FormLabel> */}
+              <Checkbox colorScheme="teal" isChecked={personalData} onChange={e => setPersonalData(e.target.checked)}>Personal data</Checkbox>
+            </FormControl>
 
-      <Button variant='success' onClick={handleSave}>Save</Button>
-    </>
+            <FormControl>
+              {/* <FormLabel>Description</FormLabel> */}
+              <Checkbox colorScheme="teal" isChecked={specialCategoryPersonalData} onChange={e => setSpecialCategoryPersonalData(e.target.checked)}>Special category personal data</Checkbox>
+            </FormControl>
+
+            <Button width="fit-content" colorScheme='teal' onClick={handleSave}>Save</Button>
+          </VStack>
+        </Flex>
+      </Card>
+    </Flex>
   )
 }
