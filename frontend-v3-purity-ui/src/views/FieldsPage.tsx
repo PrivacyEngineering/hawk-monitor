@@ -1,13 +1,14 @@
+import { Button, Flex, Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton, Table, Tbody, Td, Text, Th, Thead, Tr, useColorModeValue, VStack } from "@chakra-ui/react";
+import { Card, CardBody, CardHeader } from "components/StyledComponent";
 import { useState } from "react";
-import { Button, Col, Modal, Table } from "react-bootstrap"
-import { BsCheckSquareFill, BsFillTrashFill, BsPencilFill } from "react-icons/bs";
+import { BsCheckSquareFill, BsFillTrashFill, BsPencilFill, BsPlusLg } from "react-icons/bs";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useThunkDispatch } from "..";
 import { RootState } from "../reducers";
 import { Field, NormalizedState } from "../types"
 import { DELETE_FIELD_REQUEST, DELETE_FIELD_SUCCESS } from "../types/actions/Types";
-import { TableHeader } from "./TableHeader";
+import { Link } from "react-router-dom";
 
 export const FieldsPage = () => {
   const fields = useSelector<RootState, Field[]>(state => state.fields);
@@ -28,50 +29,67 @@ export const FieldsPage = () => {
     handleModalClose();
   }
 
+  const textColor = useColorModeValue("gray.700", "white");
+
   return (
     <>
-      <h2>Fields</h2>
-      <p>
-        <b>Fields</b> are meta-structures to enable hassle-free assignment of privacy categories to endpoints.<br />
-        Assign fields to endpoints and save yourself thinking about data privacy categories for good!
-      </p>
-      <Col xl={10}>
-        <Table>
-          <TableHeader labels={['ID', 'Description', 'Personal data', 'Special categories personal data', 'Actions']} />
-          <tbody>
-            {fields.sort((a, b) => a.id.localeCompare(b.id)).map((field, index) =>
-              <tr key={index}>
-                <td><b>{field.id}</b></td>
-                <td>{field.description}</td>
-                <td>{field.personalData ? <BsCheckSquareFill /> : '-'}</td>
-                <td>{field.specialCategoryPersonalData ? <BsCheckSquareFill /> : '-'}</td>
-                <td>
-                  <Button variant='warning' size="sm" onClick={() => navigate(`/fields/${field.id}`, { replace: true })}><BsPencilFill /> Edit</Button>{' '}
-                  {fieldsBeingDeleted[field.id] ?
-                    <Button variant='danger' size="sm" disabled><BsFillTrashFill /> Removing...</Button> :
-                    <Button variant='danger' size="sm" onClick={() => handleModalShow(field)}><BsFillTrashFill /> Remove</Button>}
-                </td>
-              </tr>
-            )}
-          </tbody>
-        </Table>
-        <Button variant="success" href="/fields/new"><BsPencilFill /> Create Field</Button>
-      </Col>
+      <Flex direction="column" pt={{ base: "120px", md: "75px" }}>
+        <Card>
+          <CardHeader p="8px 6px">
+            <Flex direction={"column"} pb="12px">
+              <Text fontSize="xl" color={textColor} fontWeight="bold" pb="6px">Fields</Text>
+              <Text color={textColor}><b>Fields</b> are meta-structures to enable hassle-free assignment of privacy categories to endpoints.</Text>
+              <Text color={textColor}>Assign fields to endpoints and save yourself thinking about data privacy categories for good!</Text>
+            </Flex>
+          </CardHeader>
+
+          <CardBody>
+            <Flex direction={"column"} width={"100%"}>
+
+              <VStack spacing='24px' alignItems={"flex-start"}>
+                <Table>
+                  <Thead>
+                    <Tr>{['ID', 'Description', 'Personal data', 'Special categories personal data', 'Actions'].map((item, index) =>
+                      <Th color="gray.400" key={index}>{item}</Th>)}
+                    </Tr>
+                  </Thead>
+                  <Tbody>
+                    {fields.sort((a, b) => a.id.localeCompare(b.id)).map((field, index) =>
+                      <Tr key={index}>
+                        <Td><b>{field.id}</b></Td>
+                        <Td>{field.description}</Td>
+                        <Td>{field.personalData ? <BsCheckSquareFill /> : '-'}</Td>
+                        <Td>{field.specialCategoryPersonalData ? <BsCheckSquareFill /> : '-'}</Td>
+                        <Td>
+                          <Button color='teal.400' size="sm" onClick={() => navigate(`/fields/${field.id}`, { replace: true })} leftIcon={<BsPencilFill />}>Edit</Button>{' '}
+                          {fieldsBeingDeleted[field.id] ?
+                            <Button color='red.400' size="sm" disabled leftIcon={<BsFillTrashFill />}>Removing...</Button> :
+                            <Button color='red.400' size="sm" onClick={() => handleModalShow(field)} leftIcon={<BsFillTrashFill />}> Remove</Button>}
+                        </Td>
+                      </Tr>
+                    )}
+                  </Tbody>
+                </Table>
+                <Link to={'new'}>
+                  <Button width={"fit-content"} color="teal.400" leftIcon={<BsPlusLg />}>Create Field</Button>
+                </Link>
+              </VStack>
+            </Flex>
+          </CardBody>
+        </Card>
+      </Flex>
 
       {fieldToDelete &&
-        <Modal show onHide={handleModalClose}>
-          <Modal.Header closeButton>
-            <Modal.Title>Confirmation</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>Are you sure to delete the field <b>{fieldToDelete.id}</b>?</Modal.Body>
-          <Modal.Footer>
-            <Button variant="secondary" onClick={handleModalClose}>
-              Close
-            </Button>
-            <Button variant="danger" onClick={() => handleDelete(fieldToDelete)}>
-              Delete
-            </Button>
-          </Modal.Footer>
+        <Modal isOpen={Boolean(fieldToDelete)} onClose={handleModalClose}>
+          <ModalOverlay />
+          <ModalContent>
+            <ModalHeader>Confirmation</ModalHeader>
+            <ModalCloseButton />
+            <ModalBody>Are you sure to delete the field <b>{fieldToDelete.id}</b>?</ModalBody>
+            <ModalFooter>
+              <Button color='red.400' mr={3} onClick={() => handleDelete(fieldToDelete)}>Delete</Button>
+            </ModalFooter>
+          </ModalContent>
         </Modal>
       }
     </>
