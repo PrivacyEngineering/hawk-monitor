@@ -59,7 +59,7 @@ export const MappingPage = () => {
                 </GridItem>
               </Grid>
 
-              <VStack pt={{ base: "60px", md: "40px" }} spacing='12px' alignItems={"flex-start"}>
+              <VStack pt={{ base: "60px", md: "40px" }} spacing='12px' alignItems="flex-start">
                 <Text fontSize="lg" color={textColor} fontWeight="bold">Attached fields</Text>
                 <Table color={textColor}>
                   <Thead>
@@ -72,7 +72,7 @@ export const MappingPage = () => {
                         <Td><ColInput value={item.path.type}></ColInput></Td>
                         <Td><ColInput value={item.path.value}></ColInput></Td>
                         <Td>
-                          <Button colorScheme='red' size='md' onClick={() => deleteFieldRef(item)}>Delete</Button>
+                          <Button colorScheme='red' onClick={() => deleteFieldRef(item)}>Delete</Button>
                         </Td>
                       </Tr>)}
                   </Tbody>
@@ -82,7 +82,7 @@ export const MappingPage = () => {
                   {fields.filter(f => !fieldRefs.map(fieldRef => fieldRef.id).includes(f.id)).map(f =>
                     <option key={f.id}>{f.id}</option>)}
                 </Select>
-                <Button width={"fit-content"} colorScheme='teal' size='md' onClick={() => handleSave()}>Save</Button>
+                <Button width={"fit-content"} colorScheme='teal' onClick={() => handleSave()}>Save</Button>
               </VStack>
             </Flex>
           </CardBody>
