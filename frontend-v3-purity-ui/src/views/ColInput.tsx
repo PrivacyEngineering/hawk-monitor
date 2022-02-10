@@ -1,16 +1,14 @@
+import { FormControl, FormHelperText, FormLabel, Input } from "@chakra-ui/react";
 import { useState } from "react"
-import { Col, ColProps, Form } from "react-bootstrap"
 
-export const ColInput = (props: ColProps & { label?: string, mutedText?: string, value?: string, placeholder?: string, readOnly?: boolean }) => {
+export const ColInput = (props: { label?: string, mutedText?: string, value?: string, placeholder?: string, isDisabled?: boolean }) => {
   const [value, setValue] = useState(props.value);
 
   return (
-    <Col xs={props.xs} sm={props.sm} md={props.md} lg={props.lg} xl={props.xl}>
-      <Form.Group className="mb-2">
-        {props.label && <Form.Label>{props.label}</Form.Label>}
-        <Form.Control value={value} placeholder={props.placeholder} readOnly={props.readOnly} onChange={e => setValue(e.target.value)} required />
-        {props.mutedText && <Form.Text className="text-muted">{props.mutedText}</Form.Text>}
-      </Form.Group>
-    </Col>
+    <FormControl>
+      {props.label && <FormLabel>{props.label}</FormLabel>}
+      <Input value={value} onChange={e => setValue(e.target.value)} isDisabled={props.isDisabled} />
+      {props.mutedText && <FormHelperText>{props.mutedText}</FormHelperText>}
+    </FormControl>
   )
 }
