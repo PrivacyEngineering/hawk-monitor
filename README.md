@@ -1,5 +1,8 @@
 # Transparency Log
 
+> ### Live demo:
+> https://hawk-transparency-dashboard.netlify.app/
+
 ## First idea
 
 Our first idea was to create a _Dashboard_, where the user can see all the outputs from our transparency library. \
@@ -70,7 +73,7 @@ In the `requests`, the user should be able to:
 
 In other words, the `requests` will more or less be the table from our first approach, with the restricton that the number of requests displayed will be limited.
 
-# `/overview`
+### `/overview`
 
 All requests grouped by Service pairs:
 
@@ -97,7 +100,7 @@ All Requests grouped by Endpoint
 | user     | /newsletter | 3643  | 2021-12-06 15:58:03  | Link         |
 | user     | /newsletter | 2342  | 2021-12-06 15:57:02  | Link         |
 
-# `/requests`
+### `/requests`
 
 See requests, for example:
 
@@ -112,7 +115,7 @@ See requests, for example:
 | 2021-12-06 15:58:03 | 32517631   | newsletter | user     | /newsletter | http-get | more...         |
 | 2021-12-06 15:57:02 | 32517630   | newsletter | user     | /newsletter | http-get | more...         |
 
-## `/requests/requestId`
+#### `/requests/requestId`
 
 ```json
 Requestor:    newsletter
@@ -175,5 +178,8 @@ The definitions are taken from the Art. 4 GDPR.
 | user         | /newsletter | 404              | Configure | 2005  | 2021-12-13 20:20     |
 | newsletter   | /signup     | 404              | Configure | 200   | 2021-12-13 20:19     |
 
-### Implementation
-TBD
+## Third version - *Purity UI*
+
+Version 3 is based on the version 2, but instead of Bootstrap, it uses Chakra UI to render UI elements. Also, the concept of legal bases dictionary was introduced. Legal bases can be later updated or managed as a kind of low-level, machine readable resources corresponding to the legislation environment the system operates in.
+
+You can see the version 3 of the dashboard live here: https://hawk-transparency-dashboard.netlify.app/
