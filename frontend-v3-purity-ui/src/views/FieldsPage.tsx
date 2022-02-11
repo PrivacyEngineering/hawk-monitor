@@ -34,7 +34,7 @@ export const FieldsPage = () => {
 
   return (
     <>
-      <Flex direction="column" pt={{ base: "120px", md: "75px" }}>
+      <Flex direction="column" pt={{ base: "60px", md: "75px" }}>
         <Card>
           <CardHeader>
             <Flex direction={"column"} pb="12px">

@@ -1,6 +1,6 @@
 import { HamburgerIcon } from "@chakra-ui/icons";
 import { Box, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerOverlay, Flex, Link, Stack, Text, useColorModeValue, useDisclosure } from "@chakra-ui/react";
-import { DocumentIcon, HomeIcon } from "components/Icons/Icons";
+import { DocumentIcon } from "components/Icons/Icons";
 import { Separator } from "components/Separator/Separator";
 import { CustomNavLink } from "./CustomNavLink";
 
@@ -20,7 +20,7 @@ export function SidebarResponsive() {
   const hamburgerColor = useColorModeValue("gray.500", "gray.200");
 
   return (
-    <Flex display={{ sm: "flex", xl: "none" }} alignItems="center">
+    <Flex display={{ base: "flex", xl: "none" }} alignItems="center">
       <HamburgerIcon color={hamburgerColor} w="18px" h="18px" onClick={onOpen} />
       <Drawer isOpen={isOpen} onClose={onClose}>
         <DrawerOverlay />
@@ -31,8 +31,9 @@ export function SidebarResponsive() {
               <Brand />
               <Stack direction="column" mb="40px">
                 <Box>
+                  <CustomNavLink path='legalBases' label='Legal Bases' icon={<DocumentIcon />} sidebarVariant={'opaque'} />
                   <CustomNavLink path='fields' label='Fields' icon={<DocumentIcon />} sidebarVariant={'opaque'} />
-                  <CustomNavLink path='mappings' label='Mappings' icon={<HomeIcon />} sidebarVariant={'opaque'} />
+                  <CustomNavLink path='mappings' label='Mappings' icon={<DocumentIcon />} sidebarVariant={'opaque'} />
                 </Box>
               </Stack>
             </Box>

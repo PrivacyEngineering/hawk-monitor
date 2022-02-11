@@ -17,8 +17,8 @@ export const MappingsPage = () => {
   const unmappedEndpoints = mappingsSortedById.filter(m => m.fields === undefined);
 
   return (
-    <Flex direction="column" pt={{ base: "120px", md: "75px" }}>
-      <Card>
+    <Flex direction="column" pt={{ base: "60px", md: "75px" }}>
+      <Card mx={{sm: 0}}>
         <GenericTable<Mapping>
           columnLabels={['ID', 'Service', 'Protocol', 'Method', 'Endpoint', 'Attached Fields', 'Inferred data category', 'Actions']}
           descriptionLine1="Mappings are used to trace processing of privacy-related data in your system. Please keep them up to date."

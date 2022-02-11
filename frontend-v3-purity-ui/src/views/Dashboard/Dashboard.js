@@ -70,7 +70,7 @@ export default function Dashboard() {
   const overlayRef = React.useRef();
 
   return (
-    <Flex flexDirection="column" pt={{ base: "120px", md: "75px" }}>
+    <Flex flexDirection="column" pt={{ base: "60px", md: "75px" }}>
       <SimpleGrid columns={{ sm: 1, md: 2, xl: 4 }} spacing="24px">
         <Card minH="83px">
           <CardBody>

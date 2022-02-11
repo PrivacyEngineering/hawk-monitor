@@ -79,7 +79,7 @@ function Sidebar(props) {
   }
 
   return (
-    <Box display={{ sm: "none", xl: "block" }} position="fixed">
+    <Box display={{ base: "none", xl: "block" }} position="fixed">
       <Box bg={sidebarBg} transition={variantChange} w="260px" maxW="260px" ms={{ sm: "16px" }} my={{ sm: "16px" }} h="calc(100vh - 32px)" ps="20px" pe="20px" m={sidebarMargins} borderRadius={sidebarRadius} >
         <Box pt="25px" mb="12px">
           <Link href={`${process.env.PUBLIC_URL}/#/`} target="_blank" display="flex" lineHeight="100%" mb="30px" fontWeight="bold" justifyContent="center" alignItems="center" fontSize="11px">

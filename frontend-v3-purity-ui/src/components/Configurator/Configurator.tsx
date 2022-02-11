@@ -31,7 +31,7 @@ export const Configurator = (props: Props) => {
           <Text fontSize="md" mb="16px">See your dashboard options</Text>
           <Separator />
         </DrawerHeader>
-        <DrawerBody w="340px" ps="24px" pe="40px">
+        <DrawerBody ps="24px" pe="40px">
           <Flex flexDirection="column">
             <Box>
               <Text fontSize="md" fontWeight="600">Sidenav Type</Text>

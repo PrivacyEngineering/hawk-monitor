@@ -16,10 +16,10 @@ export const AdminNavbarLinks = (props: Props) => {
   const navbarTextColor = useColorModeValue("gray.700", "gray.200");
   
   return (
-    <Flex pe={{ sm: "0px", md: "16px" }} w={{ sm: "100%", md: "auto" }} alignItems="center" flexDirection="row">
+    <Flex pe={{ base: "0px", md: "16px" }} w="auto" alignItems="center" flexDirection="row">
       <NavLink to="#">
-        <Button ms="0px" px="0px" me={{ sm: "2px", md: "16px" }} variant="transparent-with-icon" leftIcon={<ProfileIcon color={navbarIconColor} w="22px" h="22px" me="0px" />}>
-          <Text display={{ sm: "none", md: "flex" }} color={navbarTextColor}>Sign Out</Text>
+        <Button ms="0px" px="0px" me={{ base: "2px", md: "16px" }} variant="transparent-with-icon" leftIcon={<ProfileIcon color={navbarIconColor} w="22px" h="22px" me="0px" />}>
+          <Text display={{ base: "none", md: "flex" }} color={navbarTextColor}>Sign Out</Text>
         </Button>
       </NavLink>
       <SidebarResponsive />

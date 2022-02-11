@@ -61,7 +61,7 @@ export const FieldPage = () => {
   const textColor = useColorModeValue("gray.700", "white");
 
   return (
-    <Flex direction="column" pt={{ base: "120px", md: "75px" }}>
+    <Flex direction="column" pt={{ base: "60px", md: "75px" }}>
       <Card>
         <Flex direction="column" pb="12px">
           <Text fontSize="xl" color={textColor} fontWeight="bold" pb="6px">{field ? `Field ${id}` : `New field ${id}`}</Text>

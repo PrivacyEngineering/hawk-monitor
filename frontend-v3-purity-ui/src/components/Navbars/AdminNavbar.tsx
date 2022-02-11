@@ -71,11 +71,11 @@ export const AdminNavbar = (props: Props) => {
       right="30px"
       pt="8px"
       top="18px"
-      w={{ sm: "calc(100% - 60px)", xl: "calc(100% - 60px - 275px)" }}
+      w={{ base: "calc(100% - 60px)", xl: "calc(100% - 60px - 275px)" }}
     >
       <Flex w="100%" justifyContent="center" alignItems="center">
-        <Text color={mainText} fontSize='xl' fontWeight='800' pl={"20px"}>Dashboard</Text>
-        <Box ms="auto" w={{ sm: "100%", md: "unset" }}>
+        <Text color={mainText} fontSize='xl' fontWeight='800' pl="20px">Dashboard</Text>
+        <Box ms="auto">
           <AdminNavbarLinks onOpen={onOpen} />
         </Box>
       </Flex>
