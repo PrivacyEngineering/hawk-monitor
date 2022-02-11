@@ -1,4 +1,4 @@
-import { Badge, Button, Flex, Td, Text, Tr, useColorModeValue } from "@chakra-ui/react";
+import { Button, Flex, Td, Text, Tr, useColorModeValue } from "@chakra-ui/react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -8,6 +8,7 @@ import { RootState } from "reducers";
 import { AnyMapping, Field, Mapping, MappingFieldReference, TableRowProps } from "types";
 import { GenericTable } from "./GenericTable";
 import { BsPencilFill, BsPlusLg } from "react-icons/bs";
+import { PersonalBadge, SpecialBadge } from "./Badges";
 
 export const MappingsPage = () => {
   const mappings = useSelector<RootState, AnyMapping[]>(state => state.mappings) as Mapping[];
@@ -19,7 +20,7 @@ export const MappingsPage = () => {
     <Flex direction="column" pt={{ base: "120px", md: "75px" }}>
       <Card>
         <GenericTable<Mapping>
-          columnLabels={['ID', 'Service', 'Protocol', 'Method', 'Endpoint', 'Attached Fields', 'Inferred data categories', 'Actions']}
+          columnLabels={['ID', 'Service', 'Protocol', 'Method', 'Endpoint', 'Attached Fields', 'Inferred data category', 'Actions']}
           descriptionLine1="Mappings are used to trace processing of privacy-related data in your system. Please keep them up to date."
           header="Existing Mappings"
           items={existingMappings}
@@ -66,9 +67,6 @@ const InferredDataCategories = (props: { fieldRefs: MappingFieldReference[] }) =
   const [personal, setPersonal] = useState(false);
   const [special, setSpecial] = useState(false);
 
-  const PersonalBadge = () => <Badge bg="gray.500" color="white" fontSize={"14px"} p="3px 10px" borderRadius="8px">Personal</Badge>;
-  const SpecialBadge = () => <Badge bg="red.500" color="white" fontSize={"14px"} p="3px 10px" borderRadius="8px">Special</Badge>;
-
   useEffect(() => {
     const mappedFields = fields.filter(f => fieldRefs.some(ref => ref.id === f.id));
     setPersonal(mappedFields.map(f => f.personalData).reduce((res, cur) => res || cur, false));
@@ -77,10 +75,7 @@ const InferredDataCategories = (props: { fieldRefs: MappingFieldReference[] }) =
 
   return (
     <>
-      {personal && <PersonalBadge />}
-      {personal && special && " "}
-      {special && <SpecialBadge />}
-      {!personal && !special && '-'}
+      {special ? <SpecialBadge /> : personal ? <PersonalBadge /> : '-'}
     </>
   )
 }

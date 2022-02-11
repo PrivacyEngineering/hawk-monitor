@@ -29,7 +29,7 @@ export const MappingPage = () => {
     dispatch({ type: UPDATE_MAPPING_REQUEST, mapping: mappingToDispatch });
     // TODO: actual API call
     dispatch({ type: UPDATE_MAPPING_SUCCESS, mapping: mappingToDispatch });
-    navigate('/mappings', { replace: true })
+    navigate('/mappings')
   }
 
   return (

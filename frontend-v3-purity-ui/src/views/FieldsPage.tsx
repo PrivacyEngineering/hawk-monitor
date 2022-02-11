@@ -1,6 +1,6 @@
 import { Button, Flex, Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton, Table, Tbody, Td, Text, Th, Thead, Tr, useColorModeValue, VStack, Checkbox } from "@chakra-ui/react";
 import { Card, CardBody, CardHeader } from "components/StyledComponent";
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import { BsFillTrashFill, BsPencilFill, BsPlusLg } from "react-icons/bs";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -9,6 +9,7 @@ import { RootState } from "../reducers";
 import { Field, NormalizedState } from "../types"
 import { DELETE_FIELD_REQUEST, DELETE_FIELD_SUCCESS } from "../types/actions/Types";
 import { Link } from "react-router-dom";
+import { GdprBadge, PersonalBadge, SpecialBadge } from "./Badges";
 
 export const FieldsPage = () => {
   const fields = useSelector<RootState, Field[]>(state => state.fields);
@@ -49,8 +50,19 @@ export const FieldsPage = () => {
               <VStack spacing='24px' alignItems={"flex-start"}>
                 <Table>
                   <Thead>
-                    <Tr>{['ID', 'Description', 'Personal data', 'Special categories personal data', 'Actions'].map((item, index) =>
-                      <Th color="gray.400" key={index}>{item}</Th>)}
+                    <Tr>
+                      <Th color="gray.400">ID</Th>
+                      <Th color="gray.400">Description</Th>
+                      <Th color="gray.400">Consequences<br />of non-disclosure</Th>
+                      <Th color="gray.400">Data<br />category</Th>
+                      <Th color="gray.400">Contralctual<br />regulation?</Th>
+                      <Th color="gray.400">Legal<br />requirement?</Th>
+                      <Th color="gray.400">Legal bases</Th>
+                      <Th color="gray.400">Obligation<br />to provide?</Th>
+                      <Th color="gray.400">Actions</Th>
+                      {/* {['ID', 'Description', 'Consequences of non-disclosure ', 'Data category', 'Contractual regulation?', 'Legal requirement?', 'Legal bases', 'Obligation to provide?', 'Actions'].map((item, index) =>
+                        <Th color="gray.400" key={index}>{item}</Th>
+                      )} */}
                     </Tr>
                   </Thead>
                   <Tbody>
@@ -58,10 +70,15 @@ export const FieldsPage = () => {
                       <Tr key={index}>
                         <Td><b>{field.id}</b></Td>
                         <Td>{field.description}</Td>
-                        <Td>{field.personalData ? <Checkbox colorScheme="teal" isChecked />: '-'}</Td>
-                        <Td>{field.specialCategoryPersonalData ? <Checkbox colorScheme="teal" isChecked /> : '-'}</Td>
+                        <Td>{field.consequences || '-'}</Td>
+                        <Td>{field.specialCategoryPersonalData ? <SpecialBadge /> : field.personalData ? <PersonalBadge /> : '-'}</Td>
+                        <Td><Checkbox colorScheme="teal" isChecked={field.contractualRegulation} /></Td>
+                        <Td><Checkbox colorScheme="teal" isChecked={field.legalRequirement} /></Td>
+                        <Td>{field.legalBases.length > 0 ? field.legalBases
+                          .map(legalBase => <Fragment key={legalBase.requirement}><GdprBadge requirement={legalBase.requirement} />{" "}</Fragment>) : '-'}</Td>
+                        <Td><Checkbox colorScheme="teal" isChecked={field.obligationToProvide} /></Td>
                         <Td>
-                          <Button color='teal.400' size="sm" onClick={() => navigate(`/fields/${field.id}`, { replace: true })} leftIcon={<BsPencilFill />}>Edit</Button>{' '}
+                          <Button color='teal.400' size="sm" onClick={() => navigate(`/fields/${field.id}`)} leftIcon={<BsPencilFill />}>Edit</Button>{' '}
                           {fieldsBeingDeleted[field.id] ?
                             <Button color='red.400' size="sm" disabled leftIcon={<BsFillTrashFill />}>Removing...</Button> :
                             <Button color='red.400' size="sm" onClick={() => handleModalShow(field)} leftIcon={<BsFillTrashFill />}> Remove</Button>}

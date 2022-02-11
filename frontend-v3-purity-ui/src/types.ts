@@ -2,7 +2,12 @@ export type SidebarVariant = 'opaque' | 'transparent';
 
 export interface Field {
   id: string;
+  consequences: string;
+  contractualRegulation: boolean;
   description: string;
+  legalBases: LegalBase[];
+  legalRequirement: boolean;
+  obligationToProvide: boolean;
   personalData: boolean;
   specialCategoryPersonalData: boolean;
 }

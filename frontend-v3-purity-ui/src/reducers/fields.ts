@@ -20,12 +20,12 @@ import {
 } from "../types/actions/Types";
 
 const fieldsInitialState = [
-  { id: 'blood-test-category', description: 'Blood test category', personalData: false, specialCategoryPersonalData: false },
-  { id: 'blood-test-result', description: 'Blood test results', personalData: true, specialCategoryPersonalData: true },
-  { id: 'city', description: 'City name with Alpha-2 country code', personalData: false, specialCategoryPersonalData: false },
-  { id: 'email', description: 'Email address', personalData: true, specialCategoryPersonalData: false },
-  { id: 'genetic', description: 'Genetic information', personalData: true, specialCategoryPersonalData: true },
-  { id: 'user', description: 'Unspecified user data', personalData: true, specialCategoryPersonalData: false },
+  { id: 'blood-test-category', description: 'Blood test category', personalData: false, specialCategoryPersonalData: false, legalBases: [{requirement: 'GDPR-6-1-a', 'description': 'Consent'}], legalRequirement: false, contractualRegulation: false, obligationToProvide: true, consequences: 'Prevents automatic result assessment' },
+  { id: 'blood-test-result', description: 'Blood test results', personalData: true, specialCategoryPersonalData: true, legalBases: [{requirement: 'GDPR-6-1-c', 'description': 'Performance of a contract'}, {requirement: 'GDPR-6-1-e', 'description': 'Public interest'}], legalRequirement: false, contractualRegulation: true, obligationToProvide: true, consequences: '' },
+  { id: 'city', description: 'City name with Alpha-2 country code', personalData: false, specialCategoryPersonalData: false, legalBases: [], legalRequirement: false, contractualRegulation: false, obligationToProvide: false, consequences: '' },
+  { id: 'email', description: 'Email address', personalData: true, specialCategoryPersonalData: false, legalBases: [], legalRequirement: false, contractualRegulation: false, obligationToProvide: false, consequences: 'Unable to notify users about the test results' },
+  { id: 'genetic', description: 'Genetic information', personalData: true, specialCategoryPersonalData: true, legalBases: [], legalRequirement: false, contractualRegulation: true, obligationToProvide: false, consequences: '' },
+  { id: 'user', description: 'User legal name', personalData: true, specialCategoryPersonalData: false, legalBases: [{requirement: 'GDPR-6-1-f', 'description': 'Consent'}], legalRequirement: false, contractualRegulation: true, obligationToProvide: true, consequences: '' },
 ];
 
 export const fields = (state: Field[] = fieldsInitialState, action: CreateFieldSuccessAction | UpdateFieldSuccessAction | DeleteFieldSuccessAction) => {
