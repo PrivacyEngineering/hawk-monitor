@@ -152,7 +152,7 @@ export const FieldPage = () => {
               placeholder={legalBasesToAttach.length > 0 ? 'Add legal base' : 'All legal bases attached'}
               onChange={e => addLegalBase(e.target.value)}
             >
-              {legalBasesToAttach.map(x => <option key={x.requirement}>{x.regulation} Article {x.article} Par. {x.paragraph}</option>)}
+              {legalBasesToAttach.map(x => <option key={x.requirement} value={x.requirement}>{x.regulation} Article {x.article} Par. {x.paragraph}</option>)}
             </Select>
 
             <Button width="fit-content" colorScheme='teal' onClick={handleSave}>Save</Button>
