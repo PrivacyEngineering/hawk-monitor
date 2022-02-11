@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
 import { fields, fieldsBeingCreated, fieldsBeingUpdated, fieldsBeingDeleted } from './fields';
+import { legalBases } from './legalBases';
 import { mappings, mappingsBeingUpdated } from './mappings';
 
 export const app = combineReducers({
@@ -7,6 +8,7 @@ export const app = combineReducers({
   fieldsBeingCreated,
   fieldsBeingUpdated,
   fieldsBeingDeleted,
+  legalBases,
   mappings,
   mappingsBeingUpdated,
 });

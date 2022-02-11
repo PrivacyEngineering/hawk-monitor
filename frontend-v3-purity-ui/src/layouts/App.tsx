@@ -13,6 +13,7 @@ import { FieldPage } from "views/FieldPage";
 import { FieldsPage } from "views/FieldsPage";
 import { MappingPage } from "views/MappingPage";
 import { MappingsPage } from "views/MappingsPage";
+import { LegalBasesPage } from "views/LegalBasesPage";
 
 export const App = () => {
   const [sidebarVariant, setSidebarVariant] = useState<SidebarVariant>("transparent");
@@ -30,6 +31,7 @@ export const App = () => {
               <Route path="/fields/new" element={<FieldPage />} />
               <Route path="/fields/:id" element={<FieldPage />} />
               <Route path="/fields" element={<FieldsPage />} />
+              <Route path="/legalBases" element={<LegalBasesPage />} />
               <Route path="/mappings/:id" element={<MappingPage />} />
               <Route path="/mappings" element={<MappingsPage />} />
               <Route path="*" element={<Navigate to="/mappings" />} />

@@ -77,3 +77,14 @@ export interface MappingFieldReference {
 export interface NormalizedState<T> {
   [id: string]: T;
 }
+
+export interface LegalBase {
+  requirement: string;
+  description: string;
+}
+
+export type LegalBaseExtended = LegalBase & {
+  regulation: string;
+  article: string;
+  paragraph: string;
+}
