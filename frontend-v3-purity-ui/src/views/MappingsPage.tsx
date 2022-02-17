@@ -20,7 +20,7 @@ export const MappingsPage = () => {
     <Flex direction="column" pt={{ base: "60px", md: "75px" }}>
       <Card mx={{sm: 0}}>
         <GenericTable<Mapping>
-          columnLabels={['ID', 'Service', 'Protocol', 'Method', 'Endpoint', 'Attached Fields', 'Inferred data category', 'Actions']}
+          columnLabels={['ID', 'Endpoint ID', 'Attached Fields', 'Inferred data category', 'Actions']}
           descriptionLine1="Mappings are used to trace processing of privacy-related data in your system. Please keep them up to date."
           header="Existing Mappings"
           items={existingMappings}
@@ -28,7 +28,7 @@ export const MappingsPage = () => {
       </Card>
       <Card mt="22px">
         <GenericTable<AnyMapping>
-          columnLabels={['ID', 'Service', 'Protocol', 'Method', 'Endpoint', 'Actions']}
+          columnLabels={['ID', 'Endpoint ID', 'Actions']}
           descriptionLine1="The following API endpoints were detected in your system, but mappings for them are not yet created."
           descriptionLine2="Please add the missing mappings here and retroactively map your system's API endpoint calls to particular privacy-related data categories."
           header="Unmapped Endpoints"
@@ -46,10 +46,7 @@ const ExistingMappingsTableRow = (props: TableRowProps<Mapping>) => {
   return (
     <tr>
       <Td><Text fontSize="md" color={textColor}>{item.id}</Text></Td>
-      <Td><Text fontSize="md" color={textColor} fontWeight="bold">{item.service}</Text></Td>
-      <Td>{item.endpoint.protocol}</Td>
-      <Td>{item.endpoint.method}</Td>
-      <Td>{item.endpoint.path}</Td>
+      <Td>{item.endpointId}</Td>
       <Td>{item.fields.length ? item.fields.map(f => f.id).join(', ') : '-'}</Td>
       <Td><InferredDataCategories fieldRefs={item.fields} /></Td>
       <Td>
@@ -86,10 +83,7 @@ const UnmappedEndpointsTableRow = (props: TableRowProps<AnyMapping>) => {
   return (
     <Tr>
       <Td>{item.id}</Td>
-      <Td><b>{item.service}</b></Td>
-      <Td>{item.endpoint.protocol}</Td>
-      <Td>{item.endpoint.method}</Td>
-      <Td>{item.endpoint.path}</Td>
+      <Td>{item.endpointId}</Td>
       <Td>
         <Link to={item.id}>
           <Button color='teal.400' size="sm" leftIcon={<BsPlusLg />}>Attach fields</Button>{' '}

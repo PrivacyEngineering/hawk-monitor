@@ -17,18 +17,18 @@ export interface TableProps<T> {
   items: readonly T[];
 }
 
+export interface TableRowPropsWithIndex<T> {
+  index: number,
+  item: T;
+}
+
 export interface TableRowProps<T> {
   item: T;
 }
 
 export interface AnyMapping {
   id: string;
-  service: string;
-  endpoint: {
-    protocol: string;
-    method: string;
-    path: string;
-  };
+  endpointId: string;
   fields?: MappingFieldReference[];
 }
 
@@ -39,6 +39,8 @@ export interface Mapping extends AnyMapping {
 export interface MappingFieldReference {
   id: string;
   path: {
+    phase: string;
+    namespace: string;
     type: string;
     value: string;
   }
@@ -74,6 +76,8 @@ export interface DataCategory {
 export interface MappingFieldReference {
   id: string;
   path: {
+    phase: string;
+    namespace: string;
     type: string;
     value: string;
   }
