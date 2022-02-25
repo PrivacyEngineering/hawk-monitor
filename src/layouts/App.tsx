@@ -1,5 +1,5 @@
 import { ChakraProvider, Portal, useDisclosure } from "@chakra-ui/react"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { SidebarTS } from "../components/Sidebar/SidebarTS";
 import FixedPlugin from "components/FixedPlugin/FixedPlugin";
 import Footer from "components/Footer/Footer";
@@ -14,12 +14,19 @@ import { FieldsPage } from "views/FieldsPage";
 import { MappingPage } from "views/MappingPage";
 import { MappingsPage } from "views/MappingsPage";
 import { LegalBasesPage } from "views/LegalBasesPage";
+import { useThunkDispatch } from "index";
+import { fetchFields } from "actions/fields";
+import { fetchMappings } from "actions/mappings";
 
 export const App = () => {
+  const dispatch = useThunkDispatch();
   const [sidebarVariant, setSidebarVariant] = useState<SidebarVariant>("transparent");
   const [fixed, setFixed] = useState(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
 
+  useEffect(() => { fetchFields(dispatch) }, [dispatch]);
+  useEffect(() => { fetchMappings(dispatch) }, [dispatch]);
+  
   return (
     <ChakraProvider theme={theme} >
       <SidebarTS logoText="HAWK" sidebarVariant={sidebarVariant} />

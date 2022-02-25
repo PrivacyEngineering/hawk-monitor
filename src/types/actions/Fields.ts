@@ -1,7 +1,22 @@
-import { ThunkAction } from 'redux-thunk';
 import { Field } from '../../types';
 
 import * as types from './Types';
+
+interface FetchFieldsRequestAction {
+  type: typeof types.FETCH_FIELDS_REQUEST;
+}
+
+interface FetchFieldsSuccessAction {
+  type: typeof types.FETCH_FIELDS_SUCCESS;
+  fields: Field[];
+}
+
+interface FetchFieldsFailureAction {
+  type: typeof types.FETCH_FIELDS_FAILURE;
+  error: string;
+}
+
+export type FetchFieldsActionTypes = FetchFieldsRequestAction | FetchFieldsSuccessAction | FetchFieldsFailureAction;
 
 interface CreateFieldRequestAction {
   type: typeof types.CREATE_FIELD_REQUEST;

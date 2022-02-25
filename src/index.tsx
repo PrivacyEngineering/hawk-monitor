@@ -7,6 +7,7 @@ import { App } from "./layouts/App";
 
 const store = configureStore();
 export const useThunkDispatch = () => useDispatch<typeof store.dispatch>();
+export const URL_BASE = process.env.API_URL;
 
 ReactDOM.render(
   <React.StrictMode>

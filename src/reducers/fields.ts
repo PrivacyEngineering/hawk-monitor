@@ -4,6 +4,7 @@ import {
   CreateFieldSuccessAction,
   DeleteFieldActionTypes,
   DeleteFieldSuccessAction,
+  FetchFieldsActionTypes,
   UpdateFieldActionTypes,
   UpdateFieldSuccessAction,
 } from "../types/actions/Fields";
@@ -17,24 +18,13 @@ import {
   DELETE_FIELD_REQUEST,
   DELETE_FIELD_SUCCESS,
   DELETE_FIELD_FAILURE,
+  FETCH_FIELDS_SUCCESS,
 } from "../types/actions/Types";
 
-const fieldsInitialState = [
-  { id: 'User First Name', description: 'First name of the customer', personalData: true, specialCategoryPersonalData: false, legalBases: [], legalRequirement: false, contractualRegulation: false, obligationToProvide: false, consequences: '' },
-  { id: 'User Last Name', description: 'Last name of the customer', personalData: true, specialCategoryPersonalData: false, legalBases: [], legalRequirement: false, contractualRegulation: false, obligationToProvide: false, consequences: '' },
-  { id: 'User Username', description: 'Username of the customer', personalData: true, specialCategoryPersonalData: false, legalBases: [], legalRequirement: false, contractualRegulation: false, obligationToProvide: false, consequences: '' },
-  { id: 'User Address Post Code', description: 'Postal code of the address of the customer', personalData: true, specialCategoryPersonalData: false, legalBases: [], legalRequirement: false, contractualRegulation: false, obligationToProvide: false, consequences: 'Unable to notify users about the test results' },
-  { id: 'User Address Street', description: 'Street of the address of the customer', personalData: true, specialCategoryPersonalData: false, legalBases: [], legalRequirement: false, contractualRegulation: false, obligationToProvide: false, consequences: '' },
-  { id: 'User Address House Number', description: 'House Number in the street of the customer', personalData: true, specialCategoryPersonalData: false, legalBases: [], legalRequirement: false, contractualRegulation: false, obligationToProvide: false, consequences: '' },
-  { id: 'User Address City', description: 'City of the customer', personalData: true, specialCategoryPersonalData: false, legalBases: [], legalRequirement: false, contractualRegulation: false, obligationToProvide: false, consequences: '' },
-  { id: 'User Address Country', description: 'Country of the customer', personalData: true, specialCategoryPersonalData: false, legalBases: [], legalRequirement: false, contractualRegulation: false, obligationToProvide: false, consequences: '' },
-  { id: 'Creditcard Number', description: 'Credit card number of the customer', personalData: true, specialCategoryPersonalData: false, legalBases: [], legalRequirement: false, contractualRegulation: false, obligationToProvide: false, consequences: '' },
-  { id: 'Creditcard Expiry', description: 'Credit card expiry month and year of the customer', personalData: true, specialCategoryPersonalData: false, legalBases: [], legalRequirement: false, contractualRegulation: false, obligationToProvide: false, consequences: '' },
-  { id: 'Creditcard CCV', description: 'CCV (security code) of the credit card of the customer', personalData: true, specialCategoryPersonalData: false, legalBases: [], legalRequirement: false, contractualRegulation: false, obligationToProvide: false, consequences: '' },
-];
-
-export const fields = (state: Field[] = fieldsInitialState, action: CreateFieldSuccessAction | UpdateFieldSuccessAction | DeleteFieldSuccessAction) => {
+export const fields = (state: Field[] = [], action: FetchFieldsActionTypes | CreateFieldSuccessAction | UpdateFieldSuccessAction | DeleteFieldSuccessAction) => {
   switch (action.type) {
+    case FETCH_FIELDS_SUCCESS:
+      return action.fields;
     case CREATE_FIELD_SUCCESS:
       return [...state, action.field];
     case UPDATE_FIELD_SUCCESS:
