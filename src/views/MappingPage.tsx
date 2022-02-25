@@ -17,7 +17,7 @@ import {
 import {Card} from "components/StyledComponent";
 import {useState} from "react";
 import {useSelector} from "react-redux";
-import {Link, useNavigate, useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import {useThunkDispatch} from "..";
 import {RootState} from "../reducers";
 import {AnyMapping, Field, MappingFieldReference, TableRowPropsWithIndex} from "../types";
@@ -128,12 +128,12 @@ const MappingFieldInput = (props: TableRowPropsWithIndex<MappingFieldReference>)
         }
     ];
     const manual = () => {
-        if (usageFields.length == 0) return true;
-        return !(item.path.type == 'X' && item.path.value == 'X' && item.path.namespace == 'X' && item.path.phase == 'X');
+        if (usageFields.length === 0) return true;
+        return !(item.path.type === 'X' && item.path.value === 'X' && item.path.namespace === 'X' && item.path.phase === 'X');
     }
     const applyUsageFieldSelect = (usageField: string) => {
         console.log("select " + index + " - " + usageField);
-        let usage = usageFields.find(u => (u.phase + " - " + u.namespace + " - " + u.format + " - " + u.path) == usageField)
+        let usage = usageFields.find(u => (u.phase + " - " + u.namespace + " - " + u.format + " - " + u.path) === usageField)
         if (usage != null) {
             item.path.phase = usage.phase;
             item.path.namespace = usage.namespace;
