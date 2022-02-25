@@ -20,7 +20,6 @@ interface CreateFieldFailureAction {
 }
 
 export type CreateFieldActionTypes = CreateFieldRequestAction | CreateFieldSuccessAction | CreateFieldFailureAction;
-export type CreateFieldThunkAction = ThunkAction<Promise<any>, any, null, CreateFieldActionTypes>;
 
 interface UpdateFieldRequestAction {
   type: typeof types.UPDATE_FIELD_REQUEST;
@@ -39,7 +38,6 @@ interface UpdateFieldFailureAction {
 }
 
 export type UpdateFieldActionTypes = UpdateFieldRequestAction | UpdateFieldSuccessAction | UpdateFieldFailureAction;
-export type UpdateFieldThunkAction = ThunkAction<Promise<any>, any, null, UpdateFieldActionTypes>;
 
 interface DeleteFieldRequestAction {
   type: typeof types.DELETE_FIELD_REQUEST;
@@ -58,4 +56,3 @@ interface DeleteFieldFailureAction {
 }
 
 export type DeleteFieldActionTypes = DeleteFieldRequestAction | DeleteFieldSuccessAction | DeleteFieldFailureAction;
-export type DeleteFieldThunkAction = ThunkAction<Promise<any>, any, null, DeleteFieldActionTypes>;

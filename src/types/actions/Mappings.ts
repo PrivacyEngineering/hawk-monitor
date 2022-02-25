@@ -1,4 +1,3 @@
-import { ThunkAction } from 'redux-thunk';
 import { Mapping } from '../../types';
 
 import * as types from './Types';
@@ -20,4 +19,3 @@ interface UpdateMappingFailureAction {
 }
 
 export type UpdateMappingActionTypes = UpdateMappingRequestAction | UpdateMappingSuccessAction | UpdateMappingFailureAction;
-export type UpdateMappingThunkAction = ThunkAction<Promise<any>, any, null, UpdateMappingActionTypes>;
