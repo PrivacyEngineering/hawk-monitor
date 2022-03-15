@@ -1,7 +1,13 @@
 import { combineReducers } from 'redux';
 import { fields, fieldsBeingCreated, fieldsBeingUpdated, fieldsBeingDeleted } from './fields';
 import { legalBases } from './legalBases';
-import { mappings, mappingsBeingUpdated } from './mappings';
+import {
+  mappingFieldSuggestions,
+  mappings,
+  mappingsBeingCreated,
+  mappingsBeingDeleted,
+  mappingsBeingUpdated, requestedFieldSuggestions, unmappedEndpoints
+} from './mappings';
 
 export const app = combineReducers({
   fields,
@@ -10,7 +16,12 @@ export const app = combineReducers({
   fieldsBeingDeleted,
   legalBases,
   mappings,
+  unmappedEndpoints,
+  mappingFieldSuggestions,
+  requestedFieldSuggestions,
+  mappingsBeingCreated,
   mappingsBeingUpdated,
+  mappingsBeingDeleted
 });
 
 export type RootState = ReturnType<typeof app>

@@ -1,8 +1,19 @@
-import { getFields, postField, putField } from "gateways/fields";
+import {deleteField, getFields, postField, putField} from "gateways/fields";
 import { Dispatch } from "react";
 import { AnyAction } from "redux";
 import { Field } from "types";
-import { CREATE_FIELD_FAILURE, CREATE_FIELD_REQUEST, CREATE_FIELD_SUCCESS, FETCH_FIELDS_FAILURE, FETCH_FIELDS_REQUEST, FETCH_FIELDS_SUCCESS, UPDATE_FIELD_FAILURE, UPDATE_FIELD_REQUEST, UPDATE_FIELD_SUCCESS, } from "types/actions/Types";
+import {
+  CREATE_FIELD_FAILURE,
+  CREATE_FIELD_REQUEST,
+  CREATE_FIELD_SUCCESS, DELETE_FIELD_FAILURE,
+  DELETE_FIELD_REQUEST, DELETE_FIELD_SUCCESS,
+  FETCH_FIELDS_FAILURE,
+  FETCH_FIELDS_REQUEST,
+  FETCH_FIELDS_SUCCESS,
+  UPDATE_FIELD_FAILURE,
+  UPDATE_FIELD_REQUEST,
+  UPDATE_FIELD_SUCCESS,
+} from "types/actions/Types";
 
 export const fetchFields = (dispatch: Dispatch<AnyAction>) => {
   dispatch({ type: FETCH_FIELDS_REQUEST });
@@ -23,4 +34,11 @@ export const updateField = (dispatch: Dispatch<AnyAction>, field: Field) => {
   putField(field)
     .then(() => dispatch({ type: UPDATE_FIELD_SUCCESS, field }))
     .catch (error => dispatch({ type: UPDATE_FIELD_FAILURE, error }))
+}
+
+export const removeField = (dispatch: Dispatch<AnyAction>, field: Field) => {
+  dispatch({ type: DELETE_FIELD_REQUEST, field });
+  deleteField(field)
+      .then(() => dispatch({ type: DELETE_FIELD_SUCCESS, field }))
+      .catch (error => dispatch({ type: DELETE_FIELD_FAILURE, error }))
 }

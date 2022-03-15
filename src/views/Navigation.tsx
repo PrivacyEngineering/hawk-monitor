@@ -3,7 +3,6 @@ import { Link, useLocation } from "react-router-dom"
 
 export const Navigation = () => {
   const location = useLocation();
-  // console.log('location', location);
 
   return (
     <Navbar bg="light" expand="lg">

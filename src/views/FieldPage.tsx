@@ -6,19 +6,19 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useThunkDispatch } from "..";
 import { RootState } from "../reducers";
 import { Field, LegalBaseExtended } from "../types";
-import { CREATE_FIELD_REQUEST, CREATE_FIELD_SUCCESS, UPDATE_FIELD_REQUEST, UPDATE_FIELD_SUCCESS } from "../types/actions/Types";
 import { GdprBadge } from "./Badges";
+import {createField, updateField} from "../actions/fields";
 
 export const FieldPage = () => {
   const params = useParams<{ id: string }>();
   const idFromParams = params.id;
 
-  const field = useSelector<RootState, Field | undefined>(state => state.fields.find(f => f.id === idFromParams));
+  const field = useSelector<RootState, Field | undefined>(state => state.fields.find(f => f.name === idFromParams));
   const allLegalBases = useSelector<RootState, LegalBaseExtended[]>(state => state.legalBases);
   const dispatch = useThunkDispatch();
   const navigate = useNavigate();
 
-  const [id, setId] = useState(field?.id || '');
+  const [name, setName] = useState(field?.name || '');
   const [consequences, setConsequences] = useState(field?.consequences || '');
   const [contractualRegulation, setContractualRegulation] = useState(field?.contractualRegulation || false);
   const [description, setDescription] = useState(field?.description || '');
@@ -28,9 +28,9 @@ export const FieldPage = () => {
   const [personalData, setPersonalData] = useState(field?.personalData || false);
   const [specialCategoryPersonalData, setSpecialCategoryPersonalData] = useState(field?.specialCategoryPersonalData || false);
 
-  const [legalBasesToAttach, setLegalBasesToAttach] = useState(allLegalBases.filter(alb => !legalBases.find(lb => lb.requirement === alb.requirement)));
+  const [legalBasesToAttach, setLegalBasesToAttach] = useState(allLegalBases.filter(alb => !legalBases.find(lb => lb.reference === alb.reference)));
   useEffect(() => {
-    setLegalBasesToAttach(allLegalBases.filter(alb => !legalBases.find(lb => lb.requirement === alb.requirement)));
+    setLegalBasesToAttach(allLegalBases.filter(alb => !legalBases.find(lb => lb.reference === alb.reference)));
   }, [allLegalBases, legalBases]);
 
   const handleDataCategoryChange = (nextValue: string) => {
@@ -40,22 +40,24 @@ export const FieldPage = () => {
 
   const addLegalBaseSelectRef = createRef<HTMLSelectElement>();
   const addLegalBase = (requirement: string) => {
-    const legalBaseExtended = allLegalBases.find(x => x.requirement === requirement)!;
-    const legalBase = ({ requirement: legalBaseExtended.requirement, description: legalBaseExtended.description });
+    const legalBaseExtended = allLegalBases.find(x => x.reference === requirement)!;
+    const legalBase = ({ reference: legalBaseExtended.reference, description: legalBaseExtended.description });
     setLegalBases(s => [...s, legalBase]);
     addLegalBaseSelectRef.current!.value = '';
   }
 
   const removeLegalBase = (requirement: string) => {
-    setLegalBases(s => s.filter(x => x.requirement !== requirement));
+    setLegalBases(s => s.filter(x => x.reference !== requirement));
   }
 
   const handleSave = () => {
-    const fieldToDispatch = { id, consequences, contractualRegulation, description, legalBases, legalRequirement, obligationToProvide, personalData, specialCategoryPersonalData };
-    dispatch({ type: field ? UPDATE_FIELD_REQUEST : CREATE_FIELD_REQUEST, field: fieldToDispatch });
-    // TODO: actual API call
-    dispatch({ type: field ? UPDATE_FIELD_SUCCESS : CREATE_FIELD_SUCCESS, field: fieldToDispatch });
-    navigate('/fields')
+    const fieldToDispatch = { name, consequences, contractualRegulation, description, legalBases, legalRequirement, obligationToProvide, personalData, specialCategoryPersonalData };
+    if(idFromParams === undefined) {
+      createField(dispatch, fieldToDispatch);
+    } else {
+      updateField(dispatch, fieldToDispatch);
+    }
+    navigate('/fields');
   }
 
   const textColor = useColorModeValue("gray.700", "white");
@@ -64,7 +66,7 @@ export const FieldPage = () => {
     <Flex direction="column" pt={{ base: "60px", md: "75px" }}>
       <Card>
         <Flex direction="column" pb="12px">
-          <Text fontSize="xl" color={textColor} fontWeight="bold" pb="6px">{field ? `Field ${id}` : `New field ${id}`}</Text>
+          <Text fontSize="xl" color={textColor} fontWeight="bold" pb="6px">{field ? `Field ${name}` : `New field ${name}`}</Text>
         </Flex>
 
         <Flex direction="column" >
@@ -72,7 +74,7 @@ export const FieldPage = () => {
 
             <FormControl maxWidth="300px">
               <FormLabel>ID</FormLabel>
-              <Input value={id} onChange={e => setId(e.target.value)} isDisabled={Boolean(field)} />
+              <Input value={name} onChange={e => setName(e.target.value)} isDisabled={Boolean(field)} />
             </FormControl>
 
             <FormControl maxWidth="500px">
@@ -133,10 +135,10 @@ export const FieldPage = () => {
                 <>
                   <HStack>
                     {legalBases
-                      .sort((a, b) => a.requirement.localeCompare(b.requirement))
+                      .sort((a, b) => a.reference.localeCompare(b.reference))
                       .map(legalBase =>
-                        <Box key={legalBase.requirement} onClick={() => removeLegalBase(legalBase.requirement)} cursor={'pointer'}>
-                          <GdprBadge requirement={legalBase.requirement} />
+                        <Box key={legalBase.reference} onClick={() => removeLegalBase(legalBase.reference)} cursor={'pointer'}>
+                          <GdprBadge reference={legalBase.reference} />
                         </Box>
                       )}
                   </HStack>
@@ -152,7 +154,7 @@ export const FieldPage = () => {
               placeholder={legalBasesToAttach.length > 0 ? 'Add legal base' : 'All legal bases attached'}
               onChange={e => addLegalBase(e.target.value)}
             >
-              {legalBasesToAttach.map(x => <option key={x.requirement} value={x.requirement}>{x.regulation} Article {x.article} Par. {x.paragraph}</option>)}
+              {legalBasesToAttach.map(x => <option key={x.reference} value={x.reference}>{x.regulation} Article {x.article} Par. {x.paragraph}</option>)}
             </Select>
 
             <Button width="fit-content" colorScheme='teal' onClick={handleSave}>Save</Button>

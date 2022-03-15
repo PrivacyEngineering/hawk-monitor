@@ -1,7 +1,7 @@
 export type SidebarVariant = 'opaque' | 'transparent';
 
 export interface Field {
-  id: string;
+  name: string;
   consequences: string;
   contractualRegulation: boolean;
   description: string;
@@ -26,24 +26,35 @@ export interface TableRowProps<T> {
   item: T;
 }
 
+export interface TableRowProps<T> {
+  item: T;
+}
+
 export interface AnyMapping {
-  id: string;
+  id?: number;
   endpointId: string;
   fields?: MappingFieldReference[];
 }
 
 export interface Mapping extends AnyMapping {
+  id: number;
   fields: MappingFieldReference[]
 }
 
+export interface GroupedUsageField {
+  phase: string;
+  namespace: string;
+  format: string;
+  path: string;
+}
+
 export interface MappingFieldReference {
-  id: string;
-  path: {
-    phase: string;
-    namespace: string;
-    type: string;
-    value: string;
-  }
+  id?: number;
+  field: string;
+  phase: string;
+  namespace: string;
+  format: string;
+  path: string;
 }
 
 export interface Request {
@@ -73,22 +84,12 @@ export interface DataCategory {
   value: number;
 }
 
-export interface MappingFieldReference {
-  id: string;
-  path: {
-    phase: string;
-    namespace: string;
-    type: string;
-    value: string;
-  }
-}
-
 export interface NormalizedState<T> {
   [id: string]: T;
 }
 
 export interface LegalBase {
-  requirement: string;
+  reference: string;
   description: string;
 }
 

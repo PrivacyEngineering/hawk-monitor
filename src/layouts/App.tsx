@@ -1,5 +1,5 @@
 import { ChakraProvider, Portal, useDisclosure } from "@chakra-ui/react"
-import { useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
 import { SidebarTS } from "../components/Sidebar/SidebarTS";
 import FixedPlugin from "components/FixedPlugin/FixedPlugin";
 import Footer from "components/Footer/Footer";
@@ -39,7 +39,8 @@ export const App = () => {
               <Route path="/fields/:id" element={<FieldPage />} />
               <Route path="/fields" element={<FieldsPage />} />
               <Route path="/legalBases" element={<LegalBasesPage />} />
-              <Route path="/mappings/:id" element={<MappingPage />} />
+              <Route path="/mappings/update/:id" element={<MappingPage />} />
+              <Route path="/mappings/new" element={<MappingPage />} />
               <Route path="/mappings" element={<MappingsPage />} />
               <Route path="*" element={<Navigate to="/mappings" />} />
             </Routes>

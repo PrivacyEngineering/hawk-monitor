@@ -28,9 +28,9 @@ export const fields = (state: Field[] = [], action: FetchFieldsActionTypes | Cre
     case CREATE_FIELD_SUCCESS:
       return [...state, action.field];
     case UPDATE_FIELD_SUCCESS:
-      return [...state.filter(f => f.id !== action.field.id), action.field];
+      return [...state.filter(f => f.name !== action.field.name), action.field];
     case DELETE_FIELD_SUCCESS:
-      return [...state.filter(f => f.id !== action.field.id)]
+      return [...state.filter(f => f.name !== action.field.name)]
     default:
       return state;
   }
@@ -40,13 +40,13 @@ export const fieldsBeingCreated = (state: NormalizedState<boolean | undefined> =
   switch (action.type) {
     case CREATE_FIELD_REQUEST: {
       const nextState = { ...state };
-      nextState[action.field.id] = true;
+      nextState[action.field.name] = true;
       return nextState;
     }
     case CREATE_FIELD_SUCCESS:
     case CREATE_FIELD_FAILURE: {
       const nextState = { ...state };
-      nextState[action.field.id] = undefined;
+      nextState[action.field.name] = undefined;
       return nextState;
     }
     default:
@@ -58,13 +58,13 @@ export const fieldsBeingUpdated = (state: NormalizedState<boolean | undefined> =
   switch (action.type) {
     case UPDATE_FIELD_REQUEST: {
       const nextState = { ...state };
-      nextState[action.field.id] = true;
+      nextState[action.field.name] = true;
       return nextState;
     }
     case UPDATE_FIELD_SUCCESS:
     case UPDATE_FIELD_FAILURE: {
       const nextState = { ...state };
-      nextState[action.field.id] = undefined;
+      nextState[action.field.name] = undefined;
       return nextState;
     }
     default:
@@ -76,13 +76,13 @@ export const fieldsBeingDeleted = (state: NormalizedState<boolean | undefined> =
   switch (action.type) {
     case DELETE_FIELD_REQUEST: {
       const nextState = { ...state };
-      nextState[action.field.id] = true;
+      nextState[action.field.name] = true;
       return nextState;
     }
     case DELETE_FIELD_SUCCESS:
     case DELETE_FIELD_FAILURE: {
       const nextState = { ...state };
-      nextState[action.field.id] = undefined;
+      nextState[action.field.name] = undefined;
       return nextState;
     }
     default:

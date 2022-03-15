@@ -1,15 +1,15 @@
 import { Button, Flex, Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton, Table, Tbody, Td, Text, Th, Thead, Tr, useColorModeValue, VStack, Checkbox } from "@chakra-ui/react";
 import { Card, CardBody, CardHeader } from "components/StyledComponent";
-import { Fragment, useState } from "react";
+import {Fragment, useState} from "react";
 import { BsFillTrashFill, BsPencilFill, BsPlusLg } from "react-icons/bs";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useThunkDispatch } from "..";
 import { RootState } from "../reducers";
 import { Field, NormalizedState } from "../types"
-import { DELETE_FIELD_REQUEST, DELETE_FIELD_SUCCESS } from "../types/actions/Types";
 import { Link } from "react-router-dom";
 import { GdprBadge, PersonalBadge, SpecialBadge } from "./Badges";
+import { removeField } from "../actions/fields";
 
 export const FieldsPage = () => {
   const fields = useSelector<RootState, Field[]>(state => state.fields);
@@ -22,10 +22,8 @@ export const FieldsPage = () => {
   const handleModalClose = () => setFieldToDelete(undefined);
 
   const handleDelete = (fieldToDelete: Field) => {
-    if (!fieldsBeingDeleted[fieldToDelete.id]) {
-      dispatch({ type: DELETE_FIELD_REQUEST, field: fieldToDelete });
-      // TODO: wrap in actual API calls
-      dispatch({ type: DELETE_FIELD_SUCCESS, field: fieldToDelete });
+    if (!fieldsBeingDeleted[fieldToDelete.name]) {
+      removeField(dispatch, fieldToDelete);
     }
     handleModalClose();
   }
@@ -66,20 +64,20 @@ export const FieldsPage = () => {
                     </Tr>
                   </Thead>
                   <Tbody>
-                    {fields.sort((a, b) => a.id.localeCompare(b.id)).map((field, index) =>
+                    {fields.sort((a, b) => a.name.localeCompare(b.name)).map((field, index) =>
                       <Tr key={index}>
-                        <Td><b>{field.id}</b></Td>
+                        <Td><b>{field.name}</b></Td>
                         <Td>{field.description}</Td>
                         <Td>{field.consequences || '-'}</Td>
                         <Td>{field.specialCategoryPersonalData ? <SpecialBadge /> : field.personalData ? <PersonalBadge /> : '-'}</Td>
                         <Td><Checkbox colorScheme="teal" isChecked={field.contractualRegulation} /></Td>
                         <Td><Checkbox colorScheme="teal" isChecked={field.legalRequirement} /></Td>
-                        <Td>{field.legalBases.length > 0 ? field.legalBases
-                          .map(legalBase => <Fragment key={legalBase.requirement}><GdprBadge requirement={legalBase.requirement} />{" "}</Fragment>) : '-'}</Td>
+                        <Td>{field.legalBases != null && field.legalBases.length > 0 ? field.legalBases
+                          .map(legalBase => <Fragment key={legalBase.reference}><GdprBadge reference={legalBase.reference} />{" "}</Fragment>) : '-'}</Td>
                         <Td><Checkbox colorScheme="teal" isChecked={field.obligationToProvide} /></Td>
                         <Td>
-                          <Button color='teal.400' size="sm" onClick={() => navigate(`/fields/${field.id}`)} leftIcon={<BsPencilFill />}>Edit</Button>{' '}
-                          {fieldsBeingDeleted[field.id] ?
+                          <Button color='teal.400' size="sm" onClick={() => navigate(`/fields/${field.name}`)} leftIcon={<BsPencilFill />}>Edit</Button>{' '}
+                          {fieldsBeingDeleted[field.name] ?
                             <Button color='red.400' size="sm" disabled leftIcon={<BsFillTrashFill />}>Removing...</Button> :
                             <Button color='red.400' size="sm" onClick={() => handleModalShow(field)} leftIcon={<BsFillTrashFill />}> Remove</Button>}
                         </Td>
@@ -102,7 +100,7 @@ export const FieldsPage = () => {
           <ModalContent>
             <ModalHeader>Confirmation</ModalHeader>
             <ModalCloseButton />
-            <ModalBody>Are you sure to delete the field <b>{fieldToDelete.id}</b>?</ModalBody>
+            <ModalBody>Are you sure to delete the field <b>{fieldToDelete.name}</b>?</ModalBody>
             <ModalFooter>
               <Button color='red.400' mr={3} onClick={() => handleDelete(fieldToDelete)}>Delete</Button>
             </ModalFooter>
