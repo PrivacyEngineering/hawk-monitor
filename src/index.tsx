@@ -7,7 +7,7 @@ import {App} from "./layouts/App";
 
 const store = configureStore();
 export const useThunkDispatch = () => useDispatch<typeof store.dispatch>();
-export const URL_BASE = process.env.API_URL || "/api";
+export const URL_BASE = process.env.API_URL || "";
 export const HEADER_JSON = {
     'Accept': 'application/json',
     'Content-Type': 'application/json'
