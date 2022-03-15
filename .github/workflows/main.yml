@@ -1,0 +1,27 @@
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Login to DockerHub
+        uses: docker/login-action@v1
+        with:
+          username: p4skal
+          password: ${{ secrets.DOCKER_PASSWORD }}
+      - name: Docker Meta Legacy
+        id: meta
+        uses: crazy-max/ghaction-docker-meta@v1
+        with:
+          images: p4skal/hawk-core-monitor
+      - name: Build and Push to DockerHub
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
