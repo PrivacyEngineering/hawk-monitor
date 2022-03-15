@@ -1,5 +1,7 @@
 # Hawk Core Monitor
 
+![workflow](https://github.com/TUB-CNPE-TB/hawk-core-monitor/actions/workflows/main.yml/badge.svg)
+
 This project represents the configuration Web-Interface for Hawk Core. Fields and Mappings can be created here.
 The dashboard consists of a React application using [Chakra-UI](https://chakra-ui.com) and [Purity UI by CreativeTim](https://github.com/creativetimofficial/purity-ui-dashboard).
 
