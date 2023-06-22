@@ -13,7 +13,7 @@ The Docker-Image features a nginx server to enabled browser-routing in React.
 To start the Dashboard just run:
 
 ```
-docker run -p 80:80 p4skal/hawk-core-monitor
+docker run -p 80:80 ghcr.io/privacyengineering/hawk-core-monitor
 ```
 
 **Note: The Dashboard needs a running Hawk-Service instance reverse-proxied on the same port by default.**
