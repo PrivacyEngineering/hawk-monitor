@@ -2,7 +2,7 @@
 set -eo pipefail
 
 # Create api.json file with API_URL
-cat <<EOF > api.json
+cat <<EOF > meta.json
 {"apiUrl": "${API_URL}"}
 EOF
 

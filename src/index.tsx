@@ -14,10 +14,10 @@ export const HEADER_JSON = {
 };
 
 const fetchApiUrl = async () => {
-    const url = process.env.REACT_APP_API_URL;
+    const url = process.env.REACT_APP_API_URL || "";
     if (!url) {
         try {
-            const meta = await fetch("api.json").then(r => r.json())
+            const meta = await fetch("meta.json").then(r => r.json())
             if (meta?.apiUrl) {
                 return meta.apiUrl;
             }

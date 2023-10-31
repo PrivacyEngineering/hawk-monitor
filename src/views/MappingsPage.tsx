@@ -50,12 +50,7 @@ export const MappingsPage = () => {
                     <CardHeader>
                         <Flex direction={"column"} pb="6px">
                             <Text fontSize="xl" color={textColor} fontWeight="bold"
-                                  pb="6px">Unmapped Endpoints</Text>
-                            <Text color={textColor}>The following API endpoints were
-                                detected in your system, but mappings for them are not yet created.</Text>
-                            <Text color={textColor}>Please add the missing mappings here
-                                and retroactively map your system's API endpoint calls to particular privacy-related
-                                data categories.</Text>
+                                  pb="6px">Mapped Endpoints</Text>
                         </Flex>
                     </CardHeader>
                     <CardBody>
@@ -66,7 +61,10 @@ export const MappingsPage = () => {
                             <Table color={textColor}>
                                 <Thead>
                                     <Tr>
+                                        <Th color="gray.400">ID</Th>
                                         <Th color="gray.400">Endpoint ID</Th>
+                                        <Th color="gray.400">Fields</Th>
+                                        <Th color="gray.400">Data Categories</Th>
                                         <Th color="gray.400">Actions</Th>
                                     </Tr>
                                 </Thead>

@@ -1,6 +1,9 @@
 import {
     Button,
     Flex,
+    FormControl,
+    FormLabel,
+    Input,
     Select,
     Table,
     Tbody,
@@ -13,14 +16,16 @@ import {
     VStack
 } from "@chakra-ui/react";
 import {Card} from "components/StyledComponent";
-import {useEffect, useState} from "react";
+import {useEffect, useMemo, useState} from "react";
 import {useSelector} from "react-redux";
 import {useNavigate, useParams, useSearchParams} from "react-router-dom";
 import {useThunkDispatch} from "..";
 import {RootState} from "../reducers";
-import {AnyMapping, Field, GroupedUsageField, Mapping, MappingFieldReference} from "../types";
+import {AnyMapping, Field, GroupedUsageField, Mapping, MappingFieldReference, MappingStorage, Purpose} from "../types";
 import {ColInput} from "./ColInput";
 import {createMapping, fetchMappingFieldSuggestions, fetchMappings, updateMapping} from "../actions/mappings";
+import purposes from '../assets/purposes.json';
+
 
 export const MappingPage = () => {
     // const { search } = useLocation();
@@ -33,7 +38,11 @@ export const MappingPage = () => {
     const fields = useSelector<RootState, Field[]>(state => state.fields);
     const mapping = useSelector<RootState, Mapping | AnyMapping>(state => state.mappings.find(m => m.id === id) || {
         endpointId: endpoint,
-        fields: []
+        fields: [],
+        purposes: [],
+        legitimateInterests: [],
+        recipients: [],
+        storage: [],
     } as AnyMapping);
     const suggestionsRequested = useSelector<RootState, boolean>(state => state.requestedFieldSuggestions.get(mapping.endpointId) || false);
     useEffect(() => {
@@ -43,7 +52,35 @@ export const MappingPage = () => {
     }, [dispatch, mapping, suggestionsRequested]);
     const fieldSuggestions = useSelector<RootState, GroupedUsageField[]>(state => state.mappingFieldSuggestions.get(mapping.endpointId) || []);
 
-    const [fieldRefs, setFieldRefs] = useState(mapping !== undefined ? mapping.fields || [] : []);
+
+    const purposeItems = useMemo(() => {
+        return purposes.map(purpose => {
+            return {
+                label: purpose["@id"].split("#")[1],
+                value: purpose["http://www.w3.org/2004/02/skos/core#definition"]?.at(0)?.["@value"],
+                domain: purpose["https://w3id.org/dpv#hasDomain"]?.at(0)?.["@id"]
+            }
+        }).filter(purpose => purpose.value !== undefined && !purpose.domain);
+    }, [])
+
+
+    const [fieldRefs, setFieldRefs] = useState<MappingFieldReference[]>([]);
+    const [purposeRefs, setPurposeRefs] = useState<Purpose[]>([]);
+
+    useEffect(() => {
+        setFieldRefs(mapping !== undefined ? mapping.fields || [] : []);
+        setPurposeRefs(mapping !== undefined ? mapping.purposes || [] : []);
+        setLegitimateInterests(mapping !== undefined ? mapping.legitimateInterests || [] : []);
+        setRecipients(mapping !== undefined ? mapping.recipients || [] : []);
+        setStorage(mapping !== undefined ? mapping.storage || [] : []);
+    }, [mapping]);
+
+    const [legitimateInterests, setLegitimateInterests] = useState<string[]>([]);
+    const [recipients, setRecipients] = useState<string[]>([]);
+    const [storage, setStorage] = useState<MappingStorage[]>([]);
+
+
+
     const deleteFieldRef = (fieldRef: MappingFieldReference) => setFieldRefs([...fieldRefs.filter(x => x !== fieldRef)]);
     const addFieldRef = (fieldId: string) => {
         let firstSuggestion = fieldSuggestions[0] || {phase: '', namespace: '', format: '', path: ''};
@@ -131,9 +168,9 @@ export const MappingPage = () => {
 
     const handleSave = () => {
         if (endpoint !== undefined) {
-            createMapping(dispatch, {endpointId: endpoint, fields: fieldRefs}, () => fetchMappings(dispatch));
+            createMapping(dispatch, {endpointId: endpoint, fields: fieldRefs, purposes: purposeRefs, legitimateInterests, recipients, storage}, () => fetchMappings(dispatch));
         } else {
-            updateMapping(dispatch, {...mapping as Mapping, fields: fieldRefs});
+            updateMapping(dispatch, {...mapping as Mapping, fields: fieldRefs, purposes: purposeRefs, legitimateInterests, recipients, storage });
         }
         navigate('/mappings')
     }
@@ -143,6 +180,140 @@ export const MappingPage = () => {
             <Card>
                 <Flex direction={"column"}>
                     <Text fontSize="xl" color={textColor} fontWeight="bold">Mapping {mapping.endpointId}</Text>
+                </Flex>
+                <Flex direction={"column"} width={"100%"}>
+                    <VStack pt={{base: "60px", md: "40px"}} spacing='12px' alignItems="flex-start">
+                        <Text fontSize="lg" color={textColor} fontWeight="bold">Storage</Text>
+                        <Table color={textColor}>
+                            <Thead>
+                                <Tr>{['Description', 'TTL', 'Actions'].map((item, index) =>
+                                    <Th color="gray.400" key={index}>{item}</Th>)}
+                                </Tr>
+                            </Thead>
+                            <Tbody>
+                                { storage.map((item, index) =>
+                                    <Tr key={index}>
+                                        <Td>
+                                            <FormControl maxWidth="300px">
+                                                <Input value={item.description} onChange={e => setStorage(storage.map((v, i) => i !== index ? v : {...v,  description: e.target.value }))} />
+                                            </FormControl>
+                                        </Td>
+                                        <Td>
+                                            <FormControl maxWidth="300px">
+                                                <Input value={item.ttl} onChange={e => setStorage(storage.map((v, i) => i !== index ? v : {...v,  ttl: e.target.value }))} />
+                                            </FormControl>
+                                        </Td>
+                                        <Td>
+                                            <Button colorScheme='red'
+                                                    onClick={() => setStorage(storage.filter((_, i) => i !== index))}>Delete</Button>
+                                        </Td>
+                                    </Tr>)
+                                }
+                                
+                            </Tbody>
+                        </Table>
+                        <Button width={"fit-content"} colorScheme='teal'
+                                onClick={() => setStorage([...storage, { description: '', ttl: ''}])}>Add storage</Button>
+                    </VStack>
+                </Flex>
+                <Flex direction={"column"} width={"100%"}>
+                    <VStack pt={{base: "60px", md: "40px"}} spacing='12px' alignItems="flex-start">
+                        <Text fontSize="lg" color={textColor} fontWeight="bold">Recipients</Text>
+                        <Table color={textColor}>
+                            <Thead>
+                                <Tr>{['Recipients', 'Actions'].map((item, index) =>
+                                    <Th color="gray.400" key={index}>{item}</Th>)}
+                                </Tr>
+                            </Thead>
+                            <Tbody>
+                                { recipients.map((item, index) =>
+                                    <Tr key={index}>
+                                        <Td>
+                                            <FormControl maxWidth="300px">
+                                                <Input value={item} onChange={e => setRecipients(recipients.map((v, i) => i !== index ? v : e.target.value))} />
+                                            </FormControl>
+                                        </Td>
+                                        <Td>
+                                            <Button colorScheme='red'
+                                                    onClick={() => setRecipients(recipients.filter(r => r !== item))}>Delete</Button>
+                                        </Td>
+                                    </Tr>)
+                                }
+                                
+                            </Tbody>
+                        </Table>
+                        <Button width={"fit-content"} colorScheme='teal'
+                                onClick={() => setRecipients([...recipients, ''])}>Add recipient</Button>
+                    </VStack>
+                </Flex>
+
+                <Flex direction={"column"} width={"100%"}>
+                    <VStack pt={{base: "60px", md: "40px"}} spacing='12px' alignItems="flex-start">
+                        <Text fontSize="lg" color={textColor} fontWeight="bold">Legitimate Interests</Text>
+                        <Table color={textColor}>
+                            <Thead>
+                                <Tr>{['Legitimate Interests', 'Actions'].map((item, index) =>
+                                    <Th color="gray.400" key={index}>{item}</Th>)}
+                                </Tr>
+                            </Thead>
+                            <Tbody>
+                                { legitimateInterests.map((item, index) =>
+                                    <Tr key={index}>
+                                        <Td>
+                                            <FormControl maxWidth="300px">
+                                                <Input value={item} onChange={e => setLegitimateInterests(legitimateInterests.map((v, i) => i !== index ? v : e.target.value))} />
+                                            </FormControl>
+                                        </Td>
+                                        <Td>
+                                            <Button colorScheme='red'
+                                                    onClick={() => setLegitimateInterests(legitimateInterests.filter((_,i)=> i !== index))}>Delete</Button>
+                                        </Td>
+                                    </Tr>)
+                                }
+                                
+                            </Tbody>
+                        </Table>
+                        <Button width={"fit-content"} colorScheme='teal'
+                                onClick={() => setLegitimateInterests([...legitimateInterests, ''])}>Add legitimate interest</Button>
+                    </VStack>
+                </Flex>
+                <Flex direction={"column"} width={"100%"}>
+                    <VStack pt={{base: "60px", md: "40px"}} spacing='12px' alignItems="flex-start">
+                        <Text fontSize="lg" color={textColor} fontWeight="bold">Purposes</Text>
+                        <Table color={textColor}>
+                            <Thead>
+                                <Tr>{['Purpose', 'Description', 'Actions'].map((item, index) =>
+                                    <Th color="gray.400" key={index}>{item}</Th>)}
+                                </Tr>
+                            </Thead>
+                            <Tbody>
+                                { purposeRefs.map((item, index) =>
+                                    <Tr key={index}>
+                                        <Td>
+                                            <FormControl maxWidth="300px">
+                                                <Select value={item.purpose} onChange={(e => setPurposeRefs(purposeRefs.map((v, i) => i !== index ? v: {...v, purpose: e.target.value})))}>
+                                                    {purposeItems.map((item, index) =>
+                                                        <option key={index} value={item.label}>{item.label}</option>)}
+                                                </Select>
+                                            </FormControl>
+                                        </Td>
+                                        <Td>
+                                            <FormControl maxWidth="300px">
+                                                <Input value={item.description} onChange={e => setPurposeRefs(purposeRefs.map((v, i) => i !== index ? v : {...v,  description: e.target.value }))} />
+                                            </FormControl>
+                                        </Td>
+                                        <Td>
+                                            <Button colorScheme='red'
+                                                    onClick={() => setPurposeRefs(purposeRefs.filter(r => r.purpose !== item.purpose))}>Delete</Button>
+                                        </Td>
+                                    </Tr>)
+                                }
+                                
+                            </Tbody>
+                        </Table>
+                        <Button width={"fit-content"} colorScheme='teal'
+                                onClick={() => setPurposeRefs([...purposeRefs, { purpose: '', description: ''}])}>Add purpose field</Button>
+                    </VStack>
                 </Flex>
                 <Flex direction={"column"} width={"100%"}>
                     <VStack pt={{base: "60px", md: "40px"}} spacing='12px' alignItems="flex-start">
