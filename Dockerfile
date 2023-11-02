@@ -1,8 +1,8 @@
-FROM node:10 AS builder
+FROM node:14 AS builder
 
 WORKDIR /app
 
-COPY package.json ./
+COPY package.json package-lock.json ./
 
 RUN npm install
 
