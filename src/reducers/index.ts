@@ -1,3 +1,4 @@
+import { infoTypes } from './infoTypes';
 import { combineReducers } from 'redux';
 import { fields, fieldsBeingCreated, fieldsBeingUpdated, fieldsBeingDeleted } from './fields';
 import { legalBases } from './legalBases';
@@ -15,6 +16,7 @@ export const app = combineReducers({
   fieldsBeingUpdated,
   fieldsBeingDeleted,
   legalBases,
+  infoTypes,
   mappings,
   unmappedEndpoints,
   mappingFieldSuggestions,

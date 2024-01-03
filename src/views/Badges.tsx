@@ -13,6 +13,13 @@ export const SpecialBadge = () => {
   return <Badge bg="red.500" color={textColor} fontSize="14px" p="3px 10px" borderRadius="8px">Special</Badge>
 }
 
+export const InfoTypeBadge = (props: { infoType: string } & BadgeProps) => {
+  const { infoType } = props;
+  const textColor = useColorModeValue('white', 'gray.100');
+
+  return <Badge bg="green.500" color={textColor} fontSize="14px" p="3px 10px" borderRadius="8px">{infoType}</Badge>
+}
+
 export const GdprBadge = (props: { reference: string } & BadgeProps) => {
   const { reference } = props;
   const textColor = useColorModeValue('white', 'gray.100');

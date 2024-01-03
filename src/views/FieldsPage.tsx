@@ -8,7 +8,7 @@ import { useThunkDispatch } from "..";
 import { RootState } from "../reducers";
 import { Field, NormalizedState } from "../types"
 import { Link } from "react-router-dom";
-import { GdprBadge, PersonalBadge, SpecialBadge } from "./Badges";
+import { GdprBadge, InfoTypeBadge, PersonalBadge, SpecialBadge } from "./Badges";
 import { removeField } from "../actions/fields";
 
 export const FieldsPage = () => {
@@ -51,6 +51,7 @@ export const FieldsPage = () => {
                     <Tr>
                       <Th color="gray.400">ID</Th>
                       <Th color="gray.400">Description</Th>
+                      <Th color="gray.400">Info types</Th>
                       <Th color="gray.400">Consequences<br />of non-disclosure</Th>
                       <Th color="gray.400">Data<br />category</Th>
                       <Th color="gray.400">Contralctual<br />regulation?</Th>
@@ -68,6 +69,8 @@ export const FieldsPage = () => {
                       <Tr key={index}>
                         <Td><b>{field.name}</b></Td>
                         <Td>{field.description}</Td>
+                        <Td>{field.infoTypes != null && field.infoTypes.length > 0 ? field.infoTypes
+                          .map(infoType => <Fragment key={infoType}><InfoTypeBadge infoType={infoType} />{" "}</Fragment>) : '-'}</Td>
                         <Td>{field.consequences || '-'}</Td>
                         <Td>{field.specialCategoryPersonalData ? <SpecialBadge /> : field.personalData ? <PersonalBadge /> : '-'}</Td>
                         <Td><Checkbox colorScheme="teal" isChecked={field.contractualRegulation} /></Td>

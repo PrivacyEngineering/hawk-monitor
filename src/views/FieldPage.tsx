@@ -1,12 +1,12 @@
 import { Box, Button, Flex, FormControl, FormHelperText, FormLabel, HStack, Input, Radio, RadioGroup, Select, Stack, Text, useColorModeValue, VStack } from "@chakra-ui/react";
 import { Card } from "components/StyledComponent";
-import { createRef, useEffect, useState } from "react";
+import { createRef, useEffect, useMemo, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { useThunkDispatch } from "..";
 import { RootState } from "../reducers";
 import { Field, LegalBaseExtended } from "../types";
-import { GdprBadge } from "./Badges";
+import { GdprBadge, InfoTypeBadge } from "./Badges";
 import {createField, updateField} from "../actions/fields";
 
 export const FieldPage = () => {
@@ -15,6 +15,7 @@ export const FieldPage = () => {
 
   const field = useSelector<RootState, Field | undefined>(state => state.fields.find(f => f.name === idFromParams));
   const allLegalBases = useSelector<RootState, LegalBaseExtended[]>(state => state.legalBases);
+  const allInfoTypes = useSelector<RootState, string[]>(state => state.infoTypes.infoTypes);
   const dispatch = useThunkDispatch();
   const navigate = useNavigate();
 
@@ -22,6 +23,7 @@ export const FieldPage = () => {
   const [consequences, setConsequences] = useState(field?.consequences || '');
   const [contractualRegulation, setContractualRegulation] = useState(field?.contractualRegulation || false);
   const [description, setDescription] = useState(field?.description || '');
+  const [infoTypes, setInfoTypes] = useState(field?.infoTypes || []);
   const [legalBases, setLegalBases] = useState(field?.legalBases || []);
   const [legalRequirement, setLegalRequirement] = useState(field?.legalRequirement || false);
   const [obligationToProvide, setObligationToProvide] = useState(field?.obligationToProvide || false);
@@ -38,6 +40,19 @@ export const FieldPage = () => {
     setSpecialCategoryPersonalData(nextValue === 'special');
   }
 
+  const addInfoTypeSelectRef = createRef<HTMLSelectElement>();
+  const addInfoType = (infoType: string) => {
+    setInfoTypes(s => [...s, infoType]);
+    addInfoTypeSelectRef.current!.value = '';
+  }
+
+  const removeInfoType = (infoType: string) => {
+    setInfoTypes(s => s.filter(x => x !== infoType));
+  }
+
+
+  const restInfoTypes = useMemo(() => allInfoTypes.filter(x => !infoTypes.includes(x)), [allInfoTypes, infoTypes]);
+
   const addLegalBaseSelectRef = createRef<HTMLSelectElement>();
   const addLegalBase = (requirement: string) => {
     const legalBaseExtended = allLegalBases.find(x => x.reference === requirement)!;
@@ -51,7 +66,7 @@ export const FieldPage = () => {
   }
 
   const handleSave = () => {
-    const fieldToDispatch = { name, consequences, contractualRegulation, description, legalBases, legalRequirement, obligationToProvide, personalData, specialCategoryPersonalData };
+    const fieldToDispatch = { name, consequences, contractualRegulation, description, infoTypes, legalBases, legalRequirement, obligationToProvide, personalData, specialCategoryPersonalData };
     if(idFromParams === undefined) {
       createField(dispatch, fieldToDispatch);
     } else {
@@ -81,6 +96,35 @@ export const FieldPage = () => {
               <FormLabel>Description</FormLabel>
               <Input value={description} onChange={e => setDescription(e.target.value)} />
             </FormControl>
+
+            <FormControl>
+              <FormLabel>Info Types</FormLabel>
+              {infoTypes?.length > 0 ?
+                <>
+                  <HStack>
+                    {infoTypes
+                      .sort((a, b) => a.localeCompare(b))
+                      .map(infoType =>
+                        <Box key={infoType} onClick={() => removeInfoType(infoType)} cursor={'pointer'}>
+                          <InfoTypeBadge infoType={infoType} />
+                        </Box>
+                      )}
+                  </HStack>
+                  <FormHelperText>(click to delete)</FormHelperText>
+                </> : 'No info types attached'}
+            </FormControl>
+
+            <Select
+              ref={addInfoTypeSelectRef}
+              isDisabled={restInfoTypes.length === 0}
+              minWidth="200px"
+              maxWidth="300px"
+              placeholder={restInfoTypes.length > 0 ? 'Add Info type' : 'All Info types attached'}
+              onChange={e => addInfoType(e.target.value)}
+            >
+              {restInfoTypes.map(x => <option key={x} value={x}>{x}</option>)}
+            </Select>
+
 
             <FormControl maxWidth="500px">
               <FormLabel>Consequences in the case of non-disclosure</FormLabel>

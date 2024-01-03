@@ -2,6 +2,7 @@ export type SidebarVariant = 'opaque' | 'transparent';
 
 export interface Field {
   name: string;
+  infoTypes: string[];
   consequences: string;
   contractualRegulation: boolean;
   description: string;
