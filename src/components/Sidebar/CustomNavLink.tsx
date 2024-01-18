@@ -2,7 +2,7 @@ import { Button, Flex, Icon, Text, useColorModeValue } from "@chakra-ui/react";
 import { IconBox } from "components/Icons/IconBox";
 import { useEffect, useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
-import { SidebarVariant } from "types";
+import { SidebarVariant } from "types/types";
 
 interface Props {
   path: string;

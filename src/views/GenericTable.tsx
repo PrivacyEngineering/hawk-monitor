@@ -1,6 +1,6 @@
 import { Box, Flex, Table, Tbody, Text, Th, Thead, Tr, useColorModeValue } from "@chakra-ui/react";
 import { CardBody, CardHeader } from "components/StyledComponent";
-import { TableRowProps } from "types";
+import { TableRowProps } from "types/types";
 
 interface GenericTableProps<T> {
   columnLabels: string[];

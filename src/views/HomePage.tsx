@@ -1,5 +1,5 @@
 import { Col, Row } from "react-bootstrap"
-import { DataCategory, RequestsByEndpoint, RequestsByServicePair } from "../types"
+import { DataCategory, RequestsByEndpoint, RequestsByServicePair } from "../types/types"
 import { DataCategoriesTable } from "./DataCategoriesTable"
 import { EndpointsTable } from "./EndpointsTable"
 import { ServicePairsTable } from "./ServicePairsTable"

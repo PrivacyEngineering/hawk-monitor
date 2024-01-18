@@ -1,4 +1,4 @@
-import { Field, NormalizedState } from "../types";
+import { Field, NormalizedState } from "../types/types";
 import {
   CreateFieldActionTypes,
   CreateFieldSuccessAction,

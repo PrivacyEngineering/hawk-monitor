@@ -14,6 +14,7 @@ export const Navigation = () => {
             <Nav.Link as={Link} to="/" active={location.pathname === '/'}>Home</Nav.Link>
             <Nav.Link as={Link} to="/fields" active={location.pathname.startsWith('/fields')}>Fields</Nav.Link>
             <Nav.Link as={Link} to="/mappings" active={location.pathname.startsWith('/mappings')}>Mappings</Nav.Link>
+            <Nav.Link as={Link} to="/jobs" active={location.pathname.startsWith('/jobs')}>Jobs</Nav.Link>
             <Nav.Link as={Link} to="/requests" active={location.pathname.startsWith('/requests')}>Requests</Nav.Link>
           </Nav>
         </Navbar.Collapse>

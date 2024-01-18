@@ -1,7 +1,7 @@
 import { Box, Link, Stack, Text, useColorModeValue } from "@chakra-ui/react";
 import { DocumentIcon } from "components/Icons/Icons";
 import { useEffect, useState } from "react";
-import { SidebarVariant } from "types";
+import { SidebarVariant } from "types/types";
 import { Separator } from "../Separator/Separator";
 import { CustomNavLink } from "./CustomNavLink";
 
@@ -45,6 +45,7 @@ export const SidebarTS = (props: Props) => {
           <CustomNavLink path='legalBases' label='Legal Bases' icon={<DocumentIcon />} sidebarVariant={sidebarVariant} />
           <CustomNavLink path='fields' label='Fields' icon={<DocumentIcon />} sidebarVariant={sidebarVariant} />
           <CustomNavLink path='mappings' label='Mappings' icon={<DocumentIcon />} sidebarVariant={sidebarVariant} />
+          <CustomNavLink path='dlp/jobs' label='DLP Jobs' icon={<DocumentIcon />} sidebarVariant={sidebarVariant} />
         </Stack>
       </Box>
     </Box>

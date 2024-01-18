@@ -1,7 +1,8 @@
 import { Badge, BadgeProps, useColorModeValue } from "@chakra-ui/react";
 import { useSelector } from "react-redux";
 import { RootState } from "reducers";
-import { LegalBaseExtended } from "types";
+import { InfoTypeType } from "types/dlp";
+import { LegalBaseExtended } from "types/types";
 
 export const PersonalBadge = () => {
   const textColor = useColorModeValue('white', 'gray.100');
@@ -13,7 +14,7 @@ export const SpecialBadge = () => {
   return <Badge bg="red.500" color={textColor} fontSize="14px" p="3px 10px" borderRadius="8px">Special</Badge>
 }
 
-export const InfoTypeBadge = (props: { infoType: string } & BadgeProps) => {
+export const InfoTypeBadge = (props: { infoType: InfoTypeType } & BadgeProps) => {
   const { infoType } = props;
   const textColor = useColorModeValue('white', 'gray.100');
 

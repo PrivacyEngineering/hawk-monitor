@@ -1,4 +1,4 @@
-import { Field } from '../../types';
+import { Field } from '../types';
 
 import * as types from './Types';
 

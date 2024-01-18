@@ -1,5 +1,5 @@
 import {HEADER_JSON, URL_BASE} from "index";
-import { Field } from "types";
+import { Field } from "types/types";
 
 export const getFields = (): Promise<Field[]> => fetch(`${URL_BASE}/api/fields`).then(response => response.json());
 

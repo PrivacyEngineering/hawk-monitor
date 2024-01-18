@@ -1,7 +1,7 @@
 import { Button, Table } from "react-bootstrap";
 import { BsLink45Deg } from "react-icons/bs";
 import { Link } from "react-router-dom";
-import { RequestsByServicePair, TableProps, TableRowProps } from "../types";
+import { RequestsByServicePair, TableProps, TableRowProps } from "../types/types";
 import { TableHeader } from "./TableHeader";
 
 export const ServicePairsTable = (props: TableProps<RequestsByServicePair>) => {

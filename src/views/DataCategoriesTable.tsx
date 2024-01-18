@@ -1,5 +1,5 @@
 import { Table } from "react-bootstrap";
-import { DataCategory, TableProps, TableRowProps } from "../types";
+import { DataCategory, TableProps, TableRowProps } from "../types/types";
 import { TableHeader } from "./TableHeader";
 
 export const DataCategoriesTable = (props: TableProps<DataCategory>) => {

@@ -11,10 +11,10 @@ export default function Footer(props) {
     >
       <List display="flex">
         <ListItem me={{ base: "20px", md: "44px", }}>
-          <Link color="gray.400" href="https://github.com/TUB-CNPE-TB/">TUB-CNPE-TB</Link>
+          <Link color="gray.400" href="https://github.com/PrivacyEngineering/">TUB PrivacyEngineering</Link>
         </ListItem>
         <ListItem me={{ base: "20px", md: "44px", }}>
-          <Link color="gray.400" href="https://github.com/TUB-CNPE-TB/transparency-log/">Github</Link>
+          <Link color="gray.400" href="https://github.com/PrivacyEngineering/hawk-monitor.git">Github</Link>
         </ListItem>
       </List>
     </Flex>

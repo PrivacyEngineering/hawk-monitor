@@ -9,6 +9,7 @@ import {
   mappingsBeingDeleted,
   mappingsBeingUpdated, requestedFieldSuggestions, unmappedEndpoints
 } from './mappings';
+import { dlpJobs, dlpResults, dlpFindingsByField } from './dlp';
 
 export const app = combineReducers({
   fields,
@@ -23,7 +24,10 @@ export const app = combineReducers({
   requestedFieldSuggestions,
   mappingsBeingCreated,
   mappingsBeingUpdated,
-  mappingsBeingDeleted
+  mappingsBeingDeleted,
+  dlpJobs,
+  dlpResults,
+  dlpFindingsByField
 });
 
 export type RootState = ReturnType<typeof app>

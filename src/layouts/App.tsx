@@ -8,7 +8,7 @@ import { AdminNavbar } from "../components/Navbars/AdminNavbar";
 import { MainPanel, PanelContainer, PanelContent } from "components/StyledComponent";
 import Configurator from "components/Configurator/Configurator";
 import { Navigate, Route, Routes } from "react-router-dom";
-import { SidebarVariant } from "types";
+import { SidebarVariant } from "types/types";
 import { FieldPage } from "views/FieldPage";
 import { FieldsPage } from "views/FieldsPage";
 import { MappingPage } from "views/MappingPage";
@@ -17,6 +17,8 @@ import { LegalBasesPage } from "views/LegalBasesPage";
 import { useThunkDispatch } from "index";
 import { fetchFields } from "actions/fields";
 import { fetchMappings } from "actions/mappings";
+import { DlpJobs } from "views/dlp/DlpJobs";
+import { DlpFindings } from "views/dlp/DlpFindings";
 
 export const App = () => {
   const dispatch = useThunkDispatch();
@@ -42,6 +44,9 @@ export const App = () => {
               <Route path="/mappings/update/:id" element={<MappingPage />} />
               <Route path="/mappings/new" element={<MappingPage />} />
               <Route path="/mappings" element={<MappingsPage />} />
+              <Route path="/dlp/jobs" element={<DlpJobs />} />
+              <Route path="/dlp/findings/byField/:fieldId" element={<DlpFindings/>} />
+              <Route path="/dlp/findings/:id" element={<DlpFindings/>} />
               <Route path="*" element={<Navigate to="/mappings" />} />
             </Routes>
           </PanelContainer>

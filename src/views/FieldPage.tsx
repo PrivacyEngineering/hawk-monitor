@@ -5,9 +5,10 @@ import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { useThunkDispatch } from "..";
 import { RootState } from "../reducers";
-import { Field, LegalBaseExtended } from "../types";
+import { Field, LegalBaseExtended } from "../types/types";
 import { GdprBadge, InfoTypeBadge } from "./Badges";
 import {createField, updateField} from "../actions/fields";
+import { InfoTypeType } from "types/dlp";
 
 export const FieldPage = () => {
   const params = useParams<{ id: string }>();
@@ -15,7 +16,7 @@ export const FieldPage = () => {
 
   const field = useSelector<RootState, Field | undefined>(state => state.fields.find(f => f.name === idFromParams));
   const allLegalBases = useSelector<RootState, LegalBaseExtended[]>(state => state.legalBases);
-  const allInfoTypes = useSelector<RootState, string[]>(state => state.infoTypes.infoTypes);
+  const allInfoTypes = useSelector<RootState, InfoTypeType[]>(state => state.infoTypes.infoTypes);
   const dispatch = useThunkDispatch();
   const navigate = useNavigate();
 
@@ -41,12 +42,12 @@ export const FieldPage = () => {
   }
 
   const addInfoTypeSelectRef = createRef<HTMLSelectElement>();
-  const addInfoType = (infoType: string) => {
+  const addInfoType = (infoType: InfoTypeType) => {
     setInfoTypes(s => [...s, infoType]);
     addInfoTypeSelectRef.current!.value = '';
   }
 
-  const removeInfoType = (infoType: string) => {
+  const removeInfoType = (infoType: InfoTypeType) => {
     setInfoTypes(s => s.filter(x => x !== infoType));
   }
 
@@ -120,7 +121,7 @@ export const FieldPage = () => {
               minWidth="200px"
               maxWidth="300px"
               placeholder={restInfoTypes.length > 0 ? 'Add Info type' : 'All Info types attached'}
-              onChange={e => addInfoType(e.target.value)}
+              onChange={e => addInfoType(e.target.value as InfoTypeType)}
             >
               {restInfoTypes.map(x => <option key={x} value={x}>{x}</option>)}
             </Select>

@@ -2,7 +2,7 @@ import { Flex, Table, Tbody, Td, Text, Th, Thead, Tr, useColorModeValue } from "
 import { Card } from "components/StyledComponent";
 import { useSelector } from "react-redux";
 import { RootState } from "../reducers";
-import { LegalBaseExtended } from "../types"
+import { LegalBaseExtended } from "../types/types"
 
 export const LegalBasesPage = () => {
   const legalBases = useSelector<RootState, LegalBaseExtended[]>(state => state.legalBases);

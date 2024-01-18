@@ -1,12 +1,12 @@
 import { Button, Flex, Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton, Table, Tbody, Td, Text, Th, Thead, Tr, useColorModeValue, VStack, Checkbox } from "@chakra-ui/react";
 import { Card, CardBody, CardHeader } from "components/StyledComponent";
 import {Fragment, useState} from "react";
-import { BsFillTrashFill, BsPencilFill, BsPlusLg } from "react-icons/bs";
+import { BsFillTrashFill, BsFolder, BsPencilFill, BsPlusLg } from "react-icons/bs";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useThunkDispatch } from "..";
 import { RootState } from "../reducers";
-import { Field, NormalizedState } from "../types"
+import { Field, NormalizedState } from "../types/types"
 import { Link } from "react-router-dom";
 import { GdprBadge, InfoTypeBadge, PersonalBadge, SpecialBadge } from "./Badges";
 import { removeField } from "../actions/fields";
@@ -59,9 +59,6 @@ export const FieldsPage = () => {
                       <Th color="gray.400">Legal bases</Th>
                       <Th color="gray.400">Obligation<br />to provide?</Th>
                       <Th color="gray.400">Actions</Th>
-                      {/* {['ID', 'Description', 'Consequences of non-disclosure ', 'Data category', 'Contractual regulation?', 'Legal requirement?', 'Legal bases', 'Obligation to provide?', 'Actions'].map((item, index) =>
-                        <Th color="gray.400" key={index}>{item}</Th>
-                      )} */}
                     </Tr>
                   </Thead>
                   <Tbody>
@@ -70,7 +67,9 @@ export const FieldsPage = () => {
                         <Td><b>{field.name}</b></Td>
                         <Td>{field.description}</Td>
                         <Td>{field.infoTypes != null && field.infoTypes.length > 0 ? field.infoTypes
-                          .map(infoType => <Fragment key={infoType}><InfoTypeBadge infoType={infoType} />{" "}</Fragment>) : '-'}</Td>
+                          .map(infoType => <Fragment key={infoType}><InfoTypeBadge infoType={infoType} />{" "}</Fragment>) : '-'}
+                          { field.infoTypes?.length > 0 && <Button color='green.400' size="sm" onClick={() => navigate(`/dlp/findings/byField/${field.name}`)} leftIcon={<BsFolder />}>Show Findings</Button> }
+                        </Td>
                         <Td>{field.consequences || '-'}</Td>
                         <Td>{field.specialCategoryPersonalData ? <SpecialBadge /> : field.personalData ? <PersonalBadge /> : '-'}</Td>
                         <Td><Checkbox colorScheme="teal" isChecked={field.contractualRegulation} /></Td>

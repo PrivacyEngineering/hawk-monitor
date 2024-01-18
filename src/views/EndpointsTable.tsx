@@ -1,7 +1,7 @@
 import { Button, Table } from "react-bootstrap";
 import { BsLink45Deg } from "react-icons/bs";
 import { Link } from "react-router-dom";
-import { RequestsByEndpoint, TableProps, TableRowProps } from "../types";
+import { RequestsByEndpoint, TableProps, TableRowProps } from "../types/types";
 import { TableHeader } from "./TableHeader";
 
 export const EndpointsTable = (props: TableProps<RequestsByEndpoint>) => {

@@ -1,4 +1,4 @@
-import {GroupedUsageField, Mapping, NormalizedState} from "../types";
+import {GroupedUsageField, Mapping, NormalizedState} from "../types/types";
 import {
     CreateMappingActionTypes,
     CreateMappingSuccessAction,

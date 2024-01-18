@@ -13,7 +13,7 @@ import {useEffect, useState} from "react";
 
 import {Card, CardBody, CardHeader} from "components/StyledComponent";
 import {RootState} from "reducers";
-import {AnyMapping, Field, Mapping, MappingFieldReference, TableRowProps} from "types";
+import {AnyMapping, Field, Mapping, MappingFieldReference, TableRowProps} from "types/types";
 import {GenericTable} from "./GenericTable";
 import {BsFillTrashFill, BsPencilFill, BsPlusLg} from "react-icons/bs";
 import {PersonalBadge, SpecialBadge} from "./Badges";

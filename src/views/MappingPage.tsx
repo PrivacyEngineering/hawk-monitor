@@ -21,7 +21,7 @@ import {useSelector} from "react-redux";
 import {useNavigate, useParams, useSearchParams} from "react-router-dom";
 import {useThunkDispatch} from "..";
 import {RootState} from "../reducers";
-import {AnyMapping, Field, GroupedUsageField, Mapping, MappingFieldReference, MappingStorage, Purpose} from "../types";
+import {AnyMapping, Field, GroupedUsageField, Mapping, MappingFieldReference, MappingStorage, Purpose} from "../types/types";
 import {ColInput} from "./ColInput";
 import {createMapping, fetchMappingFieldSuggestions, fetchMappings, updateMapping} from "../actions/mappings";
 import purposes from '../assets/purposes.json';

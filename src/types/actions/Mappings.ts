@@ -1,4 +1,4 @@
-import {AnyMapping, GroupedUsageField, Mapping} from '../../types';
+import {AnyMapping, GroupedUsageField, Mapping} from '../types';
 
 import * as types from './Types';
 

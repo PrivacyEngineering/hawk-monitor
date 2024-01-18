@@ -1,7 +1,7 @@
 import {deleteField, getFields, postField, putField} from "gateways/fields";
 import { Dispatch } from "react";
 import { AnyAction } from "redux";
-import { Field } from "types";
+import { Field } from "types/types";
 import {
   CREATE_FIELD_FAILURE,
   CREATE_FIELD_REQUEST,

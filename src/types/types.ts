@@ -1,17 +1,9 @@
+
+export * from './mapping';
+export * from './field';
+
 export type SidebarVariant = 'opaque' | 'transparent';
 
-export interface Field {
-  name: string;
-  infoTypes: string[];
-  consequences: string;
-  contractualRegulation: boolean;
-  description: string;
-  legalBases: LegalBase[];
-  legalRequirement: boolean;
-  obligationToProvide: boolean;
-  personalData: boolean;
-  specialCategoryPersonalData: boolean;
-}
 
 export interface TableProps<T> {
   labels: string[];
@@ -36,41 +28,7 @@ export interface Purpose {
   description: string;
 }
 
-export interface MappingStorage {
-  description: string;
-  ttl: string;
-}
 
-export interface AnyMapping {
-  id?: number;
-  endpointId: string;
-  fields?: MappingFieldReference[];
-  purposes?: Purpose[];
-  legitimateInterests: string[];
-  recipients: string[];
-  storage: MappingStorage[];
-}
-
-export interface Mapping extends AnyMapping {
-  id: number;
-  fields: MappingFieldReference[]
-}
-
-export interface GroupedUsageField {
-  phase: string;
-  namespace: string;
-  format: string;
-  path: string;
-}
-
-export interface MappingFieldReference {
-  id?: number;
-  field: string;
-  phase: string;
-  namespace: string;
-  format: string;
-  path: string;
-}
 
 export interface Request {
   requestor: string;

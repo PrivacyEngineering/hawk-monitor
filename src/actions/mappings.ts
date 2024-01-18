@@ -8,7 +8,7 @@ import {
 } from "gateways/mappings";
 import {Dispatch} from "react";
 import {AnyAction} from "redux";
-import {AnyMapping} from "types";
+import {AnyMapping} from "types/types";
 import {
     CREATE_MAPPING_FAILURE,
     CREATE_MAPPING_REQUEST,

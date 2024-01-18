@@ -1,5 +1,5 @@
 import {HEADER_JSON, URL_BASE} from "index";
-import {AnyMapping, GroupedUsageField, Mapping} from "types";
+import {AnyMapping, GroupedUsageField, Mapping} from "types/types";
 
 export const getMappings = (): Promise<Mapping[]> => fetch(`${URL_BASE}/api/mappings`).then(response => response.json());
 

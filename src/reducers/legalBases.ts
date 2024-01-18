@@ -1,4 +1,4 @@
-import { LegalBaseExtended } from "types";
+import { LegalBaseExtended } from "types/types";
 
 const legalBasesInitialState = [
   { reference: "GDPR-6-1-a", regulation: "GDPR", article: "6", paragraph: "1(a)", description: "Consent" },
